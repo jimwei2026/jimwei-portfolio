@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Be Water — Jimmei</title>
+<title>JimWei PORTFOLIO</title>
 <meta name="description" content="Jim Wei Studio — multidisciplinary design & creative direction. Brand identity, web design, motion, and art direction.">
-<meta property="og:title" content="Be Water — Jimmei Studio">
+<meta property="og:title" content="JimWei PORTFOLIO">
 <meta property="og:description" content="Multidisciplinary design & creative direction.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#fafaf8">
@@ -359,43 +359,6 @@ nav > * { pointer-events: auto; }
   50% { transform: translateX(-50%) translateY(10px); opacity: 1; }
 }
 
-/* ═══ HERO TICKER — overlaid on video ═══════════════════════════ */
-.hero-ticker {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  z-index: 2; text-align: center; pointer-events: none;
-}
-.hero-ticker-sub {
-  font-family: var(--font); font-size: clamp(0.5rem, 1vw, 0.6rem); font-weight: 400;
-  letter-spacing: 0.28em; text-transform: uppercase;
-  color: rgba(255,255,255,0.45);
-  margin-bottom: clamp(12px, 1.5vh, 20px);
-}
-.hero-ticker-wrap {
-  position: relative;
-  height: clamp(3rem, 7vw, 7rem);
-  overflow: hidden; width: 100%;
-}
-.hero-ticker-slide {
-  position: absolute; top: 0; left: 0; right: 0;
-  font-family: var(--font); font-weight: 300;
-  font-size: clamp(2.5rem, 7vw, 7rem);
-  line-height: 1; letter-spacing: -0.03em;
-  color: rgba(255,255,255,0.92);
-  transform: translateY(110%); will-change: transform;
-  text-align: center;
-}
-.hero-ticker-slide.active  { transform: translateY(0);     transition: transform 0.72s var(--ease-out); }
-.hero-ticker-slide.exiting { transform: translateY(-110%);  transition: transform 0.6s var(--ease-in-out); }
-.hero-ticker-dots { display: flex; gap: 10px; margin-top: clamp(20px, 3vh, 32px); justify-content: center; }
-.hero-ticker-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: rgba(255,255,255,0.25);
-  transition: all 0.4s var(--ease-out);
-}
-.hero-ticker-dot.active { background: rgba(255,255,255,0.85); transform: scale(1.6); }
-
-/* ═══ OLD TICKER (page-level, now unused — kept for safety) ═══ */
-.ticker-section { display: none; }
 
 
 
@@ -1195,26 +1158,9 @@ footer::before {
 <!-- ═══ HERO — fullscreen video ══════════════════════════════════════ -->
 <section id="hero">
   <video autoplay muted loop playsinline aria-hidden="true">
-    <source src="hero.mp4" type="video/mp4">
+    <source src="hero视频动画.mp4" type="video/mp4">
     <p>Your browser does not support video. This is a fullscreen background video of the designer's work.</p>
   </video>
-
-  <!-- Ticker overlaid on video -->
-  <div class="hero-ticker" id="main-content" aria-live="polite">
-    <div class="hero-ticker-sub" data-i18n="ticker_sub">We make digital (and magical)...</div>
-    <div class="hero-ticker-wrap">
-      <div class="hero-ticker-slide active" data-i18n-idx="0">Branding</div>
-      <div class="hero-ticker-slide" data-i18n-idx="1">Experiences</div>
-      <div class="hero-ticker-slide" data-i18n-idx="2">Interfaces</div>
-      <div class="hero-ticker-slide" data-i18n-idx="3">Stories</div>
-    </div>
-    <div class="hero-ticker-dots" aria-hidden="true">
-      <div class="hero-ticker-dot active"></div>
-      <div class="hero-ticker-dot"></div>
-      <div class="hero-ticker-dot"></div>
-      <div class="hero-ticker-dot"></div>
-    </div>
-  </div>
 </section>
 
 
@@ -2341,8 +2287,6 @@ const dict = {
     nav_home:'Home', nav_work:'Work', nav_about:'About', nav_contact:'Contact',
     nav_play:'Playground', nav_label:'Navigation', close:'Close',
     scroll:'Scroll',
-    ticker_sub:'We make digital (and magical)...',
-    ticker:['Branding','Experiences','Interfaces','Stories'],
     work_label:'Selected Work', work_title:'Work',
     about_label:'About', about_title:'Design\nwith\nIntent',
     about_p1:"I'm a multidisciplinary creative with a decade of crafting purposeful digital products. I believe every pixel carries intent — and that restraint is the highest form of design.",
@@ -2354,8 +2298,6 @@ const dict = {
     nav_home:'首页', nav_work:'作品', nav_about:'关于', nav_contact:'联系',
     nav_play:'实验室', nav_label:'导航', close:'关闭',
     scroll:'向下',
-    ticker_sub:'我们创造数字（与魔法）...',
-    ticker:['品牌设计','数字体验','交互界面','创意叙事'],
     work_label:'精选作品', work_title:'作品',
     about_label:'关于', about_title:'设计\n源于\n意图',
     about_p1:'我是一位跨学科创意人，十年来专注于打造有意义的数字产品。我相信每一个像素都承载着意图——而克制，是设计最高的形式。',
@@ -2367,8 +2309,6 @@ const dict = {
     nav_home:'ホーム', nav_work:'作品', nav_about:'概要', nav_contact:'連絡',
     nav_play:'実験', nav_label:'ナビゲーション', close:'閉じる',
     scroll:'スクロール',
-    ticker_sub:'デジタルと魔法を創る...',
-    ticker:['ブランディング','体験設計','インターフェース','ストーリー'],
     work_label:'厳選作品', work_title:'作品',
     about_label:'概要', about_title:'意図ある\nデザイン',
     about_p1:'10年間、目的意識を持ったデジタルプロダクトを手掛けてきた多分野クリエイターです。すべてのピクセルには意図があり、抑制こそデザインの最高の形と信じています。',
@@ -2380,8 +2320,6 @@ const dict = {
     nav_home:'Accueil', nav_work:'Travaux', nav_about:'À propos', nav_contact:'Contact',
     nav_play:'Labo', nav_label:'Navigation', close:'Fermer',
     scroll:'Défiler',
-    ticker_sub:'Nous créons le digital (et la magie)...',
-    ticker:['Branding','Expériences','Interfaces','Récits'],
     work_label:'Sélection', work_title:'Travaux',
     about_label:'À propos', about_title:'Design\navec\nIntention',
     about_p1:"Créatif multidisciplinaire depuis dix ans, je façonne des produits numériques porteurs de sens. Je crois que chaque pixel a une intention — et que la retenue est la forme la plus haute du design.",
@@ -2403,11 +2341,6 @@ function applyLang(lang) {
       if (key === 'about_title') { el.innerHTML = t[key].replace(/\n/g,'<br>'); }
       else el.textContent = t[key];
     }
-  });
-  // Ticker slides
-  document.querySelectorAll('[data-i18n-idx]').forEach(el => {
-    const idx = +el.dataset.i18nIdx;
-    if (t.ticker[idx]) el.textContent = t.ticker[idx];
   });
   // Update close button aria-label
   const closeBtn = document.getElementById('side-nav-close');
@@ -2651,21 +2584,6 @@ function selectLang(e){
 document.addEventListener('click',()=>{ langSwitcher.classList.remove('open'); langBtn.setAttribute('aria-expanded','false'); });
 
 /* ══════════════════════════════════════════════════════════════
-   TICKER
-══════════════════════════════════════════════════════════════ */
-const slides=[...document.querySelectorAll('.hero-ticker-slide')];
-const tdots=[...document.querySelectorAll('.hero-ticker-dot')];
-let tCur=0;
-function showSlide(n){
-  slides[tCur].classList.remove('active'); slides[tCur].classList.add('exiting');
-  tdots[tCur].classList.remove('active');
-  const prev=tCur; tCur=n;
-  slides[n].classList.add('active'); tdots[n].classList.add('active');
-  setTimeout(()=>slides[prev].classList.remove('exiting'),700);
-}
-function startTicker(){ setInterval(()=>showSlide((tCur+1)%slides.length),2400); }
-
-/* ══════════════════════════════════════════════════════════════
    LOADER
 ══════════════════════════════════════════════════════════════ */
 const loader=document.getElementById('loader');
@@ -2712,7 +2630,6 @@ function initPage(){
     scrollTrigger: { trigger: '#work-masonry', start: 'top 88%', toggleActions: 'play none none none' }
   });
 
-  setTimeout(startTicker, 500);
 }
 
 /* ══════════════════════════════════════════════════════════════
