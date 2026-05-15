@@ -382,21 +382,24 @@ nav > * { pointer-events: auto; }
 #hero::after {
   content: ''; position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(to bottom,
-    rgba(0,0,0,0.12) 0%,
-    rgba(0,0,0,0) 35%,
-    rgba(0,0,0,0.45) 100%);
+    rgba(0,0,0,0.18) 0%,
+    rgba(0,0,0,0.08) 40%,
+    rgba(0,0,0,0.22) 60%,
+    rgba(0,0,0,0.5) 100%);
 }
 .hero-overlay-text {
-  position: absolute; top: 50%; left: 56px; transform: translateY(-50%);
+  position: absolute; top: clamp(80px, 14vh, 140px); left: 56px;
   z-index: 2; pointer-events: none;
 }
 .hero-overlay-text h1 {
-  font-family: var(--font); font-weight: 800;
-  font-size: clamp(3rem, 8vw, 9rem);
-  letter-spacing: -0.05em; text-transform: uppercase;
-  color: rgba(255,255,255,0.9); line-height: 0.88;
+  font-family: var(--font); font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 3.2rem);
+  letter-spacing: -0.04em; text-transform: uppercase;
+  color: rgba(255,255,255,0.78); line-height: 0.92;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.35);
 }
-.hero-overlay-text h1 em { font-style: italic; font-weight: 300; opacity: 0.7; }
+.hero-overlay-text h1 em { font-style: italic; font-weight: 300; opacity: 0.6; }
+.hero-overlay-text h1 br { display: block; }
 .hero-scroll-hint {
   position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
   z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px;
@@ -412,45 +415,45 @@ nav > * { pointer-events: auto; }
   50% { transform: translateX(-50%) translateY(10px); opacity: 1; }
 }
 
-/* ═══ TICKER SECTION ════════════════════════════════════════════════ */
-.ticker-section {
-  padding: 72px 56px;
-  border-bottom: 1px solid var(--border);
-  display: flex; flex-direction: column; align-items: center;
-  text-align: center;
-  background: var(--bg);
+/* ═══ HERO TICKER — overlaid on video ═══════════════════════════ */
+.hero-ticker {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  z-index: 2; text-align: center; pointer-events: none;
+}
+.hero-ticker-sub {
+  font-family: var(--font); font-size: clamp(0.55rem, 1.2vw, 0.68rem); font-weight: 500;
+  letter-spacing: 0.32em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: clamp(16px, 2vh, 28px);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+.hero-ticker-wrap {
   position: relative;
+  height: clamp(3rem, 7vw, 7rem);
+  overflow: hidden; width: 100%;
 }
-.ticker-section::before {
-  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-  width: 60px; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--grey4), transparent);
-}
-.ticker-sub {
-  font-family: var(--font); font-size: 0.65rem; font-weight: 500;
-  letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--grey3); margin-bottom: 24px;
-}
-.ticker-wrap {
-  position: relative; height: clamp(3.5rem, 8vw, 8rem); overflow: hidden; width: 100%;
-}
-.ticker-slide {
+.hero-ticker-slide {
   position: absolute; top: 0; left: 0; right: 0;
   font-family: var(--font); font-weight: 200;
-  font-size: clamp(3rem, 8vw, 8rem); line-height: 1; letter-spacing: -0.04em;
-  color: var(--fg); transform: translateY(110%); will-change: transform;
+  font-size: clamp(2.5rem, 7vw, 7rem);
+  line-height: 1; letter-spacing: -0.04em;
+  color: rgba(255,255,255,0.92);
+  transform: translateY(110%); will-change: transform;
   text-align: center;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4), 0 0 60px rgba(0,0,0,0.2);
 }
-.ticker-slide.active  { transform: translateY(0);     transition: transform 0.72s var(--ease-out); }
-.ticker-slide.exiting { transform: translateY(-110%);  transition: transform 0.6s var(--ease-in-out); }
-.ticker-dots { display: flex; gap: 10px; margin-top: 28px; justify-content: center; }
-.ticker-dot {
-  width: 6px; height: 6px; border-radius: 50%; background: var(--grey5);
+.hero-ticker-slide.active  { transform: translateY(0);     transition: transform 0.72s var(--ease-out); }
+.hero-ticker-slide.exiting { transform: translateY(-110%);  transition: transform 0.6s var(--ease-in-out); }
+.hero-ticker-dots { display: flex; gap: 10px; margin-top: clamp(20px, 3vh, 32px); justify-content: center; }
+.hero-ticker-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.25);
   transition: all 0.4s var(--ease-out);
-  cursor: none;
 }
-.ticker-dot.active { background: var(--fg); transform: scale(1.6); }
-.ticker-dot:hover { background: var(--grey3); }
+.hero-ticker-dot.active { background: rgba(255,255,255,0.85); transform: scale(1.6); }
+
+/* ═══ OLD TICKER (page-level, now unused — kept for safety) ═══ */
+.ticker-section { display: none; }
 
 /* ═══ MARQUEE ═══════════════════════════════════════════════════════ */
 .marquee-wrap {
@@ -749,7 +752,8 @@ footer::before {
     border-radius: var(--radius-md);
   }
   .nav-links { display: none; }
-  .hero-overlay-text { left: 24px; }
+  .hero-overlay-text { left: 24px; top: clamp(70px, 12vh, 100px); }
+  .hero-overlay-text h1 { font-size: clamp(1.2rem, 5vw, 2rem); }
   #about { grid-template-columns: 1fr; gap: 48px; padding: 80px 24px; }
   .about-left { position: static; }
   .about-big-text br { display: none; }
@@ -757,7 +761,6 @@ footer::before {
   .footer-meta { text-align: left; }
   .footer-links { justify-content: flex-start; }
   #work { padding: 80px 24px; }
-  .ticker-section { padding: 48px 24px; }
   #cursor, .edge-hint, #back-to-top { display: none; }
   body { cursor: auto; }
   #side-nav-trigger { width: 24px; }
@@ -874,6 +877,24 @@ footer::before {
     <source src="hero.mp4" type="video/mp4">
     <p>Your browser does not support video. This is a fullscreen background video of the designer's work.</p>
   </video>
+
+  <!-- Ticker overlaid on video -->
+  <div class="hero-ticker" id="main-content" aria-live="polite">
+    <div class="hero-ticker-sub" data-i18n="ticker_sub">We make digital (and magical)...</div>
+    <div class="hero-ticker-wrap">
+      <div class="hero-ticker-slide active" data-i18n-idx="0">Branding</div>
+      <div class="hero-ticker-slide" data-i18n-idx="1">Experiences</div>
+      <div class="hero-ticker-slide" data-i18n-idx="2">Interfaces</div>
+      <div class="hero-ticker-slide" data-i18n-idx="3">Stories</div>
+    </div>
+    <div class="hero-ticker-dots" aria-hidden="true">
+      <div class="hero-ticker-dot active"></div>
+      <div class="hero-ticker-dot"></div>
+      <div class="hero-ticker-dot"></div>
+      <div class="hero-ticker-dot"></div>
+    </div>
+  </div>
+
   <div class="hero-overlay-text" aria-hidden="true">
     <h1>Be<br>Water<br><em>My Friend</em></h1>
   </div>
@@ -885,22 +906,6 @@ footer::before {
   </div>
 </section>
 
-<!-- ═══ TICKER ════════════════════════════════════════════════════════ -->
-<div class="ticker-section" id="main-content">
-  <div class="ticker-sub" data-i18n="ticker_sub">We make digital (and magical)...</div>
-  <div class="ticker-wrap" aria-live="polite">
-    <div class="ticker-slide active" data-i18n-idx="0">Branding</div>
-    <div class="ticker-slide" data-i18n-idx="1">Experiences</div>
-    <div class="ticker-slide" data-i18n-idx="2">Interfaces</div>
-    <div class="ticker-slide" data-i18n-idx="3">Stories</div>
-  </div>
-  <div class="ticker-dots" aria-hidden="true">
-    <div class="ticker-dot active"></div>
-    <div class="ticker-dot"></div>
-    <div class="ticker-dot"></div>
-    <div class="ticker-dot"></div>
-  </div>
-</div>
 
 <!-- ═══ MARQUEE ══════════════════════════════════════════════════════ -->
 <div class="marquee-wrap" aria-hidden="true">
@@ -1420,8 +1425,8 @@ document.addEventListener('click',()=>{ langSwitcher.classList.remove('open'); l
 /* ══════════════════════════════════════════════════════════════
    TICKER
 ══════════════════════════════════════════════════════════════ */
-const slides=[...document.querySelectorAll('.ticker-slide')];
-const tdots=[...document.querySelectorAll('.ticker-dot')];
+const slides=[...document.querySelectorAll('.hero-ticker-slide')];
+const tdots=[...document.querySelectorAll('.hero-ticker-dot')];
 let tCur=0;
 function showSlide(n){
   slides[tCur].classList.remove('active'); slides[tCur].classList.add('exiting');
