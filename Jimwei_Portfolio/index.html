@@ -16,27 +16,27 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
-/* ═══ TOKENS — refined palette with subtle warmth ═════════════════ */
+/* ═══ TOKENS — minimal, premium palette ═════════════════ */
 :root {
   --bg:       #fafaf8;
-  --fg:       #0d0d0c;
+  --fg:       #141412;
   --grey1:    #1a1a18;
   --grey2:    #3d3d3a;
-  --grey3:    #5c5c57;
-  --grey4:    #8a8a84;
-  --grey5:    #d4d4ce;
-  --surface:  #f3f3ef;
-  --border:   #dcdcd4;
-  --warm:     #d4a574;
-  --warm-dim: #b8957a;
+  --grey3:    #6b6b65;
+  --grey4:    #96968e;
+  --grey5:    #dcdcd6;
+  --surface:  #f7f7f4;
+  --border:   #e8e8e2;
+  --warm:     #c4956a;
+  --warm-dim: #b08460;
   --cool:     #5b7f95;
   --water-blue: #2a7fff;
   --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.1);
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.03);
+  --shadow-md: 0 2px 12px rgba(0,0,0,0.04);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.07);
   --font: 'Syne', sans-serif;
   --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.87, 0, 0.13, 1);
@@ -148,38 +148,22 @@ img, video { display: block; width: 100%; }
   will-change: transform;
 }
 
-/* ═══ CURSOR — cute emoji ═════════════════════════ */
+/* ═══ CURSOR — pixel-art canvas ═════════════════════════ */
 #cursor {
   position: fixed; top: 0; left: 0;
   pointer-events: none; z-index: 9999;
-  width: 32px; height: 32px;
   will-change: transform;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 28px; line-height: 1;
-  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
   transform-origin: 50% 50%;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+#cursor canvas {
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
 #cursor.hovering {
-  font-size: 38px;
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
-}
-
-/* Wake trail dots */
-.wake-dot {
-  position: fixed; pointer-events: none;
-  z-index: 8999;
-  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-  background:
-    radial-gradient(ellipse 50% 35% at 38% 28%,
-      rgba(200,230,255,0.9) 0%,
-      transparent 100%),
-    radial-gradient(ellipse at 50% 65%,
-      rgba(30,100,220,0.8) 0%,
-      rgba(5,30,120,0.5) 60%,
-      transparent 100%);
-  box-shadow: 0 0 5px rgba(50,130,255,0.35);
-  will-change: transform, opacity;
-  transform-origin: 50% 20%;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.35));
 }
 
 /* ═══ TOP NAV ═══════════════════════════════════════════════════════ */
@@ -214,10 +198,10 @@ nav > * { pointer-events: auto; }
 .nav-logo-slot:hover { transform: scale(1.08); }
 .nav-logo-slot img { width: 100%; height: 100%; object-fit: cover; }
 
-.nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+.nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
 .nav-links a {
-  font-family: var(--font); font-size: 0.66rem; font-weight: 600;
-  letter-spacing: 0.14em; text-transform: uppercase; color: var(--grey2);
+  font-family: var(--font); font-size: 0.6rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey3);
   position: relative; padding: 4px 0;
   transition: color 0.25s;
 }
@@ -340,9 +324,9 @@ nav > * { pointer-events: auto; }
 .side-nav-links { list-style: none; position: relative; z-index: 5; }
 .side-nav-links li { overflow: hidden; }
 .side-nav-links a {
-  display: block; font-family: var(--font); font-weight: 700;
-  font-size: clamp(1.1rem, 2.6vw, 1.8rem); letter-spacing: -0.02em; text-transform: uppercase;
-  color: var(--fg); line-height: 1.15; padding: 7px 0;
+  display: block; font-family: var(--font); font-weight: 500;
+  font-size: clamp(1.1rem, 2.6vw, 1.6rem); letter-spacing: -0.02em; text-transform: uppercase;
+  color: var(--fg); line-height: 1.2; padding: 6px 0;
   transform: translateY(115%);
   transition: color 0.3s; cursor: none;
   overflow-wrap: break-word; word-break: break-word;
@@ -379,10 +363,10 @@ nav > * { pointer-events: auto; }
 #hero::after {
   content: ''; position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(to bottom,
-    rgba(0,0,0,0.10) 0%,
-    rgba(0,0,0,0.04) 40%,
-    rgba(0,0,0,0.14) 60%,
-    rgba(0,0,0,0.35) 100%);
+    rgba(0,0,0,0.06) 0%,
+    rgba(0,0,0,0.02) 40%,
+    rgba(0,0,0,0.10) 60%,
+    rgba(0,0,0,0.32) 100%);
 }
 .hero-scroll-hint {
   position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
@@ -405,11 +389,10 @@ nav > * { pointer-events: auto; }
   z-index: 2; text-align: center; pointer-events: none;
 }
 .hero-ticker-sub {
-  font-family: var(--font); font-size: clamp(0.55rem, 1.2vw, 0.68rem); font-weight: 500;
-  letter-spacing: 0.32em; text-transform: uppercase;
-  color: rgba(255,255,255,0.55);
-  margin-bottom: clamp(16px, 2vh, 28px);
-  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  font-family: var(--font); font-size: clamp(0.5rem, 1vw, 0.6rem); font-weight: 400;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: clamp(12px, 1.5vh, 20px);
 }
 .hero-ticker-wrap {
   position: relative;
@@ -418,13 +401,12 @@ nav > * { pointer-events: auto; }
 }
 .hero-ticker-slide {
   position: absolute; top: 0; left: 0; right: 0;
-  font-family: var(--font); font-weight: 200;
+  font-family: var(--font); font-weight: 300;
   font-size: clamp(2.5rem, 7vw, 7rem);
-  line-height: 1; letter-spacing: -0.04em;
+  line-height: 1; letter-spacing: -0.03em;
   color: rgba(255,255,255,0.92);
   transform: translateY(110%); will-change: transform;
   text-align: center;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.4), 0 0 60px rgba(0,0,0,0.2);
 }
 .hero-ticker-slide.active  { transform: translateY(0);     transition: transform 0.72s var(--ease-out); }
 .hero-ticker-slide.exiting { transform: translateY(-110%);  transition: transform 0.6s var(--ease-in-out); }
@@ -443,10 +425,10 @@ nav > * { pointer-events: auto; }
 
 /* ═══ WORK TITLE ═════════════════════════════════════════════════ */
 .work-title {
-  font-family: var(--font); font-weight: 800;
-  font-size: clamp(3rem, 7vw, 7rem); letter-spacing: -0.05em; line-height: 0.9;
+  font-family: var(--font); font-weight: 500;
+  font-size: clamp(2.5rem, 5vw, 5rem); letter-spacing: -0.03em; line-height: 1;
   text-transform: uppercase; color: var(--fg);
-  text-align: center; margin-bottom: 32px;
+  text-align: center; margin-bottom: 40px;
 }
 
 /* ═══ WORK FILTERS ═══════════════════════════════════════════ */
@@ -456,18 +438,18 @@ nav > * { pointer-events: auto; }
   flex-wrap: wrap;
 }
 .work-filter-btn {
-  font-family: var(--font); font-size: 0.62rem; font-weight: 600;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  padding: 10px 22px;
+  font-family: var(--font); font-size: 0.56rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 8px 18px;
   border: 1px solid var(--border);
   border-radius: 100px;
   background: transparent;
-  color: var(--grey3);
+  color: var(--grey4);
   cursor: none;
   transition: all 0.3s var(--ease-out);
 }
 .work-filter-btn:hover {
-  border-color: var(--fg);
+  border-color: var(--grey3);
   color: var(--fg);
 }
 .work-filter-btn.active {
@@ -482,7 +464,7 @@ nav > * { pointer-events: auto; }
 
 /* ═══ WORK SECTION — masonry waterfall ══════════════════════════════ */
 #work {
-  padding: 100px 56px 120px;
+  padding: 120px 56px 140px;
   background: var(--bg);
 }
 
@@ -495,16 +477,16 @@ nav > * { pointer-events: auto; }
 
 .work-item {
   break-inside: avoid; margin-bottom: 24px;
-  position: relative; overflow: hidden;
+  position: relative;
   cursor: none;
   background: var(--surface);
   border-radius: var(--radius-md);
+  overflow: hidden;
+  will-change: transform, opacity;
 }
 
-
-/* Mimosa effect: the card itself recoils from cursor via JS */
 .work-item-inner {
-  position: relative; overflow: hidden;
+  position: relative;
   border-radius: var(--radius-md);
   will-change: transform;
   transform-origin: center center;
@@ -514,83 +496,108 @@ nav > * { pointer-events: auto; }
   box-shadow: var(--shadow-lg);
 }
 
-.work-item-img,
-.work-item-video {
+/* Video — top half of card, no bottom radius */
+.work-item-video,
+.work-item-img {
   width: 100%; display: block;
   object-fit: cover;
-  border-radius: var(--radius-md);
-  transition: filter 0.6s ease, transform 0.6s var(--ease-out);
-  filter: grayscale(5%) brightness(0.96);
+  aspect-ratio: 16/9;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  transition: filter 0.5s ease;
+  filter: brightness(0.96);
   will-change: transform;
-  background: var(--surface);
+  background: #111;
 }
-.work-item:hover .work-item-img,
-.work-item:hover .work-item-video {
-  filter: grayscale(0%) brightness(1.02);
-  transform: scale(1.03);
+.work-item:hover .work-item-video,
+.work-item:hover .work-item-img {
+  filter: brightness(1);
 }
 
-/* Info card overlay */
+/* Hover preview progress bar */
+.work-item-progress {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 3px; background: rgba(255,255,255,0.08);
+  z-index: 3; pointer-events: none;
+  opacity: 0; transition: opacity 0.35s ease;
+  border-radius: 0 0 0 var(--radius-md);
+}
+.work-item:hover .work-item-progress,
+.work-item.playing .work-item-progress {
+  opacity: 1;
+}
+.work-item-progress-bar {
+  height: 100%; width: 0%;
+  background: var(--warm);
+  border-radius: inherit;
+  will-change: width;
+}
+
+/* Info area — below video, dark background */
 .work-item-info {
-  position: absolute; inset: 0;
-  padding: 24px;
-  display: flex; flex-direction: column;
-  border-radius: var(--radius-md);
-  pointer-events: none;
+  padding: 14px 18px 16px;
+  background: #121212;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  display: flex; flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 8px;
+  row-gap: 1px;
 }
 
-/* Title — centered in upper half */
-.work-item-name {
-  font-family: var(--font); font-weight: 700; font-size: clamp(0.9rem, 2vw, 1.2rem);
-  letter-spacing: -0.02em; color: #fff;
-  text-align: center;
-  margin-top: 18%;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.7);
-}
-
-/* Bottom row: left = brand+role, right = type tag */
-.work-item-info::before {
-  content: '';
-  flex: 1;
-}
-.work-item-brand {
-  font-family: var(--font); font-size: 0.7rem; font-weight: 700;
-  letter-spacing: 0.04em; text-transform: uppercase;
-  color: #fff;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
-  margin-bottom: 2px;
-}
-.work-item-role {
-  font-family: var(--font); font-size: 0.54rem; font-weight: 500;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--warm);
-  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-}
+/* Type tag — top-right area of info, small pill */
 .work-item-tag {
-  position: absolute; bottom: 24px; right: 24px;
-  font-family: var(--font); font-size: 0.56rem; font-weight: 600;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  padding: 4px 11px;
-  border: 1px solid rgba(255,255,255,0.35);
-  color: rgba(255,255,255,0.75);
-  border-radius: var(--radius-sm);
-  backdrop-filter: blur(4px);
+  order: 1;
+  font-family: var(--font); font-size: 0.46rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 7px;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.4);
+  border-radius: 4px;
+  margin-bottom: 4px;
 }
-.work-item:hover .work-item-tag {
-  border-color: rgba(255,255,255,0.6);
-  color: #fff;
-  background: rgba(255,255,255,0.1);
+
+/* Title — full width, left-aligned */
+.work-item-name {
+  order: 2;
+  flex-basis: 100%;
+  font-family: var(--font); font-weight: 500; font-size: 0.95rem;
+  letter-spacing: -0.01em; color: #fff;
+  line-height: 1.35;
 }
-.work-item-meta {
-  display: none;
+
+/* Brand — full width */
+.work-item-brand {
+  order: 3;
+  flex-basis: 100%;
+  font-family: var(--font); font-size: 0.58rem; font-weight: 400;
+  letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.35);
+  margin-top: 1px;
 }
+
+/* Role — full width, "片中职务: " prefix, warm accent */
+.work-item-role {
+  order: 4;
+  flex-basis: 100%;
+  font-family: var(--font); font-size: 0.55rem; font-weight: 400;
+  letter-spacing: 0.03em;
+  color: var(--warm);
+  margin-top: 0;
+}
+.work-item-role:not(:empty)::before {
+  content: '片中职务: ';
+  color: rgba(255,255,255,0.35);
+  font-weight: 400;
+  margin-right: 2px;
+}
+
+.work-item-meta { display: none; }
 .work-item-role:empty:not([contenteditable]),
 .work-item-brand:empty:not([contenteditable]) {
   display: none;
 }
 .editing .work-item-role:empty,
 .editing .work-item-brand:empty {
-  display: inline-block;
+  display: block;
   min-width: 60px;
 }
 
@@ -671,6 +678,24 @@ nav > * { pointer-events: auto; }
   cursor: grabbing;
 }
 
+/* Cover set button — visible in edit mode */
+.cover-btn {
+  position: absolute; top: 10px; left: 10px; z-index: 5;
+  width: 28px; height: 28px;
+  display: none; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.5);
+  border: none; border-radius: 4px;
+  color: #fff; font-size: 14px; line-height: 1;
+  cursor: pointer; padding: 0;
+  transition: background 0.2s;
+}
+.cover-btn:hover { background: var(--warm); }
+.editing .cover-btn { display: flex; }
+.cover-btn.saved { background: var(--warm); }
+.cover-btn.saved::after {
+  content: '✓'; font-size: 10px; margin-left: 1px;
+}
+
 /* Restore pointer events in edit mode */
 .editing .work-item-info { pointer-events: auto; }
 .editing .work-item-name,
@@ -678,42 +703,19 @@ nav > * { pointer-events: auto; }
 .editing .work-item-role { pointer-events: auto; }
 
 /* ═══ WORK PLAY BUTTON ══════════════════════════════════════════ */
-.work-play-btn {
-  position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  width: 56px; height: 56px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.55);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1.5px solid rgba(255,255,255,0.3);
-  display: flex; align-items: center; justify-content: center;
-  cursor: none;
-  opacity: 1;
-  pointer-events: auto;
-}
-.work-play-btn svg { width: 22px; height: 22px; margin-left: 2px; }
-.work-item:hover .work-play-btn {
-  transform: translate(-50%, -50%) scale(1.08);
-}
-.work-play-btn:hover {
-  background: rgba(0,0,0,0.75);
-  border-color: rgba(255,255,255,0.6);
-  transform: translate(-50%, -50%) scale(1.12);
-}
+.work-play-btn { display: none; }
 /* ═══ WORK VIEW ALL ═════════════════════════════════════════════════ */
 .work-view-all {
   text-align: center; padding-top: 40px;
 }
 .btn-view-all {
   display: inline-block;
-  font-family: var(--font); font-size: 0.7rem; font-weight: 600;
-  letter-spacing: 0.18em; text-transform: uppercase;
+  font-family: var(--font); font-size: 0.62rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--fg);
-  padding: 16px 40px;
-  border: 1.5px solid var(--fg);
-  border-radius: var(--radius-sm);
+  padding: 14px 36px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
   transition: all 0.35s var(--ease-out);
   cursor: none;
 }
@@ -724,14 +726,14 @@ nav > * { pointer-events: auto; }
   box-shadow: var(--shadow-md);
 }
 @media (prefers-color-scheme: dark) {
-  .btn-view-all { color: var(--fg); border-color: var(--fg); }
-  .btn-view-all:hover { background: var(--fg); color: var(--bg); }
+  .btn-view-all { color: var(--fg); border-color: var(--border); }
+  .btn-view-all:hover { background: var(--fg); color: var(--bg); border-color: var(--fg); }
 }
 
 /* ═══ ABOUT ═════════════════════════════════════════════════════════ */
 #about {
   display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
-  align-items: start; padding: 120px 56px;
+  align-items: start; padding: 140px 56px;
   background: var(--surface);
   border-top: 1px solid var(--border);
   position: relative;
@@ -740,45 +742,43 @@ nav > * { pointer-events: auto; }
   content: ''; position: absolute; top: 0; left: 56px; right: 56px;
   height: 1px;
   background: linear-gradient(90deg, var(--fg) 0%, transparent 60%);
-  opacity: 0.04;
+  opacity: 0.03;
 }
 .about-left { position: sticky; top: 120px; }
 .about-section-label {
-  font-family: var(--font); font-size: 0.62rem; font-weight: 600;
-  letter-spacing: 0.28em; text-transform: uppercase; color: var(--grey3); margin-bottom: 24px;
+  font-family: var(--font); font-size: 0.58rem; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--grey4); margin-bottom: 20px;
 }
 .about-big-text {
-  font-family: var(--font); font-weight: 800;
-  font-size: clamp(2.5rem, 5vw, 5.5rem); letter-spacing: -0.04em;
-  text-transform: uppercase; line-height: 0.92; color: var(--fg);
+  font-family: var(--font); font-weight: 500;
+  font-size: clamp(2.5rem, 5vw, 5rem); letter-spacing: -0.03em;
+  text-transform: uppercase; line-height: 0.94; color: var(--fg);
 }
-.about-big-text em { font-style: italic; font-weight: 300; }
-.about-right { padding-top: 24px; }
+.about-big-text em { font-style: normal; font-weight: 300; }
+.about-right { padding-top: 20px; }
 .about-para {
-  font-family: var(--font); font-size: 1.05rem; line-height: 1.9;
-  color: var(--grey2); margin-bottom: 32px; opacity: 0; transform: translateY(24px);
+  font-family: var(--font); font-size: 0.95rem; line-height: 1.85; font-weight: 400;
+  color: var(--grey3); margin-bottom: 28px; opacity: 0; transform: translateY(24px);
 }
-.about-skills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 48px; }
+.about-skills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 48px; }
 .skill-tag {
-  font-family: var(--font); font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
-  padding: 8px 16px;
+  font-family: var(--font); font-size: 0.54rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 6px 14px;
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  color: var(--grey3);
-  background: var(--bg);
+  border-radius: 100px;
+  color: var(--grey4);
+  background: transparent;
   transition: all 0.3s var(--ease-out);
 }
 .skill-tag:hover {
   border-color: var(--fg);
-  color: var(--bg);
-  background: var(--fg);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
+  color: var(--fg);
+  background: transparent;
 }
 
 /* ═══ FOOTER ════════════════════════════════════════════════════════ */
 footer {
-  padding: 100px 56px 56px; border-top: 1px solid var(--border);
+  padding: 120px 56px 64px; border-top: 1px solid var(--border);
   display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 48px;
   background: var(--bg);
   position: relative;
@@ -786,13 +786,13 @@ footer {
 footer::before {
   content: ''; position: absolute; top: 0; left: 56px; right: 56px;
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, var(--grey4) 30%, transparent 100%);
-  opacity: 0.2;
+  background: linear-gradient(90deg, transparent 0%, var(--grey5) 30%, transparent 100%);
+  opacity: 0.3;
 }
 .footer-cta {
-  font-family: var(--font); font-weight: 800;
-  font-size: clamp(2.5rem, 6vw, 6rem); letter-spacing: -0.05em;
-  text-transform: uppercase; line-height: 0.92;
+  font-family: var(--font); font-weight: 500;
+  font-size: clamp(2.5rem, 6vw, 5.5rem); letter-spacing: -0.03em;
+  text-transform: uppercase; line-height: 0.94;
 }
 .footer-cta a {
   display: inline-block; position: relative;
@@ -871,45 +871,40 @@ footer::before {
     --border:   #2e2e2a;
   }
   nav {
-    background: rgba(14,14,13,0.88);
+    background: rgba(14,14,13,0.9);
   }
   nav.scrolled {
-    background: rgba(14,14,13,0.95);
+    background: rgba(14,14,13,0.96);
     border-color: rgba(255,255,255,0.06);
   }
   #side-nav-panel {
     background: rgba(14,14,13,0.98);
-    box-shadow: -8px 8px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+    box-shadow: -4px 4px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
   }
   #wave-path { stroke: rgba(255,255,255,0.06); }
   .side-nav-close { background: var(--surface); border-color: var(--border); }
   .side-nav-close:hover { border-color: var(--fg); background: var(--bg); }
-  #water-canvas { opacity: 0.25; }
+  #water-canvas { opacity: 0.2; }
   .work-item { background: var(--surface); }
   .work-item:hover .work-item-inner {
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
   }
-  .work-item-info {
-    background: linear-gradient(to top,
-      rgba(14,14,13,0.95) 0%,
-      rgba(14,14,13,0.5) 50%,
-      transparent 100%);
-  }
-  .work-item-img,
-  .work-item-video { filter: grayscale(8%) brightness(0.9); }
-  .work-item:hover .work-item-img,
-  .work-item:hover .work-item-video { filter: grayscale(0%) brightness(1); }
-  .skill-tag { background: var(--surface); }
+  .work-item-video,
+  .work-item-img { filter: brightness(0.9); }
+  .work-item:hover .work-item-video,
+  .work-item:hover .work-item-img { filter: brightness(1); }
+  .work-item-info { background: #0a0a0a; }
+  .skill-tag { background: transparent; }
   .lang-btn { background: var(--surface); }
   .lang-dropdown { background: var(--surface); }
 
   #hero { background: #000; }
   #hero::after {
     background: linear-gradient(to bottom,
-      rgba(0,0,0,0.18) 0%,
-      rgba(0,0,0,0.08) 40%,
-      rgba(0,0,0,0.22) 60%,
-      rgba(0,0,0,0.5) 100%);
+      rgba(0,0,0,0.12) 0%,
+      rgba(0,0,0,0.04) 40%,
+      rgba(0,0,0,0.16) 60%,
+      rgba(0,0,0,0.45) 100%);
   }
   #loader { background: var(--fg); }
   #loader::before { background: radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.03) 0%, transparent 70%); }
@@ -932,13 +927,13 @@ footer::before {
     border-radius: var(--radius-md);
   }
   .nav-links { display: none; }
-  #about { grid-template-columns: 1fr; gap: 48px; padding: 80px 24px; }
+  #about { grid-template-columns: 1fr; gap: 48px; padding: 100px 24px; }
   .about-left { position: static; }
   .about-big-text br { display: none; }
   footer { grid-template-columns: 1fr; padding: 80px 24px 40px; }
   .footer-meta { text-align: left; }
   .footer-links { justify-content: flex-start; }
-  #work { padding: 80px 24px; }
+  #work { padding: 100px 24px; }
   #cursor, .edge-hint, #back-to-top { display: none; }
   body { cursor: auto; }
   #side-nav-trigger { width: 24px; }
@@ -1000,6 +995,116 @@ footer::before {
   .video-lightbox-close { top: 8px; right: 8px; }
 }
 
+
+/* ═══ PROJECT DETAIL OVERLAY ════════════════════════════════════ */
+.project-detail {
+  position: fixed; inset: 0; z-index: 99990;
+  display: flex; align-items: stretch; justify-content: flex-end;
+  opacity: 0; pointer-events: none; cursor: auto;
+  transition: opacity 0.35s var(--ease-out);
+}
+.project-detail.open { opacity: 1; pointer-events: auto; }
+.project-detail-bg {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.project-detail-panel {
+  position: relative; z-index: 1;
+  width: min(680px, 92vw); height: 100vh;
+  background: #0d0d0c;
+  border-left: 1px solid rgba(255,255,255,0.08);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.project-detail-scroll {
+  flex: 1; overflow-y: auto; overflow-x: hidden;
+  padding: 60px 40px 80px;
+  scroll-behavior: smooth;
+}
+.project-detail-close {
+  position: absolute; top: 20px; right: 20px; z-index: 2;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(0,0,0,0.5);
+  color: #fff; font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.2s;
+}
+.project-detail-close:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.3);
+}
+
+.project-detail-images {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-bottom: 36px;
+}
+.project-detail-images img {
+  width: 100%; border-radius: 8px;
+  background: #1a1a1a;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.project-detail-images img:hover { transform: scale(1.02); }
+.project-detail-images img:first-child { grid-column: 1 / -1; }
+
+.project-detail-body { color: #ccc; }
+.project-detail-body .live-title {
+  font-family: var(--font); font-size: 1.6rem; font-weight: 700;
+  color: #fff; letter-spacing: -0.02em; margin-bottom: 8px;
+}
+.project-detail-body .live-meta {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.project-detail-body .live-meta span {
+  font-family: var(--font); font-size: 0.58rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 4px 12px; border-radius: var(--radius-sm);
+}
+.live-meta-brand { background: rgba(212,165,116,0.15); color: var(--warm); }
+.live-meta-role { border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); }
+.live-meta-date { color: rgba(255,255,255,0.35); }
+
+.project-detail-body .live-block {
+  margin-bottom: 16px; line-height: 1.7;
+}
+.project-detail-body .live-block.header {
+  font-family: var(--font); font-size: 0.85rem; font-weight: 700;
+  color: #fff; margin-top: 28px; text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.project-detail-body .live-block.sub_header {
+  font-family: var(--font); font-size: 1rem; font-weight: 600;
+  color: #eee; margin-top: 24px;
+}
+.project-detail-body .live-block.sub_sub_header {
+  font-family: var(--font); font-size: 0.85rem; font-weight: 600;
+  color: #ddd; margin-top: 20px;
+}
+.project-detail-body .live-block.bulleted_list {
+  padding-left: 16px; position: relative;
+  font-size: 0.82rem; color: #aaa;
+}
+.project-detail-body .live-block.bulleted_list::before {
+  content: '—'; position: absolute; left: 0; color: var(--warm);
+}
+.project-detail-body .live-block.text {
+  font-size: 0.82rem; color: #999;
+}
+.project-detail-body .live-block.toggle {
+  font-family: var(--font); font-size: 0.75rem; font-weight: 600;
+  color: rgba(255,255,255,0.45); margin-top: 12px;
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+@media (max-width: 700px) {
+  .project-detail-panel { width: 100vw; }
+  .project-detail-scroll { padding: 50px 20px 60px; }
+  .project-detail-images { gap: 6px; }
+}
+
 /* ═══ TOUCH DEVICES ══════════════════════════════════════════════ */
 @media (hover: none) and (pointer: coarse) {
   body { cursor: auto; }
@@ -1019,7 +1124,7 @@ footer::before {
 <canvas id="water-canvas"></canvas>
 
 <!-- Cursor droplet -->
-<div id="cursor">🐱</div>
+<div id="cursor"><canvas id="cursor-canvas"></canvas></div>
 
 <!-- Back to top -->
 <button id="back-to-top" aria-label="Back to top">
@@ -1153,17 +1258,17 @@ footer::before {
   <h2 class="work-title">Work</h2>
 
   <div class="work-filters">
-    <button class="work-filter-btn active" data-filter="all">All</button>
     <button class="work-filter-btn" data-filter="TVC">TV COMMERCIAL</button>
     <button class="work-filter-btn" data-filter="AIGC">AIGC VIDEO</button>
     <button class="work-filter-btn" data-filter="短视频">SHORT VIDEO</button>
+    <button class="work-filter-btn" data-filter="LIVE">LIVE SHOW</button>
     <button class="edit-toggle-btn" id="edit-toggle" title="Toggle inline editing">Edit Mode ✎</button>
   </div>
 
 <div class="work-masonry" id="work-masonry">
 <div class="work-item" data-category="TVC" data-role="" data-brand="Tuborg">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/Tuborg.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/Tuborg.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1179,7 +1284,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="陪你一起长大">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/《陪你一起长大》-初为父母特辑.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/《陪你一起长大》-初为父母特辑.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1196,7 +1301,7 @@ footer::before {
 
 <div class="work-item" data-category="TVC" data-role="" data-brand="亚洲渔港">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/亚洲渔港海参_不回复系列-灵魂时刻_完整版（带客户角标）.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/亚洲渔港海参_不回复系列-灵魂时刻_完整版（带客户角标）.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1212,7 +1317,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="亚洲渔港">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/亚洲渔港海参_不回复系列_老板喊你_完整版（带客户角标）.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/亚洲渔港海参_不回复系列_老板喊你_完整版（带客户角标）.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1228,7 +1333,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="亚洲渔港">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/亚洲渔港海参_免衣力系列_情侣_完整版(带客户角标）.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/亚洲渔港海参_免衣力系列_情侣_完整版(带客户角标）.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1244,7 +1349,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="亚洲渔港">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/亚洲渔港海参_免衣力系列_祖孙-完整版（带客户角标）.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/亚洲渔港海参_免衣力系列_祖孙-完整版（带客户角标）.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1260,7 +1365,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="亚洲渔港">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/亚洲渔港海参_免衣力系列_老伴_完整版(带客户角标）.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/亚洲渔港海参_免衣力系列_老伴_完整版(带客户角标）.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1276,7 +1381,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="亚洲渔港">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/亚洲渔港海参_高胶原不叫冤_镜子_完整版（带客户角标）.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/亚洲渔港海参_高胶原不叫冤_镜子_完整版（带客户角标）.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1292,7 +1397,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="亚洲渔港">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/亚洲渔港烤鱼_01_-完整版（带客户角标）.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/亚洲渔港烤鱼_01_-完整版（带客户角标）.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1308,7 +1413,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="元气森林">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/元气森林.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/元气森林.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1324,7 +1429,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="唐家饼">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/唐家饼蝴蝶酥  横版.MP4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/唐家饼蝴蝶酥  横版.MP4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1340,7 +1445,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="威尔仕健身">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/威尔仕健身_团课升级篇.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/威尔仕健身_团课升级篇.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1356,7 +1461,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="康师傅">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/康师傅冰红茶 燃炸街舞秀.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/康师傅冰红茶 燃炸街舞秀.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1372,7 +1477,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="植村秀">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/植村秀x这就是街舞.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/植村秀x这就是街舞.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1390,7 +1495,7 @@ footer::before {
 
 <div class="work-item" data-category="TVC" data-role="" data-brand="知乎">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/知乎丨吾辈问答 x 天猫双11·DIRCUT.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/知乎丨吾辈问答 x 天猫双11·DIRCUT.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1406,7 +1511,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/第一期0808.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/第一期0808.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1422,7 +1527,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/第七期.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/第七期.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1438,7 +1543,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/第三期final.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/第三期final.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1454,7 +1559,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/第二期0812.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/第二期0812.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1470,7 +1575,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/第五期0901.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/第五期0901.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1486,7 +1591,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/第八期最终.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/第八期最终.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1502,7 +1607,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/第六期.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/第六期.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1518,7 +1623,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/第四期0825.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/第四期0825.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1534,7 +1639,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="美克美家">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/美克美家《享受意外》_Final_完整版_0518.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/美克美家《享受意外》_Final_完整版_0518.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1552,7 +1657,7 @@ footer::before {
 
 <div class="work-item" data-category="TVC" data-role="" data-brand="起跑线">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/起跑线 相伴成长特辑.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/起跑线 相伴成长特辑.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1568,7 +1673,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="迪卡侬">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/迪卡侬青少年秋季篇.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/迪卡侬青少年秋季篇.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1585,7 +1690,7 @@ footer::before {
 
 <div class="work-item" data-category="TVC" data-role="" data-brand="随变">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/随变.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/随变.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1601,7 +1706,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="七时吉祥">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/七时吉祥x是.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/七时吉祥x是.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1617,7 +1722,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="中免日上">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/中免日上x徐梦洁 .mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/中免日上x徐梦洁 .mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1633,7 +1738,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="今麦郎">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/今麦郎凉白开 杨紫 喵咪喝水紫南-广告片餐饮食品视频-新片场.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/今麦郎凉白开 杨紫 喵咪喝水紫南-广告片餐饮食品视频-新片场.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1649,7 +1754,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="玫瑰是玫瑰">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/把世界落在日常 x 玫瑰是玫瑰TVC-竖屏广告美妆护肤视频-新片场.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/把世界落在日常 x 玫瑰是玫瑰TVC-竖屏广告美妆护肤视频-新片场.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1665,7 +1770,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="今麦郎">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/杨紫今麦郎凉白开-广告片TVC广告视频-新片场.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/杨紫今麦郎凉白开-广告片TVC广告视频-新片场.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1681,7 +1786,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="今麦郎">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/杨紫今麦郎凉白开举个水-广告片餐饮食品视频-新片场.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/杨紫今麦郎凉白开举个水-广告片餐饮食品视频-新片场.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1697,7 +1802,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="甄稀">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/甄稀 x 张颜齐final_小档.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/甄稀 x 张颜齐final_小档.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1713,7 +1818,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="甄稀">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/甄稀支棒x尹正Final.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/甄稀支棒x尹正Final.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1729,7 +1834,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="艾热">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/艾热.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/艾热.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1745,7 +1850,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="蓝河绵羊">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/蓝河绵羊奶粉x张雨绮-广告片餐饮食品视频-新片场.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/蓝河绵羊奶粉x张雨绮-广告片餐饮食品视频-新片场.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1761,7 +1866,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="蘑菇街">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/蘑菇街宝藏美妆师-广告片美妆护肤视频-新片场.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/蘑菇街宝藏美妆师-广告片美妆护肤视频-新片场.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1777,7 +1882,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="飞喜">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/邂逅格拉斯的天然味道飞喜电子烟品牌TVC-广告片快消产品视频-新片场.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/邂逅格拉斯的天然味道飞喜电子烟品牌TVC-广告片快消产品视频-新片场.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1793,7 +1898,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="TVC" data-role="" data-brand="随变">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/随变bridge.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/随变bridge.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1809,7 +1914,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="AIGC" data-role="" data-brand="嘴嘴IP">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/嘴嘴IP test_第一条视频.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/嘴嘴IP test_第一条视频.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1825,7 +1930,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="短视频" data-role="" data-brand="">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/1208双12预热v5.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/1208双12预热v5.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1841,7 +1946,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="短视频" data-role="" data-brand="一叶子">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/一叶子产品V3.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/一叶子产品V3.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1857,7 +1962,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="短视频" data-role="" data-brand="一叶子">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/一叶子产品_V2.MP4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/一叶子产品_V2.MP4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1873,7 +1978,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="短视频" data-role="" data-brand="">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/信息流_V3.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/信息流_V3.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1889,7 +1994,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="短视频" data-role="" data-brand="">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/信息流_V4.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/信息流_V4.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1905,7 +2010,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="短视频" data-role="" data-brand="">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/千川预热_V1.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/千川预热_V1.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1921,7 +2026,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="短视频" data-role="" data-brand="有翡">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/有翡_V1.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/有翡_V1.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1937,7 +2042,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="短视频" data-role="" data-brand="汤包大师">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/汤包大师篇.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/汤包大师篇.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1953,7 +2058,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="短视频" data-role="" data-brand="经典汤包">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/经典汤包_产品展示片1.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/经典汤包_产品展示片1.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1969,7 +2074,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="短视频" data-role="" data-brand="经典汤包">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/经典汤包_产品展示片2.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/经典汤包_产品展示片2.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -1985,7 +2090,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="短视频" data-role="" data-brand="超级品牌日">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/超级品牌日_V1.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/超级品牌日_V1.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -2001,7 +2106,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="短视频" data-role="" data-brand="超级品牌日">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/超级品牌日_V2.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/超级品牌日_V2.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -2017,7 +2122,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="短视频" data-role="" data-brand="韩束">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/韩束产品_V1.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/韩束产品_V1.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -2033,7 +2138,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="短视频" data-role="" data-brand="韩束">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/韩束产品_V3.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/韩束产品_V3.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -2049,7 +2154,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="短视频" data-role="" data-brand="韩束">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/韩束产品_V5.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/韩束产品_V5.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -2065,7 +2170,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="短视频" data-role="" data-brand="韩束">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/韩束复古变装_V4.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/韩束复古变装_V4.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -2081,7 +2186,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="短视频" data-role="" data-brand="鹿鼎记">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/鹿鼎记_V1.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/鹿鼎记_V1.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -2097,7 +2202,7 @@ footer::before {
     </div>
 <div class="work-item" data-category="短视频" data-role="" data-brand="鹿鼎记">
       <div class="work-item-inner">
-        <video class="work-item-video" src="videos/鹿鼎记_V3.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <video class="work-item-video" preload="none" src="videos/鹿鼎记_V3.mp4" muted loop playsinline aria-hidden="true"></video>
         <button class="work-play-btn" aria-label="Play video">
           <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
             <path d="M8 5v14l11-7z"/>
@@ -2108,6 +2213,83 @@ footer::before {
           <div class="work-item-tag">短视频</div>
           <div class="work-item-brand">鹿鼎记</div>
           <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="LIVE" data-role="活动统筹, 现场导演, 创意策划" data-brand="伊丽莎白·雅顿">
+      <div class="work-item-inner">
+        <img class="work-item-img" src="data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='450'%20viewBox='0%200%20800%20450'>%20%20<rect%20fill='%238B1A2B'%20width='800'%20height='450'/>%20%20<rect%20fill='rgba(0,0,0,0.2)'%20width='800'%20height='450'/>%20%20<text%20fill='white'%20font-family='sans-serif'%20font-size='36'%20font-weight='bold'%20text-anchor='middle'%20x='400'%20y='200'>伊丽莎白·雅顿｜抖音超级品牌盛典</text>%20%20<text%20fill='rgba(255,255,255,0.7)'%20font-family='sans-serif'%20font-size='20'%20text-anchor='middle'%20x='400'%20y='240'>伊丽莎白·雅顿</text>%20%20<text%20fill='rgba(255,255,255,0.4)'%20font-family='sans-serif'%20font-size='16'%20text-anchor='middle'%20x='400'%20y='270'>LIVE%20SHOW</text></svg>" alt="伊丽莎白·雅顿｜抖音超级品牌盛典" loading="lazy">
+        <div class="work-item-info">
+          <div class="work-item-tag">LIVE</div>
+          <div class="work-item-name">伊丽莎白·雅顿｜抖音超级品牌盛典</div>
+          <div class="work-item-brand">伊丽莎白·雅顿</div>
+          <div class="work-item-role">活动统筹, 现场导演, 创意策划</div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="LIVE" data-role="项目经理, 现场导演" data-brand="NARS">
+      <div class="work-item-inner">
+        <img class="work-item-img" src="data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='450'%20viewBox='0%200%20800%20450'>%20%20<rect%20fill='%231a1a1a'%20width='800'%20height='450'/>%20%20<rect%20fill='rgba(0,0,0,0.2)'%20width='800'%20height='450'/>%20%20<text%20fill='white'%20font-family='sans-serif'%20font-size='36'%20font-weight='bold'%20text-anchor='middle'%20x='400'%20y='200'>NARS｜陈昊宇%20x%20十四点%20京东直播内</text>%20%20<text%20fill='rgba(255,255,255,0.7)'%20font-family='sans-serif'%20font-size='20'%20text-anchor='middle'%20x='400'%20y='240'>NARS</text>%20%20<text%20fill='rgba(255,255,255,0.4)'%20font-family='sans-serif'%20font-size='16'%20text-anchor='middle'%20x='400'%20y='270'>LIVE%20SHOW</text></svg>" alt="NARS｜陈昊宇 x 十四点 京东直播内容场" loading="lazy">
+        <div class="work-item-info">
+          <div class="work-item-tag">LIVE</div>
+          <div class="work-item-name">NARS｜陈昊宇 x 十四点 京东直播内容场</div>
+          <div class="work-item-brand">NARS</div>
+          <div class="work-item-role">项目经理, 现场导演</div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="LIVE" data-role="项目经理, 创意策划, 现场导演" data-brand="NARS">
+      <div class="work-item-inner">
+        <img class="work-item-img" src="data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='450'%20viewBox='0%200%20800%20450'>%20%20<rect%20fill='%232d2d2d'%20width='800'%20height='450'/>%20%20<rect%20fill='rgba(0,0,0,0.2)'%20width='800'%20height='450'/>%20%20<text%20fill='white'%20font-family='sans-serif'%20font-size='36'%20font-weight='bold'%20text-anchor='middle'%20x='400'%20y='200'>NARS｜歌手刘忻%20x%20葛晓倩%20抖音直播</text>%20%20<text%20fill='rgba(255,255,255,0.7)'%20font-family='sans-serif'%20font-size='20'%20text-anchor='middle'%20x='400'%20y='240'>NARS</text>%20%20<text%20fill='rgba(255,255,255,0.4)'%20font-family='sans-serif'%20font-size='16'%20text-anchor='middle'%20x='400'%20y='270'>LIVE%20SHOW</text></svg>" alt="NARS｜歌手刘忻 x 葛晓倩 抖音直播内容场" loading="lazy">
+        <div class="work-item-info">
+          <div class="work-item-tag">LIVE</div>
+          <div class="work-item-name">NARS｜歌手刘忻 x 葛晓倩 抖音直播内容场</div>
+          <div class="work-item-brand">NARS</div>
+          <div class="work-item-role">项目经理, 创意策划, 现场导演</div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="LIVE" data-role="现场导演" data-brand="妮维雅">
+      <div class="work-item-inner">
+        <img class="work-item-img" src="data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='450'%20viewBox='0%200%20800%20450'>%20%20<rect%20fill='%23004B87'%20width='800'%20height='450'/>%20%20<rect%20fill='rgba(0,0,0,0.2)'%20width='800'%20height='450'/>%20%20<text%20fill='white'%20font-family='sans-serif'%20font-size='36'%20font-weight='bold'%20text-anchor='middle'%20x='400'%20y='200'>妮维雅｜一枝南南%20抖音直播内容场</text>%20%20<text%20fill='rgba(255,255,255,0.7)'%20font-family='sans-serif'%20font-size='20'%20text-anchor='middle'%20x='400'%20y='240'>妮维雅</text>%20%20<text%20fill='rgba(255,255,255,0.4)'%20font-family='sans-serif'%20font-size='16'%20text-anchor='middle'%20x='400'%20y='270'>LIVE%20SHOW</text></svg>" alt="妮维雅｜一枝南南 抖音直播内容场" loading="lazy">
+        <div class="work-item-info">
+          <div class="work-item-tag">LIVE</div>
+          <div class="work-item-name">妮维雅｜一枝南南 抖音直播内容场</div>
+          <div class="work-item-brand">妮维雅</div>
+          <div class="work-item-role">现场导演</div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="LIVE" data-role="项目经理, 创意策划, 现场导演" data-brand="伊丽莎白·雅顿">
+      <div class="work-item-inner">
+        <img class="work-item-img" src="data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='450'%20viewBox='0%200%20800%20450'>%20%20<rect%20fill='%237A1628'%20width='800'%20height='450'/>%20%20<rect%20fill='rgba(0,0,0,0.2)'%20width='800'%20height='450'/>%20%20<text%20fill='white'%20font-family='sans-serif'%20font-size='36'%20font-weight='bold'%20text-anchor='middle'%20x='400'%20y='200'>伊丽莎白·雅顿｜左岸潇直播内容场</text>%20%20<text%20fill='rgba(255,255,255,0.7)'%20font-family='sans-serif'%20font-size='20'%20text-anchor='middle'%20x='400'%20y='240'>伊丽莎白·雅顿</text>%20%20<text%20fill='rgba(255,255,255,0.4)'%20font-family='sans-serif'%20font-size='16'%20text-anchor='middle'%20x='400'%20y='270'>LIVE%20SHOW</text></svg>" alt="伊丽莎白·雅顿｜左岸潇直播内容场" loading="lazy">
+        <div class="work-item-info">
+          <div class="work-item-tag">LIVE</div>
+          <div class="work-item-name">伊丽莎白·雅顿｜左岸潇直播内容场</div>
+          <div class="work-item-brand">伊丽莎白·雅顿</div>
+          <div class="work-item-role">项目经理, 创意策划, 现场导演</div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="LIVE" data-role="现场导演, 项目经理" data-brand="麦当劳">
+      <div class="work-item-inner">
+        <img class="work-item-img" src="data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='450'%20viewBox='0%200%20800%20450'>%20%20<rect%20fill='%23DA291C'%20width='800'%20height='450'/>%20%20<rect%20fill='rgba(0,0,0,0.2)'%20width='800'%20height='450'/>%20%20<text%20fill='white'%20font-family='sans-serif'%20font-size='36'%20font-weight='bold'%20text-anchor='middle'%20x='400'%20y='200'>麦当劳%20西瓜麦旋风新品上市内容场</text>%20%20<text%20fill='rgba(255,255,255,0.7)'%20font-family='sans-serif'%20font-size='20'%20text-anchor='middle'%20x='400'%20y='240'>麦当劳</text>%20%20<text%20fill='rgba(255,255,255,0.4)'%20font-family='sans-serif'%20font-size='16'%20text-anchor='middle'%20x='400'%20y='270'>LIVE%20SHOW</text></svg>" alt="麦当劳 西瓜麦旋风新品上市内容场" loading="lazy">
+        <div class="work-item-info">
+          <div class="work-item-tag">LIVE</div>
+          <div class="work-item-name">麦当劳 西瓜麦旋风新品上市内容场</div>
+          <div class="work-item-brand">麦当劳</div>
+          <div class="work-item-role">现场导演, 项目经理</div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="LIVE" data-role="现场导演, 项目经理" data-brand="麦当劳">
+      <div class="work-item-inner">
+        <img class="work-item-img" src="data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='450'%20viewBox='0%200%20800%20450'>%20%20<rect%20fill='%23BD1021'%20width='800'%20height='450'/>%20%20<rect%20fill='rgba(0,0,0,0.2)'%20width='800'%20height='450'/>%20%20<text%20fill='white'%20font-family='sans-serif'%20font-size='36'%20font-weight='bold'%20text-anchor='middle'%20x='400'%20y='200'>麦当劳%20x%20王楚淇%20直播内容场</text>%20%20<text%20fill='rgba(255,255,255,0.7)'%20font-family='sans-serif'%20font-size='20'%20text-anchor='middle'%20x='400'%20y='240'>麦当劳</text>%20%20<text%20fill='rgba(255,255,255,0.4)'%20font-family='sans-serif'%20font-size='16'%20text-anchor='middle'%20x='400'%20y='270'>LIVE%20SHOW</text></svg>" alt="麦当劳 x 王楚淇 直播内容场" loading="lazy">
+        <div class="work-item-info">
+          <div class="work-item-tag">LIVE</div>
+          <div class="work-item-name">麦当劳 x 王楚淇 直播内容场</div>
+          <div class="work-item-brand">麦当劳</div>
+          <div class="work-item-role">现场导演, 项目经理</div>
         </div>
       </div>
     </div>
@@ -2287,7 +2469,13 @@ function disturbWater(px, py, str = 60) {
   }
 }
 const offscr = document.createElement('canvas');
-function renderWater() {
+let lastWaterTime = 0;
+const WATER_INTERVAL = 33; // ~30fps
+function renderWater(now) {
+  waterRAF = requestAnimationFrame(renderWater);
+  // Throttle to ~30fps — halves GPU/CPU cost with no visible difference
+  if (now - lastWaterTime < WATER_INTERVAL) return;
+  lastWaterTime = now;
   const DAMP = 0.985;
   for (let y=1;y<wRows-1;y++) for (let x=1;x<wCols-1;x++) {
     const i = y*wCols+x;
@@ -2305,85 +2493,94 @@ function renderWater() {
   const oc = offscr.getContext('2d'); oc.putImageData(imgData,0,0);
   wCtx.clearRect(0,0,wW,wH);
   wCtx.drawImage(offscr,0,0,wW,wH);
-  waterRAF = requestAnimationFrame(renderWater);
 }
 let waterRAF = null;
 initWater(); waterRAF = requestAnimationFrame(renderWater);
-function startWater() { if (!waterRAF) { waterRAF = requestAnimationFrame(renderWater); } }
-function stopWater()  { if (waterRAF) { cancelAnimationFrame(waterRAF); waterRAF = null; } }
+function startWater() {
+  if (!waterRAF) { lastWaterTime = 0; waterRAF = requestAnimationFrame(renderWater); }
+}
+function stopWater()  {
+  if (waterRAF) { cancelAnimationFrame(waterRAF); waterRAF = null; }
+}
 document.addEventListener("visibilitychange", () => {
   document.hidden ? stopWater() : (startWater(), initWater());
 });
 window.addEventListener('resize', initWater);
 
 /* ══════════════════════════════════════════════════════════════
-   CURSOR  — fast droplet + dot-trail
+   CURSOR  — simple pixel-art canvas
 ══════════════════════════════════════════════════════════════ */
 const cursorEl = document.getElementById('cursor');
-let cmx=0,cmy=0,lastDistT=0,lastDotT=0;
+const cursorCanvas = document.getElementById('cursor-canvas');
+const cursorCtx = cursorCanvas.getContext('2d');
+let cmx=0,cmy=0;
 
-const POOL = 20;
-const pool = [];
-for (let i=0;i<POOL;i++) {
-  const d = document.createElement('div');
-  d.className='wake-dot';
-  d.style.cssText='width:0;height:0;opacity:0;position:fixed;left:0;top:0;';
-  document.body.appendChild(d);
-  pool.push(d);
-}
-let poolIdx = 0;
+// Pixel art — water drop (Be Water brand), 12×12 cells @ 3px
+const PIXEL = 3;
+const PW = 12, PH = 12;
+cursorCanvas.width = PW * PIXEL;
+cursorCanvas.height = PH * PIXEL;
 
-function spawnDot(x,y,vx,vy) {
-  const speed = Math.hypot(vx,vy);
-  if (speed < 1) return;
-  const d = pool[poolIdx++ % POOL];
-  const w = 2.5 + Math.min(speed*0.15, 4);
-  const h = w * (1.2 + Math.min(speed*0.035, 1.0));
-  const ang = Math.atan2(vy,vx)*180/Math.PI + 90;
-  gsap.killTweensOf(d);
-  d.style.cssText = `position:fixed;left:${x}px;top:${y}px;
-    width:${w.toFixed(1)}px;height:${h.toFixed(1)}px;
-    transform:translate(-50%,-50%) rotate(${ang.toFixed(1)}deg);
-    opacity:0.85;border-radius:50% 50% 50% 50% / 40% 40% 60% 60%;
-    background:radial-gradient(ellipse 50% 35% at 38% 28%,rgba(200,230,255,.9) 0%,transparent 100%),
-      radial-gradient(ellipse at 50% 65%,rgba(30,100,220,.8) 0%,rgba(5,30,120,.5) 60%,transparent 100%);
-    box-shadow:0 0 4px rgba(50,130,255,.3);`;
-  gsap.to(d,{opacity:0,scaleX:0.4,scaleY:2,duration:0.5+Math.random()*0.2,ease:'power2.out',
-    onComplete:()=>{ d.style.opacity='0'; }});
+const pattern = [
+  '.....##.....',
+  '....####....',
+  '...######...',
+  '...######...',
+  '..########..',
+  '..########..',
+  '...######...',
+  '....####....',
+  '.....##.....',
+  '.....##.....',
+  '.....##.....',
+  '.....###....'
+];
+
+const hoverPattern = [
+  '.....##.....',
+  '....####....',
+  '...######...',
+  '..########..',
+  '..########..',
+  '.##########.',
+  '.##########.',
+  '..########..',
+  '...######...',
+  '....####....',
+  '.....##.....',
+  '.....###....'
+];
+
+function drawCursor(patternArr) {
+  cursorCtx.clearRect(0, 0, PW * PIXEL, PH * PIXEL);
+  for (let y = 0; y < patternArr.length; y++) {
+    for (let x = 0; x < patternArr[y].length; x++) {
+      const ch = patternArr[y][x];
+      if (ch === ' ') continue;
+      if (ch === '#') cursorCtx.fillStyle = '#0d0d0c';
+      else if (ch === '@') cursorCtx.fillStyle = '#d4a574';
+      else if (ch === '.') cursorCtx.fillStyle = 'rgba(0,0,0,0.18)';
+      cursorCtx.fillRect(x * PIXEL, y * PIXEL, PIXEL, PIXEL);
+    }
+  }
 }
+drawCursor(pattern);
 
 document.addEventListener('mousemove', e => {
   const dx = e.clientX - cmx, dy = e.clientY - cmy;
   cmx = e.clientX; cmy = e.clientY;
 
-  // Ultra-fast cursor
-  gsap.to(cursorEl,{x:cmx-11,y:cmy-14,duration:0.035,ease:'none'});
+  gsap.to(cursorEl,{x:cmx-18,y:cmy-18,duration:0.035,ease:'none'});
 
-  // Tilt with movement direction
   const spd = Math.hypot(dx,dy);
   const ang = Math.atan2(dy,dx)*180/Math.PI + 90;
   gsap.to(cursorEl,{rotate:ang*(0.35), scaleX:1+Math.min(spd*.008,.2),
     duration:0.1,ease:'power2.out'});
-
-  const now = Date.now();
-  if (now-lastDistT>14) { disturbWater(cmx,cmy,25+spd*0.6); lastDistT=now; }
-  if (now-lastDotT>12) {
-    spawnDot(cmx,cmy,dx,dy);
-    if (spd>10) spawnDot(cmx-dx*.3+(Math.random()-.5)*2,cmy-dy*.3+(Math.random()-.5)*2,dx*.6,dy*.6);
-    lastDotT=now;
-  }
 });
 
 document.querySelectorAll('a,button,.work-item,.lang-option').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ cursorEl.classList.add('hovering'); disturbWater(cmx,cmy,120); });
-  el.addEventListener('mouseleave',()=>cursorEl.classList.remove('hovering'));
-});
-document.addEventListener('click',e=>{
-  disturbWater(e.clientX,e.clientY,280);
-  for(let i=0;i<8;i++){
-    const a=(i/8)*Math.PI*2,r=4+Math.random()*8;
-    spawnDot(e.clientX+Math.cos(a)*r,e.clientY+Math.sin(a)*r,Math.cos(a)*8,Math.sin(a)*8);
-  }
+  el.addEventListener('mouseenter',()=>{ cursorEl.classList.add('hovering'); drawCursor(hoverPattern); });
+  el.addEventListener('mouseleave',()=>{ cursorEl.classList.remove('hovering'); drawCursor(pattern); });
 });
 
 
@@ -2397,60 +2594,58 @@ workItems.forEach(item => {
   const inner = item.querySelector('.work-item-inner');
   const media = item.querySelector('.work-item-img, .work-item-video');
 
-  item.addEventListener('mousemove', e => {
+  let queued = null;
+  let mimosaRAF = null;
+
+  function applyMimosa(e) {
     const rect  = item.getBoundingClientRect();
-    const relX  = e.clientX - rect.left;
-    const relY  = e.clientY - rect.top;
     const cx    = rect.width  / 2;
     const cy    = rect.height / 2;
-    const dx    = relX - cx;
-    const dy    = relY - cy;
+    const dx    = e.clientX - rect.left - cx;
+    const dy    = e.clientY - rect.top  - cy;
     const dist  = Math.hypot(dx, dy);
     const maxDist = Math.hypot(cx, cy);
-
-    // Strength of repulsion — strongest near center, fades at edges
     const strength = Math.max(0, 1 - dist / maxDist);
-
-    // Tilt away from cursor: if cursor is at right-top, card leans left-down
-    const tiltX = -(dy / cy) * 12 * strength;   // rotate around X axis
-    const tiltY =  (dx / cx) * 12 * strength;   // rotate around Y axis
-
-    // Translate slightly away from cursor
+    const tiltX = -(dy / cy) * 12 * strength;
+    const tiltY =  (dx / cx) * 12 * strength;
     const pushX = -(dx / cx) * 10 * strength;
     const pushY = -(dy / cy) * 10 * strength;
 
     gsap.to(inner, {
-      rotateX: tiltX,
-      rotateY: tiltY,
-      x: pushX,
-      y: pushY,
+      rotateX: tiltX, rotateY: tiltY,
+      x: pushX, y: pushY,
       scale: 0.97 - strength * 0.03,
-      duration: 0.4,
-      ease: 'power2.out',
+      duration: 0.4, ease: 'power2.out',
       transformPerspective: 800,
       transformOrigin: 'center center'
     });
-
-    // Image also subtly shifts in opposite direction (parallax within card)
     gsap.to(media, {
-      x: dx * 0.04,
-      y: dy * 0.04,
-      duration: 0.5,
-      ease: 'power2.out'
+      x: dx * 0.04, y: dy * 0.04,
+      duration: 0.5, ease: 'power2.out'
     });
+  }
+
+  item.addEventListener('mousemove', e => {
+    queued = e;
+    if (!mimosaRAF) {
+      mimosaRAF = requestAnimationFrame(() => {
+        mimosaRAF = null;
+        if (queued) applyMimosa(queued);
+        queued = null;
+      });
+    }
   });
 
   item.addEventListener('mouseleave', () => {
-    // Spring back — like mimosa leaves re-opening
+    queued = null;
+    if (mimosaRAF) { cancelAnimationFrame(mimosaRAF); mimosaRAF = null; }
     gsap.to(inner, {
       rotateX: 0, rotateY: 0, x: 0, y: 0, scale: 1,
-      duration: 0.9,
-      ease: 'elastic.out(1, 0.5)'
+      duration: 0.9, ease: 'elastic.out(1, 0.5)'
     });
     gsap.to(media, {
       x: 0, y: 0,
-      duration: 0.7,
-      ease: 'elastic.out(1, 0.4)'
+      duration: 0.7, ease: 'elastic.out(1, 0.4)'
     });
   });
 });
@@ -2615,11 +2810,12 @@ function initPage(){
   gsap.fromTo('.footer-cta',{opacity:0,y:32},{opacity:1,y:0,duration:1,ease:'power3.out',
     scrollTrigger:{trigger:'footer',start:'top 88%'}});
 
-  // Work items entrance
-  gsap.utils.toArray('.work-item').forEach((item,i)=>{
-    gsap.fromTo(item,{opacity:0,y:40},{opacity:1,y:0,duration:0.75,ease:'power3.out',
-      delay:(i%3)*0.1,
-      scrollTrigger:{trigger:item,start:'top 88%',toggleActions:'play none none none'}});
+  // Work items entrance — single ScrollTrigger on the section, staggered reveal
+  var workItemsForAnim = gsap.utils.toArray('.work-item');
+  gsap.fromTo(workItemsForAnim, { opacity: 0, y: 40 }, {
+    opacity: 1, y: 0, duration: 0.65, ease: 'power3.out',
+    stagger: { each: 0.04, from: 'start' },
+    scrollTrigger: { trigger: '#work-masonry', start: 'top 88%', toggleActions: 'play none none none' }
   });
 
   setTimeout(startTicker, 500);
@@ -2659,23 +2855,69 @@ if (backToTop) {
 
 
 /* ══════════════════════════════════════════════════════════════
-   WORK FILTER
+   WORK FILTER — animated toggle
 ══════════════════════════════════════════════════════════════ */
 const filterBtns = document.querySelectorAll('.work-filter-btn');
 const workItemsAll = document.querySelectorAll('.work-item');
 
+// Animate-in helpers for items that become visible
+function revealItems() {
+  gsap.utils.toArray('.work-item:not(.filter-hidden)').forEach((item, i) => {
+    if (item.style.display === 'none') return;
+    gsap.fromTo(item, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out', delay: (i % 6) * 0.04 });
+  });
+}
+
 filterBtns.forEach(btn => {
   btn.addEventListener('click', () => {
+    // Toggle: if already active, deselect and show all
+    if (btn.classList.contains('active')) {
+      btn.classList.remove('active');
+      workItemsAll.forEach(item => {
+        item.style.display = '';
+        item.classList.remove('filter-hidden');
+      });
+      revealItems();
+      return;
+    }
     filterBtns.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const filter = btn.dataset.filter;
+
+    // Hide non-matching items with a quick fade
+    var hiding = [];
+    var showing = [];
     workItemsAll.forEach(item => {
-      if (filter === 'all' || item.dataset.category === filter) {
-        item.style.display = '';
+      if (item.dataset.category === filter) {
+        if (item.style.display === 'none') {
+          item.style.display = '';
+          showing.push(item);
+        }
+        item.classList.remove('filter-hidden');
       } else {
-        item.style.display = 'none';
+        if (item.style.display !== 'none') {
+          hiding.push(item);
+        }
       }
     });
+
+    // Fade out hidden items, then set display:none
+    hiding.forEach(function(item, i) {
+      gsap.to(item, { opacity: 0, y: 10, duration: 0.25, ease: 'power2.in', delay: i * 0.02, onComplete: function() {
+        item.style.display = 'none';
+        item.classList.add('filter-hidden');
+      }});
+    });
+
+    // Fade in new items after a brief delay
+    if (showing.length) {
+      setTimeout(function() {
+        showing.forEach(function(item, i) {
+          item.style.opacity = '0';
+          gsap.to(item, { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out', delay: i * 0.04 });
+        });
+      }, 50);
+    }
   });
 });
 
@@ -2697,21 +2939,31 @@ filterBtns.forEach(btn => {
 
   var cursorEl = document.getElementById('cursor');
 
-  function openLightbox(videoEl) {
-    var src = videoEl.getAttribute('src');
+  var currentMediaType = 'video'; // 'video' or 'image'
+
+  function openLightbox(mediaEl) {
+    var isVideo = mediaEl.tagName === 'VIDEO';
+    var src = mediaEl.getAttribute('src');
     if (!src) return;
     lbVideo.innerHTML = '';
-    var source = document.createElement('source');
-    source.src = src;
-    source.type = getType(src);
-    lbVideo.appendChild(source);
-    lbVideo.load();
+    if (isVideo) {
+      currentMediaType = 'video';
+      var source = document.createElement('source');
+      source.src = src;
+      source.type = getType(src);
+      lbVideo.appendChild(source);
+      lbVideo.load();
+      lbVideo.style.display = '';
+    } else {
+      currentMediaType = 'image';
+      lbVideo.style.display = 'none';
+    }
     lightbox.classList.add('open');
     lightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     document.body.style.cursor = 'auto';
     if (cursorEl) cursorEl.style.display = 'none';
-    lbVideo.focus();
+    if (isVideo) lbVideo.focus();
   }
 
   function closeLightbox() {
@@ -2734,17 +2986,18 @@ filterBtns.forEach(btn => {
   var items = document.querySelectorAll('.work-item');
   for (var i = 0; i < items.length; i++) {
     (function(item) {
-      var video = item.querySelector('.work-item-video');
-      if (!video) return;
+      var media = item.querySelector('.work-item-video') || item.querySelector('.work-item-img');
+      if (!media) return;
 
       function handleClick(e) {
         if (e.target.closest('[contenteditable]')) return;
+        if (e.target.closest('.work-item-info') && !e.target.closest('.work-play-btn')) return;
         e.stopPropagation();
-        openLightbox(video);
+        openLightbox(media);
       }
 
       item.addEventListener('click', handleClick);
-      video.addEventListener('click', handleClick);
+      media.addEventListener('click', handleClick);
 
       var playBtn = item.querySelector('.work-play-btn');
       if (playBtn) {
@@ -2759,13 +3012,109 @@ filterBtns.forEach(btn => {
 })();
 
 /* ══════════════════════════════════════════════════════════════
+   HOVER SCRUB — progress bar follows mouse across video
+══════════════════════════════════════════════════════════════ */
+(function() {
+  document.querySelectorAll('.work-item').forEach(function(item) {
+    var video = item.querySelector('.work-item-video');
+    if (!video) return; // skip image-only items
+
+    // Inject progress bar
+    var progressWrap = document.createElement('div');
+    progressWrap.className = 'work-item-progress';
+    var progressBar = document.createElement('div');
+    progressBar.className = 'work-item-progress-bar';
+    progressWrap.appendChild(progressBar);
+    item.querySelector('.work-item-inner').appendChild(progressWrap);
+
+    var hovering = false;
+    var scrubQueued = null;
+    var scrubRAF = null;
+
+    function seekToMouse(e) {
+      if (!hovering) return;
+      var rect = item.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var pct = Math.max(0, Math.min(100, (x / rect.width) * 100));
+      progressBar.style.width = pct + '%';
+      if (video.duration && video.readyState >= 2) {
+        video.currentTime = (pct / 100) * video.duration;
+      }
+    }
+
+    item.addEventListener('mouseenter', function(e) {
+      hovering = true;
+      seekToMouse(e);
+    });
+
+    item.addEventListener('mousemove', function(e) {
+      scrubQueued = e;
+      if (!scrubRAF) {
+        scrubRAF = requestAnimationFrame(function() {
+          scrubRAF = null;
+          if (scrubQueued) seekToMouse(scrubQueued);
+          scrubQueued = null;
+        });
+      }
+    });
+
+    item.addEventListener('mouseleave', function() {
+      hovering = false;
+      scrubQueued = null;
+      if (scrubRAF) { cancelAnimationFrame(scrubRAF); scrubRAF = null; }
+      progressBar.style.width = '0%';
+    });
+  });
+})();
+
+/* ══════════════════════════════════════════════════════════════
    INLINE EDITING — edit name, brand, role directly on page
 ══════════════════════════════════════════════════════════════ */
 (function() {
   var editToggle = document.getElementById('edit-toggle');
   var workSection = document.getElementById('work');
   var STORAGE_KEY = 'jimwei_work_edits';
+  var COVER_KEY = 'jimwei_cover_timestamps';
   var editing = false;
+
+  // Cover frame: capture current video frame as poster
+  var coverCanvas = document.createElement('canvas');
+  var coverCtx = coverCanvas.getContext('2d');
+
+  window.setCoverFrame = function(item) {
+    var video = item.querySelector('.work-item-video');
+    if (!video || !video.duration) return;
+    var t = video.currentTime;
+    var key = video.getAttribute('src') || '';
+    if (!key) return;
+
+    // Capture current frame
+    try {
+      coverCanvas.width = video.videoWidth || 320;
+      coverCanvas.height = video.videoHeight || 180;
+      coverCtx.drawImage(video, 0, 0, coverCanvas.width, coverCanvas.height);
+      var dataUrl = coverCanvas.toDataURL('image/jpeg', 0.75);
+      video.setAttribute('poster', dataUrl);
+    } catch(e) { return; }
+
+    // Save timestamp
+    var stamps = {};
+    try { stamps = JSON.parse(localStorage.getItem(COVER_KEY)) || {}; } catch(e) {}
+    stamps[key] = t;
+    try { localStorage.setItem(COVER_KEY, JSON.stringify(stamps)); } catch(e) {}
+
+    // Flash feedback
+    var btn = item.querySelector('.cover-btn');
+    if (btn) { btn.classList.add('saved'); setTimeout(function() { btn.classList.remove('saved'); }, 1200); }
+  };
+
+  // Load saved cover timestamps for poster capture to use
+  window.getCoverTimestamp = function(src) {
+    try {
+      var stamps = JSON.parse(localStorage.getItem(COVER_KEY)) || {};
+      return stamps[src] || null;
+    } catch(e) { return null; }
+  };
 
   // Editable field config
   var editableSelectors = {
@@ -2799,6 +3148,19 @@ filterBtns.forEach(btn => {
           handle.setAttribute('aria-label', 'Drag to reorder');
           item.querySelector('.work-item-inner').appendChild(handle);
         }
+        // Add cover button
+        if (!item.querySelector('.cover-btn')) {
+          var coverBtn = document.createElement('button');
+          coverBtn.className = 'cover-btn';
+          coverBtn.textContent = '📷';
+          coverBtn.title = 'Set cover frame';
+          coverBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            setCoverFrame(item);
+          });
+          item.querySelector('.work-item-inner').appendChild(coverBtn);
+        }
         item.setAttribute('draggable', 'true');
       });
     } else {
@@ -2810,6 +3172,7 @@ filterBtns.forEach(btn => {
         el.removeAttribute('data-placeholder');
       });
       document.querySelectorAll('.work-item .drag-handle').forEach(function(h) { h.remove(); });
+      document.querySelectorAll('.work-item .cover-btn').forEach(function(b) { b.remove(); });
       document.querySelectorAll('.work-item').forEach(function(item) {
         item.removeAttribute('draggable');
         item.classList.remove('dragging', 'drag-over');
@@ -3005,20 +3368,72 @@ filterBtns.forEach(btn => {
 })();
 
 /* ══════════════════════════════════════════════════════════════
+   LIVE SHOW — generate clean SVG placeholders for cards
+══════════════════════════════════════════════════════════════ */
+(function() {
+  var brandColors = {
+    '伊丽莎白·雅顿': '#8B1A2B',
+    'NARS': '#1a1a1a',
+    '妮维雅': '#004B87',
+    '麦当劳': '#DA291C'
+  };
+
+  function generatePlaceholderSVG(title, brand, w, h) {
+    var color = brandColors[brand] || '#2d2d2d';
+    var shortTitle = title.length > 18 ? title.slice(0, 18) + '…' : title;
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '">';
+    svg += '<rect fill="' + color + '" width="' + w + '" height="' + h + '"/>';
+    svg += '<rect fill="rgba(255,255,255,0.04)" width="' + w + '" height="' + h + '" rx="2"/>';
+    svg += '<text fill="white" font-family="sans-serif" font-size="' + (w > 500 ? 28 : 18) + '" font-weight="bold" text-anchor="middle" x="' + (w / 2) + '" y="' + (h / 2 - 8) + '">' + shortTitle + '</text>';
+    svg += '<text fill="rgba(255,255,255,0.5)" font-family="sans-serif" font-size="' + (w > 500 ? 16 : 12) + '" text-anchor="middle" x="' + (w / 2) + '" y="' + (h / 2 + 18) + '">' + (brand || '') + '</text>';
+    svg += '<text fill="rgba(255,255,255,0.3)" font-family="sans-serif" font-size="' + (w > 500 ? 12 : 10) + '" text-anchor="middle" x="' + (w / 2) + '" y="' + (h / 2 + 38) + '">LIVE SHOW</text>';
+    svg += '</svg>';
+    return 'data:image/svg+xml,' + encodeURIComponent(svg);
+  }
+
+  document.querySelectorAll('.work-item[data-category="LIVE"]').forEach(function(item) {
+    var img = item.querySelector('.work-item-img');
+    if (!img) return;
+    var title = item.querySelector('.work-item-name');
+    var brand = item.querySelector('.work-item-brand');
+    var titleText = title ? title.textContent.trim() : '';
+    var brandText = brand ? brand.textContent.trim() || brand.getAttribute('data-brand') || '' : '';
+    // Only generate if the current src is the old URL-encoded placeholder
+    if (img.src.indexOf('svg+xml') !== -1 || !img.src) {
+      img.src = generatePlaceholderSVG(titleText, brandText, 800, 450);
+    }
+  });
+})();
+
+/* ══════════════════════════════════════════════════════════════
    POSTER FRAME CAPTURE — lazy capture first frame for thumbnails
+   + lazy video loading: preload=none → metadata when near viewport
 ══════════════════════════════════════════════════════════════ */
 (function() {
   var processed = new WeakSet();
+  var preloadActivated = new WeakSet();
   var canvas = document.createElement('canvas');
   var ctx = canvas.getContext('2d');
 
+  function activatePreload(videoEl) {
+    if (preloadActivated.has(videoEl)) return;
+    preloadActivated.add(videoEl);
+    videoEl.preload = 'metadata';
+    videoEl.load();
+  }
+
   function captureFrame(videoEl) {
     if (processed.has(videoEl)) return;
-    if (videoEl.readyState < 2) return; // need at least metadata
+    if (videoEl.readyState < 2) return;
     processed.add(videoEl);
 
+    // Use saved cover timestamp if available, otherwise default 0.5s
+    var src = videoEl.getAttribute('src') || '';
+    var savedTime = (typeof getCoverTimestamp === 'function') ? getCoverTimestamp(src) : null;
+    var seekTime = (savedTime !== null) ? savedTime : 0.5;
+
     try {
-      videoEl.currentTime = 0.5;
+      videoEl.currentTime = seekTime;
     } catch(e) { return; }
 
     function onSeeked() {
@@ -3042,11 +3457,17 @@ filterBtns.forEach(btn => {
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
-          captureFrame(entry.target);
-          observer.unobserve(entry.target);
+          var v = entry.target;
+          activatePreload(v); // lazy-load metadata only when near viewport
+          if (v.readyState >= 2) {
+            captureFrame(v);
+            observer.unobserve(v);
+          } else {
+            v.addEventListener('loadedmetadata', function() { captureFrame(v); observer.unobserve(v); }, { once: true });
+          }
         }
       });
-    }, { rootMargin: '200px' });
+    }, { rootMargin: '400px' });
 
     var videos = document.querySelectorAll('.work-item-video');
     for (var i = 0; i < videos.length; i++) {
@@ -3054,7 +3475,6 @@ filterBtns.forEach(btn => {
       if (v.readyState >= 2) {
         captureFrame(v);
       } else {
-        v.addEventListener('loadedmetadata', function() { captureFrame(this); }, { once: true });
         observer.observe(v);
       }
     }
@@ -3069,6 +3489,135 @@ filterBtns.forEach(btn => {
 
 </script>
 
-<!-- ═══ VIDEO LIGHTBOX ═══════════════════════════════════════════════ -->
+
+<script>
+var LIVE_PROJECTS = [{"title":"伊丽莎白·雅顿｜抖音超级品牌盛典","brand":"伊丽莎白·雅顿","role":"活动统筹,现场导演,创意策划","tagline":"百年之美，美在雅顿","date":"2024年5月9日-2024年5月28日","images":["https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/bf81008f-0cb7-4195-aa3e-1b5dd97483a6/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/44e56cbc-c288-4746-b128-6e5676f11d9f/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/5007f32b-eb93-4ce3-9daf-abf73ecb99a5/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/987f2e2f-972b-49ec-b4f4-4f9c31d29593/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/9dc6acc0-7fe2-400d-af26-166e8c71f08c/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/b5934660-1829-43ab-8837-650797d52097/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/6df394ad-b6ce-4e00-be32-e018a133ae28/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/ba23318e-0716-47cc-a07e-816a3eeec3d7/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/f4f7f863-0888-458b-9753-487df7186d98/21631730378844_.pic_hd.jpg","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/392ae740-99cb-4c60-9d2c-547f63d2b569/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/e7447e3b-6df2-4e3f-9f63-ae14b2d064fb/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/d0198a9a-6c2b-4cb5-8a32-880a03b685c6/image.png"],"content":[{"type":"sub_sub_header","text":"承担工作："},{"type":"toggle","text":"活动策划："},{"type":"toggle","text":"活动统筹："},{"type":"toggle","text":"现场导演："},{"type":"sub_sub_header","text":"客户目标？"},{"type":"text","text":"雅顿做一个大campaign，首先在生意层面达到2500W的GMV，其次也希望在Branding层面有一定输出。"},{"type":"sub_sub_header","text":"做了什么？"},{"type":"text","text":"自造节：品牌自造节 “雅顿超品盛典“ x ”抖音超品日IP“"},{"type":"text","text":"形式：1场Artdeco主题晚宴 + 7场达人专场直播 + 1场品牌历史溯源内容场"},{"type":"text","text":"内容："},{"type":"bulleted_list","text":"邀请到明星李若彤和7位抖音kol来到晚宴现场，借助明星/kol流量为自造节预热造势。"},{"type":"bulleted_list","text":"七场达人专场直播，保证生意。"},{"type":"bulleted_list","text":"打造1场品牌历史向趣味展示内容场，补充品牌声量。"},{"type":"sub_sub_header","text":"结果？"},{"type":"bulleted_list","text":"品牌冲进抖音高美Top10"},{"type":"bulleted_list","text":"达播GMV高达7500w+"},{"type":"bulleted_list","text":"高端美妆品牌“黛珂”自造节项目pitch接入"},{"type":"sub_header","text":"晚宴部分展示"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/bf81008f-0cb7-4195-aa3e-1b5dd97483a6/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/44e56cbc-c288-4746-b128-6e5676f11d9f/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/5007f32b-eb93-4ce3-9daf-abf73ecb99a5/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/987f2e2f-972b-49ec-b4f4-4f9c31d29593/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/9dc6acc0-7fe2-400d-af26-166e8c71f08c/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/b5934660-1829-43ab-8837-650797d52097/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/6df394ad-b6ce-4e00-be32-e018a133ae28/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/ba23318e-0716-47cc-a07e-816a3eeec3d7/image.png","caption":"image.png"},{"type":"sub_header","text":"直播部分展示"},{"type":"toggle","text":"场景搭建"},{"type":"toggle","text":"部分达人直播截图"},{"type":"toggle","text":"左岸潇x雅顿内容场直播——红门时光之旅"}]},{"title":"NARS｜陈昊宇 x 十四点 京东直播内容场","brand":"NARS","role":"项目经理,现场导演","tagline":"妆若原升 宇光同尘","date":"2024年9月13日","images":["https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/8334cb93-f093-4c59-bf16-7d525b93e2e7/21121730109839_.pic.jpg","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/723f68b4-f2cc-4b5f-b81e-264c80d1b35c/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/1b3fb035-cefd-4d6d-8f7a-b4a585458c8c/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/ed3030e1-550b-4e82-9151-5dd5c6b00a1e/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/657002c1-87f9-412b-a887-43d3e3ab5ce0/21201730110712_.pic.jpg","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/bfa9c79a-4592-413d-adc4-ce29c245f359/21191730110710_.pic.jpg","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/b658b393-2574-47be-9ab5-ed2d072ae2fd/21231730110715_.pic.jpg","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/e63a0b70-0bcf-4b75-be2a-4f46b5358fe9/21201730110712_.pic.jpg"],"content":[{"type":"sub_sub_header","text":"承担工作："},{"type":"toggle","text":"项目经理"},{"type":"toggle","text":"现场导演"},{"type":"sub_sub_header","text":"客户目标？"},{"type":"bulleted_list","text":"项目在直播执行上做到0失误。"},{"type":"sub_sub_header","text":"做了什么？"},{"type":"bulleted_list","text":"提前一天的现场搭建和内部技术彩排。"},{"type":"bulleted_list","text":"技术彩排的同时精准同步可以在镜头上、产品展示上、艺人需求时的传达和排练。"},{"type":"sub_sub_header","text":"结果如何？"},{"type":"bulleted_list","text":"0失误完成直播，并获得客户的赞扬。"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/8334cb93-f093-4c59-bf16-7d525b93e2e7/21121730109839_.pic.jpg","caption":"21121730109839_.pic.jpg"},{"type":"bulleted_list","text":"在线人数：最低在线人数600+，巅峰最高在线人数4100+，平均在线人数3500+"},{"type":"bulleted_list","text":"GMV：本场直播卖货总金额49W+，主推产品全线卖空。"},{"type":"sub_header","text":"直播截图"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/723f68b4-f2cc-4b5f-b81e-264c80d1b35c/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/1b3fb035-cefd-4d6d-8f7a-b4a585458c8c/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/ed3030e1-550b-4e82-9151-5dd5c6b00a1e/image.png","caption":"image.png"},{"type":"text","text":"自来水长尾传播"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/657002c1-87f9-412b-a887-43d3e3ab5ce0/21201730110712_.pic.jpg","caption":"21201730110712_.pic.jpg"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/bfa9c79a-4592-413d-adc4-ce29c245f359/21191730110710_.pic.jpg","caption":"21191730110710_.pic.jpg"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/b658b393-2574-47be-9ab5-ed2d072ae2fd/21231730110715_.pic.jpg","caption":"21231730110715_.pic.jpg"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/e63a0b70-0bcf-4b75-be2a-4f46b5358fe9/21201730110712_.pic.jpg","caption":"21201730110712_.pic.jpg"}]},{"title":"NARS｜歌手刘忻 x 葛晓倩 抖音直播内容场","brand":"NARS","role":"项目经理,创意策划,现场导演","tagline":"忻之所向 欲我所欲","date":"2024年7月24日","images":["https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/1d99c613-7df8-4c80-b804-23369c30f29c/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/e8db791f-a28e-4c4a-8288-433c9b5f1c17/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/39208e2f-7b15-4e70-91a1-d6bbc82283ce/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/ed4f3bda-9092-4d7f-b7cc-c74cac65c7b5/21161730110707_.pic.jpg","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/fad31f5e-1dce-40e4-ab45-8dce58b393c8/21181730110709_.pic.jpg","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/1c80186f-21d2-4b38-88bf-3c1eb2839cc5/21171730110708_.pic.jpg","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/887b3361-3f46-46fc-b906-121014613434/21151730110706_.pic.jpg"],"content":[{"type":"sub_sub_header","text":"承担工作："},{"type":"toggle","text":"创意策划"},{"type":"toggle","text":"项目经理"},{"type":"toggle","text":"现场导演"},{"type":"sub_sub_header","text":"客户目标？"},{"type":"bulleted_list","text":"内容上把刘忻的影响力“用到极致”，加强带货收割属性。"},{"type":"bulleted_list","text":"项目在直播执行上做到0失误。"},{"type":"sub_sub_header","text":"做了什么？"},{"type":"bulleted_list","text":"直播策划上用直播现场海报签名、粉丝专属语音录制、直播现场唱歌、粉丝截图拍照等趣味互动环节，增加粉丝在直播间停留时长和互动保证热度。"},{"type":"bulleted_list","text":"技术彩排的同时精准同步可以在镜头上、产品展示上、艺人需求时的传达和排练。"},{"type":"sub_sub_header","text":"结果如何？"},{"type":"bulleted_list","text":"0失误完成直播，并获得客户的赞扬。"},{"type":"bulleted_list","text":"在线人数：最低在线人数1000+，巅峰最高在线人数8000+，平均在线人数5000+"},{"type":"bulleted_list","text":"相比当日时均场观增加了2489.7%，停留时长增加了81.9%。"},{"type":"bulleted_list","text":"GMV：本场直播卖货总金额100W+，超过品牌预估GMV的300%"},{"type":"sub_header","text":"直播截图："},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/1d99c613-7df8-4c80-b804-23369c30f29c/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/e8db791f-a28e-4c4a-8288-433c9b5f1c17/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/39208e2f-7b15-4e70-91a1-d6bbc82283ce/image.png","caption":"image.png"},{"type":"text","text":"自来水尾传播"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/ed4f3bda-9092-4d7f-b7cc-c74cac65c7b5/21161730110707_.pic.jpg","caption":"21161730110707_.pic.jpg"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/fad31f5e-1dce-40e4-ab45-8dce58b393c8/21181730110709_.pic.jpg","caption":"21181730110709_.pic.jpg"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/1c80186f-21d2-4b38-88bf-3c1eb2839cc5/21171730110708_.pic.jpg","caption":"21171730110708_.pic.jpg"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/887b3361-3f46-46fc-b906-121014613434/21151730110706_.pic.jpg","caption":"21151730110706_.pic.jpg"}]},{"title":"妮维雅｜一枝南南 抖音直播内容场","brand":"妮维雅","role":"现场导演","tagline":"白雪公主的告白奇遇记","date":"2024年10月10日","images":["https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/9a1979aa-024e-49fb-8840-7f3b7f4c8164/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/129c08e5-f2aa-45a9-a6bb-39cb7b878615/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/c7c43898-76ab-4a90-a9a5-ade7f26c6456/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/0094520f-75b6-4d32-b4ad-04518aec5615/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/d8bca56b-1f3c-4066-a219-c8b324d759bd/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/7722494c-f743-44eb-983e-56a7bcb22ea9/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/9efcd508-41a3-4777-8db5-1d4ec6ee2671/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/ad067fce-7601-4bf1-97b2-28e5fe442cba/image.png"],"content":[{"type":"sub_sub_header","text":"承担工作"},{"type":"toggle","text":"现场导演"},{"type":"sub_sub_header","text":"项目结果"},{"type":"bulleted_list","text":"项目0失误完成直播执行"},{"type":"bulleted_list","text":"GMV目标46w，达成61w，达成率132%；GMV最高时均较日常提升2127%，较D11提升1857%"},{"type":"bulleted_list","text":"粉丝数增长720%"},{"type":"sub_header","text":"直播截图"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/9a1979aa-024e-49fb-8840-7f3b7f4c8164/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/129c08e5-f2aa-45a9-a6bb-39cb7b878615/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/c7c43898-76ab-4a90-a9a5-ade7f26c6456/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/0094520f-75b6-4d32-b4ad-04518aec5615/image.png","caption":"image.png"},{"type":"text","text":"自来水长尾传播"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/d8bca56b-1f3c-4066-a219-c8b324d759bd/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/7722494c-f743-44eb-983e-56a7bcb22ea9/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/9efcd508-41a3-4777-8db5-1d4ec6ee2671/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/ad067fce-7601-4bf1-97b2-28e5fe442cba/image.png","caption":"image.png"}]},{"title":"伊丽莎白·雅顿｜左岸潇直播内容场","brand":"伊丽莎白·雅顿","role":"项目经理,创意策划,现场导演","tagline":"百年雅顿 红门时光之旅","date":"2024年5月28日","images":["https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/c19a5503-54d0-4fd9-ba72-0e58296a94b3/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/6fb6ef18-d147-4bd0-ac14-393ed99545e1/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/8089d40a-9472-4f88-98af-9dbcfefd2d9f/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/efee1781-e821-47cb-99a6-40b705beb9bc/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/1ca4e62f-7346-4303-9cd9-feac56ba4fee/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/210dc1cb-d16e-4045-a506-ee5fd1e0b357/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/70ac9526-b549-47cb-8e42-7ae4780f5312/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/e1e417a6-4580-4745-8137-2032fa6d1532/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/6c8937ce-cab2-4691-8638-765a7735d626/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/2d8cc99e-5ebd-439d-84cd-c42c0f40c639/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/af4ffc7a-0c86-4df5-a65a-f4b8d8e3f6b0/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/5e654e18-c34f-4a25-a7f3-8b8603fdde8d/image.png"],"content":[{"type":"sub_sub_header","text":"承担工作："},{"type":"toggle","text":"项目经理"},{"type":"toggle","text":"现场导演"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/c19a5503-54d0-4fd9-ba72-0e58296a94b3/image.png","caption":"image.png"},{"type":"toggle","text":"项目概述"},{"type":"toggle","text":"项目亮点&难点"},{"type":"sub_header","text":"直播截图"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/6fb6ef18-d147-4bd0-ac14-393ed99545e1/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/8089d40a-9472-4f88-98af-9dbcfefd2d9f/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/efee1781-e821-47cb-99a6-40b705beb9bc/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/1ca4e62f-7346-4303-9cd9-feac56ba4fee/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/210dc1cb-d16e-4045-a506-ee5fd1e0b357/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/70ac9526-b549-47cb-8e42-7ae4780f5312/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/e1e417a6-4580-4745-8137-2032fa6d1532/image.png","caption":"image.png"}]},{"title":"麦当劳 西瓜麦旋风新品上市内容场","brand":"麦当劳","role":"现场导演,项目经理","tagline":"麦麦上新啦！","date":"2024年6月23日","images":["https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/8c1b6f08-6fee-4ec8-b4a4-9b5be26d7897/fd50839a-8923-4abf-b16b-220c0e4da037.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/6f8f757d-c1bd-49dc-8b4e-4c4442cd6f8c/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/e7390403-4217-4d98-be26-221fa1fcfd04/image.png"],"content":[{"type":"sub_sub_header","text":"承担工作："},{"type":"toggle","text":"项目经理"},{"type":"toggle","text":"现场导演"},{"type":"sub_header","text":"直播截图"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/8c1b6f08-6fee-4ec8-b4a4-9b5be26d7897/fd50839a-8923-4abf-b16b-220c0e4da037.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/6f8f757d-c1bd-49dc-8b4e-4c4442cd6f8c/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/e7390403-4217-4d98-be26-221fa1fcfd04/image.png","caption":"image.png"}]},{"title":"麦当劳 x 王楚淇 直播内容场","brand":"麦当劳","role":"现场导演,项目经理","tagline":"麦麦足球夜","date":"2024年7月9日","images":["https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/b7b03f2e-e5bf-45a8-99ec-3eed8e9e8f09/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/cd9e566a-dccf-4e8f-b40a-2984744f0028/image.png","https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/b43ede99-6846-438c-bdfc-f957c4e6d318/image.png"],"content":[{"type":"sub_sub_header","text":"承担工作："},{"type":"toggle","text":"项目经理"},{"type":"toggle","text":"现场导演"},{"type":"sub_header","text":"直播截图"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/b7b03f2e-e5bf-45a8-99ec-3eed8e9e8f09/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/cd9e566a-dccf-4e8f-b40a-2984744f0028/image.png","caption":"image.png"},{"type":"image","src":"https://prod-files-secure.s3.us-west-2.amazonaws.com/99df945a-b2bb-441a-8e66-92417156ab04/b43ede99-6846-438c-bdfc-f957c4e6d318/image.png","caption":"image.png"}]}];
+</script>
+
+
+<div id="project-detail" class="project-detail" aria-hidden="true">
+  <div class="project-detail-bg"></div>
+  <div class="project-detail-panel">
+    <button class="project-detail-close" aria-label="Close">✕</button>
+    <div class="project-detail-scroll">
+      <div class="project-detail-images" id="detail-images"></div>
+      <div class="project-detail-body" id="detail-body"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+/* ══════════════════════════════════════════════════════════════
+   PROJECT DETAIL — LIVE SHOW overlay with images + text
+══════════════════════════════════════════════════════════════ */
+(function() {
+  var detail = document.getElementById('project-detail');
+  var detailImages = document.getElementById('detail-images');
+  var detailBody = document.getElementById('detail-body');
+  var closeBtn = document.querySelector('.project-detail-close');
+  var bg = document.querySelector('.project-detail-bg');
+  var cursorEl = document.getElementById('cursor');
+
+  // Color palette for placeholders
+  var colors = ['#8B1A2B','#1a3a4a','#2d5a3d','#4a2d6b','#6b3a1a','#1a4a5a','#3a1a4a'];
+
+  function openDetail(index) {
+    var project = LIVE_PROJECTS[index];
+    if (!project) return;
+
+    var color = colors[index % colors.length];
+
+    // Build images section
+    detailImages.innerHTML = '';
+    var imgCount = project.images.length || 1;
+
+    // Hero placeholder
+    var heroWrap = document.createElement('div');
+    heroWrap.style.cssText = 'grid-column:1/-1;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:' + color + ';display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;';
+    heroWrap.innerHTML = '<div style="font-size:48px;opacity:0.6">📺</div><div style="font-family:Syne,sans-serif;font-size:1.2rem;font-weight:700;color:#fff;text-align:center;padding:0 20px;">' + project.title + '</div><div style="font-size:0.7rem;color:rgba(255,255,255,0.5);font-family:Syne,sans-serif;">' + (project.brand || '') + '  ·  ' + (project.date || '') + '</div>';
+    detailImages.appendChild(heroWrap);
+
+    // Add real images (fallback on error)
+    project.images.slice(0, 8).forEach(function(src) {
+      var img = document.createElement('img');
+      img.src = src;
+      img.alt = '';
+      img.loading = 'lazy';
+      img.style.cssText = 'aspect-ratio:16/9;background:#1a1a1a;';
+      img.onerror = function() {
+        img.style.display = 'none';
+      };
+      detailImages.appendChild(img);
+    });
+
+    // Build text content
+    var bodyHTML = '<div class="live-title">' + project.title + '</div>';
+    bodyHTML += '<div class="live-meta">';
+    if (project.brand) bodyHTML += '<span class="live-meta-brand">' + project.brand + '</span>';
+    if (project.role) bodyHTML += '<span class="live-meta-role">' + project.role + '</span>';
+    if (project.date) bodyHTML += '<span class="live-meta-date">' + project.date + '</span>';
+    bodyHTML += '</div>';
+    if (project.tagline) {
+      bodyHTML += '<div class="live-block text" style="color:var(--warm);font-style:italic;font-size:0.9rem;margin-bottom:20px;">' + project.tagline + '</div>';
+    }
+
+    var hasContent = false;
+    project.content.forEach(function(block) {
+      var cls = 'live-block ' + block.type;
+      if (block.type === 'image') return;
+      var text = (block.text || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      if (text) {
+        hasContent = true;
+        bodyHTML += '<div class="' + cls + '">' + text + '</div>';
+      }
+    });
+
+    if (!hasContent) {
+      bodyHTML += '<div class="live-block text" style="color:rgba(255,255,255,0.3);margin-top:20px;">详细内容请查看 Notion 页面</div>';
+    }
+
+    detailBody.innerHTML = bodyHTML;
+    detail.classList.add('open');
+    detail.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    document.body.style.cursor = 'auto';
+    if (cursorEl) cursorEl.style.display = 'none';
+    detail.querySelector('.project-detail-scroll').scrollTop = 0;
+  }
+
+  function closeDetail() {
+    detail.classList.remove('open');
+    detail.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    document.body.style.cursor = '';
+    if (cursorEl) cursorEl.style.display = '';
+  }
+
+  closeBtn.addEventListener('click', closeDetail);
+  bg.addEventListener('click', closeDetail);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && detail.classList.contains('open')) closeDetail();
+  });
+
+  // Attach to LIVE SHOW work items
+  var liveItems = document.querySelectorAll('.work-item[data-category="LIVE"]');
+  for (var i = 0; i < liveItems.length; i++) {
+    (function(item, index) {
+      function handleLiveClick(e) {
+        if (e.target.closest('[contenteditable]')) return;
+        if (e.target.closest('.drag-handle') || e.target.closest('.cover-btn')) return;
+        if (e.target.closest('.work-item-info') && !e.target.closest('[contenteditable]')) return;
+        e.stopPropagation();
+        openDetail(index);
+      }
+      item.addEventListener('click', handleLiveClick);
+      var img = item.querySelector('.work-item-img');
+      if (img) img.addEventListener('click', handleLiveClick);
+    })(liveItems[i], i);
+  }
+})();
+
+</script>
 </body>
 </html>
