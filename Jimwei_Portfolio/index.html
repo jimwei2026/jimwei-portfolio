@@ -15,11 +15,11 @@
   --fg:       #0d0d0c;
   --grey1:    #1a1a18;
   --grey2:    #3d3d3a;
-  --grey3:    #6b6b66;
-  --grey4:    #a8a8a2;
-  --grey5:    #e4e4df;
+  --grey3:    #5c5c57;
+  --grey4:    #8a8a84;
+  --grey5:    #d4d4ce;
   --surface:  #f3f3ef;
-  --border:   #e2e2da;
+  --border:   #dcdcd4;
   --warm:     #d4a574;
   --warm-dim: #b8957a;
   --cool:     #5b7f95;
@@ -54,6 +54,36 @@ body {
 a { color: inherit; text-decoration: none; }
 img, video { display: block; width: 100%; }
 :focus-visible { outline: 2px solid var(--fg); outline-offset: 4px; border-radius: 2px; }
+
+/* ═══ UTILITY: visually hidden ═════════════════════════════════════ */
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* ═══ SKIP LINK ══════════════════════════════════════════════════════ */
+.skip-link {
+  position: fixed; top: 8px; left: 8px; z-index: 100000;
+  background: var(--fg); color: var(--bg);
+  padding: 10px 18px; border-radius: var(--radius-sm);
+  font-family: var(--font); font-size: 0.7rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  transform: translateY(-120%); pointer-events: none;
+  transition: transform 0.25s var(--ease-out);
+}
+.skip-link:focus { transform: translateY(0); pointer-events: auto; outline: none; }
+
+/* ═══ REDUCED MOTION ═══════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee-track { animation: none !important; }
+}
 
 /* ═══ LOADER ════════════════════════════════════════════════════════ */
 #loader {
@@ -259,6 +289,7 @@ nav > * { pointer-events: auto; }
 /* ═══ SIDE NAV — wave border + i18n ════════════════════════════════ */
 #side-nav-trigger {
   position: fixed; top: 0; right: 0; bottom: 0; width: 40px; z-index: 395; cursor: none;
+  background: none; border: none; padding: 0;
 }
 #side-nav-panel {
   position: fixed; top: 0; right: 0; bottom: 0;
@@ -659,6 +690,47 @@ footer::before {
 }
 #back-to-top svg { width: 16px; height: 16px; }
 
+/* ═══ DARK MODE ═══════════════════════════════════════════════════ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:       #0e0e0d;
+    --fg:       #f0f0ed;
+    --grey1:    #e8e8e4;
+    --grey2:    #c8c8c2;
+    --grey3:    #9a9a94;
+    --grey4:    #6e6e68;
+    --grey5:    #3a3a36;
+    --surface:  #1a1a18;
+    --border:   #2e2e2a;
+  }
+  nav {
+    background: rgba(14,14,13,0.88);
+  }
+  nav.scrolled {
+    background: rgba(14,14,13,0.95);
+    border-color: rgba(255,255,255,0.06);
+  }
+  #side-nav-panel {
+    background: rgba(14,14,13,0.97);
+  }
+  #water-canvas { opacity: 0.25; }
+  .work-item { background: var(--surface); }
+  .work-item:hover .work-item-inner {
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .work-item-info {
+    background: linear-gradient(to top,
+      rgba(14,14,13,0.95) 0%,
+      rgba(14,14,13,0.5) 50%,
+      transparent 100%);
+  }
+  .work-item-img { filter: grayscale(8%) brightness(0.9); }
+  .work-item:hover .work-item-img { filter: grayscale(0%) brightness(1); }
+  .skill-tag { background: var(--surface); }
+  .lang-btn { background: var(--surface); }
+  .lang-dropdown { background: var(--surface); }
+}
+
 /* ═══ RESPONSIVE ════════════════════════════════════════════════════ */
 @media (max-width: 900px) {
   nav {
@@ -681,9 +753,18 @@ footer::before {
   body { cursor: auto; }
   #side-nav-trigger { width: 24px; }
 }
+
+/* ═══ TOUCH DEVICES ══════════════════════════════════════════════ */
+@media (hover: none) and (pointer: coarse) {
+  body { cursor: auto; }
+  #cursor, .edge-hint { display: none; }
+}
 </style>
 </head>
 <body>
+
+<!-- Skip to main content -->
+<a href="#main-content" class="skip-link">Skip to content</a>
 
 <!-- Scroll progress -->
 <div id="scroll-progress" aria-hidden="true"></div>
@@ -696,7 +777,7 @@ footer::before {
 
 <!-- Back to top -->
 <button id="back-to-top" aria-label="Back to top">
-  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
     <path d="M10 16V4M4 10l6-6 6 6"/>
   </svg>
 </button>
@@ -714,14 +795,14 @@ footer::before {
 <div class="edge-hint" aria-hidden="true"></div>
 
 <!-- ═══ SIDE NAV ════════════════════════════════════════════════════ -->
-<div id="side-nav-trigger" aria-hidden="true"></div>
+<button id="side-nav-trigger" aria-label="Open navigation menu"></button>
 <div id="side-nav-panel" role="dialog" aria-modal="true" aria-label="Navigation" aria-hidden="true">
   <canvas id="ripple-canvas"></canvas>
   <svg id="wave-border-svg" viewBox="0 0 30 800" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
     <path id="wave-path" d="" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="1.5"/>
   </svg>
-  <button class="side-nav-close" id="side-nav-close">
-    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+  <button class="side-nav-close" id="side-nav-close" aria-label="Close navigation">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
       <line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/>
     </svg>
     <span data-i18n="close">Close</span>
@@ -754,42 +835,43 @@ footer::before {
     <li><a href="#services"   data-i18n="nav_services">Services</a></li>
   </ul>
   <div class="lang-switcher" id="lang-switcher">
-    <button class="lang-btn" id="lang-btn" aria-haspopup="listbox" aria-expanded="false">
-      <svg class="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+    <button class="lang-btn" id="lang-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">
+      <svg class="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
         <circle cx="12" cy="12" r="10"/>
         <path d="M12 2a14.5 14.5 0 0 1 0 20M12 2a14.5 14.5 0 0 0 0 20M2 12h20"/>
         <path d="M4.3 7h15.4M4.3 17h15.4"/>
       </svg>
       <span id="lang-current">EN</span>
-      <span style="font-size:0.45rem;opacity:0.5">▼</span>
+      <span aria-hidden="true" style="font-size:0.45rem;opacity:0.5">▼</span>
     </button>
-    <div class="lang-dropdown" role="listbox" id="lang-dropdown">
-      <div class="lang-option active" data-lang="en" data-label="EN"><span class="lang-flag">🇺🇸</span><span class="lang-code">EN</span><span>English</span></div>
-      <div class="lang-option" data-lang="zh" data-label="中文"><span class="lang-flag">🇨🇳</span><span class="lang-code">ZH</span><span>中文</span></div>
-      <div class="lang-option" data-lang="ja" data-label="日本語"><span class="lang-flag">🇯🇵</span><span class="lang-code">JA</span><span>日本語</span></div>
-      <div class="lang-option" data-lang="fr" data-label="FR"><span class="lang-flag">🇫🇷</span><span class="lang-code">FR</span><span>Français</span></div>
+    <div class="lang-dropdown" role="listbox" id="lang-dropdown" aria-label="Languages">
+      <div class="lang-option active" role="option" aria-selected="true" tabindex="0" data-lang="en" data-label="EN"><span class="lang-flag" aria-hidden="true">🇺🇸</span><span class="lang-code">EN</span><span>English</span></div>
+      <div class="lang-option" role="option" aria-selected="false" tabindex="0" data-lang="zh" data-label="中文"><span class="lang-flag" aria-hidden="true">🇨🇳</span><span class="lang-code">ZH</span><span>中文</span></div>
+      <div class="lang-option" role="option" aria-selected="false" tabindex="0" data-lang="ja" data-label="日本語"><span class="lang-flag" aria-hidden="true">🇯🇵</span><span class="lang-code">JA</span><span>日本語</span></div>
+      <div class="lang-option" role="option" aria-selected="false" tabindex="0" data-lang="fr" data-label="FR"><span class="lang-flag" aria-hidden="true">🇫🇷</span><span class="lang-code">FR</span><span>Français</span></div>
     </div>
   </div>
 </nav>
 
 <!-- ═══ HERO — fullscreen video ══════════════════════════════════════ -->
 <section id="hero">
-  <video autoplay muted loop playsinline>
+  <video autoplay muted loop playsinline aria-hidden="true">
     <source src="hero.mp4" type="video/mp4">
+    <p>Your browser does not support video. This is a fullscreen background video of the designer's work.</p>
   </video>
   <div class="hero-overlay-text" aria-hidden="true">
     <h1>Be<br>Water<br><em>My Friend</em></h1>
   </div>
-  <div class="hero-scroll-hint">
+  <div class="hero-scroll-hint" aria-hidden="true">
     <span data-i18n="scroll">Scroll</span>
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
       <path d="M10 4v12M4 10l6 6 6-6"/>
     </svg>
   </div>
 </section>
 
 <!-- ═══ TICKER ════════════════════════════════════════════════════════ -->
-<div class="ticker-section">
+<div class="ticker-section" id="main-content">
   <div class="ticker-sub" data-i18n="ticker_sub">We make digital (and magical)...</div>
   <div class="ticker-wrap" aria-live="polite">
     <div class="ticker-slide active" data-i18n-idx="0">Branding</div>
@@ -1006,6 +1088,7 @@ let currentLang = 'en';
 
 function applyLang(lang) {
   currentLang = lang;
+  document.documentElement.lang = lang;
   const t = dict[lang];
   if (!t) return;
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -1020,6 +1103,9 @@ function applyLang(lang) {
     const idx = +el.dataset.i18nIdx;
     if (t.ticker[idx]) el.textContent = t.ticker[idx];
   });
+  // Update close button aria-label
+  const closeBtn = document.getElementById('side-nav-close');
+  if (closeBtn && t.close) closeBtn.setAttribute('aria-label', t.close + ' navigation');
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -1273,10 +1359,15 @@ function closeNav(){
 }
 
 sideTrigger.addEventListener('mouseenter', openNav);
+sideTrigger.addEventListener('focus', openNav);
+sideTrigger.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openNav(); } });
 sidePanel.addEventListener('mousemove',e=>{
   if(Math.random()<0.04){const r=ripCanvas.getBoundingClientRect();spawnRipple(e.clientX-r.left,e.clientY-r.top);}
 });
 sidePanel.addEventListener('mouseleave', closeNav);
+sidePanel.addEventListener('blur', e => {
+  if (!sidePanel.contains(e.relatedTarget) && navOpen) closeNav();
+});
 sideClose.addEventListener('click', closeNav);
 sidePanel.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeNav));
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeNav(); });
@@ -1295,16 +1386,20 @@ langBtn.addEventListener('click', e=>{
   langBtn.setAttribute('aria-expanded', o);
 });
 document.querySelectorAll('.lang-option').forEach(opt=>{
-  opt.addEventListener('click',()=>{
-    const lang=opt.dataset.lang, label=opt.dataset.label;
-    langCurrent.textContent=label;
-    document.querySelectorAll('.lang-option').forEach(o=>o.classList.remove('active'));
-    opt.classList.add('active');
-    langSwitcher.classList.remove('open');
-    langBtn.setAttribute('aria-expanded','false');
-    applyLang(lang);
+  opt.addEventListener('click', selectLang);
+  opt.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectLang.call(opt, e); }
   });
 });
+function selectLang(e){
+  const lang=this.dataset.lang, label=this.dataset.label;
+  langCurrent.textContent=label;
+  document.querySelectorAll('.lang-option').forEach(o=>{ o.classList.remove('active'); o.setAttribute('aria-selected','false'); });
+  this.classList.add('active'); this.setAttribute('aria-selected','true');
+  langSwitcher.classList.remove('open');
+  langBtn.setAttribute('aria-expanded','false');
+  applyLang(lang);
+}
 document.addEventListener('click',()=>{ langSwitcher.classList.remove('open'); langBtn.setAttribute('aria-expanded','false'); });
 
 /* ══════════════════════════════════════════════════════════════
