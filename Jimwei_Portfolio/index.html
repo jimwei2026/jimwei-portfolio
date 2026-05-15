@@ -54,7 +54,6 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  cursor: none;
   overflow-x: hidden;
 }
 ::selection { background: var(--fg); color: var(--bg); }
@@ -148,24 +147,6 @@ img, video { display: block; width: 100%; }
   will-change: transform;
 }
 
-/* ═══ CURSOR — pixel-art canvas ═════════════════════════ */
-#cursor {
-  position: fixed; top: 0; left: 0;
-  pointer-events: none; z-index: 9999;
-  will-change: transform;
-  transform-origin: 50% 50%;
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
-}
-#cursor canvas {
-  display: block;
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
-}
-#cursor.hovering {
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.35));
-}
-
 /* ═══ TOP NAV ═══════════════════════════════════════════════════════ */
 nav {
   position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
@@ -220,8 +201,7 @@ nav > * { pointer-events: auto; }
 .lang-switcher { position: relative; }
 .lang-btn {
   background: var(--bg); border: 1px solid var(--border);
-  color: var(--fg); cursor: none;
-  font-family: var(--font); font-size: 0.6rem; letter-spacing: 0.14em;
+  color: var(--fg);  font-family: var(--font); font-size: 0.6rem; letter-spacing: 0.14em;
   text-transform: uppercase; padding: 6px 12px;
   border-radius: var(--radius-sm);
   display: flex; align-items: center; gap: 6px;
@@ -244,8 +224,7 @@ nav > * { pointer-events: auto; }
   display: flex; align-items: center; gap: 10px;
   padding: 12px 16px;
   font-family: var(--font); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--grey3); cursor: none;
-  transition: background 0.18s, color 0.18s;
+  color: var(--grey3);  transition: background 0.18s, color 0.18s;
 }
 .lang-option:not(:last-child) { border-bottom: 1px solid var(--border); }
 .lang-option:hover { background: var(--surface); color: var(--fg); }
@@ -269,8 +248,7 @@ nav > * { pointer-events: auto; }
 
 /* ═══ SIDE NAV — wave border + i18n ════════════════════════════════ */
 #side-nav-trigger {
-  position: fixed; top: 0; right: 0; bottom: 0; width: 40px; z-index: 395; cursor: none;
-  background: none; border: none; padding: 0;
+  position: fixed; top: 0; right: 0; bottom: 0; width: 40px; z-index: 395;  background: none; border: none; padding: 0;
 }
 #side-nav-panel {
   position: fixed; top: 16px; right: 16px; bottom: 16px;
@@ -307,8 +285,7 @@ nav > * { pointer-events: auto; }
   background: var(--surface); border: 1px solid var(--border);
   border-radius: 20px;
   font-family: var(--font); font-size: 0.58rem; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--grey3); cursor: none;
-  transition: all 0.25s var(--ease-out); z-index: 5;
+  text-transform: uppercase; color: var(--grey3);  transition: all 0.25s var(--ease-out); z-index: 5;
   display: flex; align-items: center; gap: 5px;
   padding: 6px 12px;
 }
@@ -328,8 +305,7 @@ nav > * { pointer-events: auto; }
   font-size: clamp(1.1rem, 2.6vw, 1.6rem); letter-spacing: -0.02em; text-transform: uppercase;
   color: var(--fg); line-height: 1.2; padding: 6px 0;
   transform: translateY(115%);
-  transition: color 0.3s; cursor: none;
-  overflow-wrap: break-word; word-break: break-word;
+  transition: color 0.3s;  overflow-wrap: break-word; word-break: break-word;
 }
 .side-nav-links a:hover { color: var(--grey3); }
 .side-nav-links li.revealed a {
@@ -445,8 +421,7 @@ nav > * { pointer-events: auto; }
   border-radius: 100px;
   background: transparent;
   color: var(--grey4);
-  cursor: none;
-  transition: all 0.3s var(--ease-out);
+   transition: all 0.3s var(--ease-out);
 }
 .work-filter-btn:hover {
   border-color: var(--grey3);
@@ -478,8 +453,7 @@ nav > * { pointer-events: auto; }
 .work-item {
   break-inside: avoid; margin-bottom: 24px;
   position: relative;
-  cursor: none;
-  background: var(--surface);
+   background: var(--surface);
   border-radius: var(--radius-md);
   overflow: hidden;
   will-change: transform, opacity;
@@ -717,8 +691,7 @@ nav > * { pointer-events: auto; }
   border: 1px solid var(--border);
   border-radius: 100px;
   transition: all 0.35s var(--ease-out);
-  cursor: none;
-}
+ }
 .btn-view-all:hover {
   background: var(--fg);
   color: var(--bg);
@@ -841,8 +814,7 @@ footer::before {
   color: var(--bg);
   border: none;
   display: flex; align-items: center; justify-content: center;
-  cursor: none;
-  opacity: 0; transform: translateY(16px);
+   opacity: 0; transform: translateY(16px);
   pointer-events: none;
   transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out), background 0.3s;
   box-shadow: var(--shadow-md);
@@ -934,8 +906,7 @@ footer::before {
   .footer-meta { text-align: left; }
   .footer-links { justify-content: flex-start; }
   #work { padding: 100px 24px; }
-  #cursor, .edge-hint, #back-to-top { display: none; }
-  body { cursor: auto; }
+  .edge-hint, #back-to-top { display: none; }
   #side-nav-trigger { width: 24px; }
   #side-nav-panel {
     top: 8px; right: 8px; bottom: 8px;
@@ -1108,7 +1079,7 @@ footer::before {
 /* ═══ TOUCH DEVICES ══════════════════════════════════════════════ */
 @media (hover: none) and (pointer: coarse) {
   body { cursor: auto; }
-  #cursor, .edge-hint { display: none; }
+  .edge-hint { display: none; }
 }
 </style>
 </head>
@@ -1122,9 +1093,6 @@ footer::before {
 
 <!-- Water canvas -->
 <canvas id="water-canvas"></canvas>
-
-<!-- Cursor droplet -->
-<div id="cursor"><canvas id="cursor-canvas"></canvas></div>
 
 <!-- Back to top -->
 <button id="back-to-top" aria-label="Back to top">
@@ -1275,10 +1243,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">Tuborg</div>
+          <div class="work-item-name">中国说唱巅峰对决 x 早安 x Tuborg</div>
           <div class="work-item-tag">TVC</div>
-          <div class="work-item-brand">Tuborg</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">Tuborg乐堡啤酒</div>
+          <div class="work-item-role">副导演｜创意策划｜制片人</div>
         </div>
       </div>
     </div>
@@ -1293,8 +1261,8 @@ footer::before {
         <div class="work-item-info">
           <div class="work-item-name">《陪你一起长大》-初为父母特辑</div>
           <div class="work-item-tag">TVC</div>
-          <div class="work-item-brand">陪你一起长大</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">芒果TV</div>
+          <div class="work-item-role">导演｜剪辑师</div>
         </div>
       </div>
     </div>
@@ -1308,10 +1276,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">亚洲渔港海参_不回复系列-灵魂时刻_完整版（带客户角标）</div>
+          <div class="work-item-name">亚洲渔港海参《地库篇》</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">亚洲渔港</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">创意｜制片人</div>
         </div>
       </div>
     </div>
@@ -1324,10 +1292,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">亚洲渔港海参_不回复系列_老板喊你_完整版（带客户角标）</div>
+          <div class="work-item-name">亚洲渔港海参 《老板篇》</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">亚洲渔港</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">创意｜制片人</div>
         </div>
       </div>
     </div>
@@ -1340,10 +1308,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">亚洲渔港海参_免衣力系列_情侣_完整版(带客户角标）</div>
+          <div class="work-item-name">亚洲渔港海参-《情侣篇》</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">亚洲渔港</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">创意｜制片人</div>
         </div>
       </div>
     </div>
@@ -1356,10 +1324,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">亚洲渔港海参_免衣力系列_祖孙-完整版（带客户角标）</div>
+          <div class="work-item-name">亚洲渔港海参《祖孙篇》</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">亚洲渔港</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">创意｜制片人</div>
         </div>
       </div>
     </div>
@@ -1372,10 +1340,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">亚洲渔港海参_免衣力系列_老伴_完整版(带客户角标）</div>
+          <div class="work-item-name">亚洲渔港海参《老伴儿篇》</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">亚洲渔港</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">创意｜制片人</div>
         </div>
       </div>
     </div>
@@ -1388,10 +1356,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">亚洲渔港海参_高胶原不叫冤_镜子_完整版（带客户角标）</div>
+          <div class="work-item-name">亚洲渔港海参《冤案篇》</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">亚洲渔港</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">创意｜制片人</div>
         </div>
       </div>
     </div>
@@ -1404,10 +1372,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">亚洲渔港烤鱼_01_-完整版（带客户角标）</div>
+          <div class="work-item-name">亚洲渔港烤鱼《辞职篇》</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">亚洲渔港</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">创意｜制片人</div>
         </div>
       </div>
     </div>
@@ -1423,7 +1391,7 @@ footer::before {
           <div class="work-item-name">元气森林</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">元气森林</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">副导演｜创意｜制片人</div>
         </div>
       </div>
     </div>
@@ -1436,10 +1404,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">唐家饼蝴蝶酥  横版</div>
+          <div class="work-item-name">唐家饼 蝴蝶酥新品上市宣传片</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">唐家饼</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">创意｜制片人</div>
         </div>
       </div>
     </div>
@@ -1452,10 +1420,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">威尔仕健身_团课升级篇</div>
+          <div class="work-item-name">威尔仕健身 团课升级宣传片</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">威尔仕健身</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">导演｜剪辑师</div>
         </div>
       </div>
     </div>
@@ -1468,10 +1436,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">康师傅冰红茶 燃炸街舞秀</div>
+          <div class="work-item-name">康师傅冰红茶 x 这就是街舞</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">康师傅</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">副导演｜制片人</div>
         </div>
       </div>
     </div>
@@ -1484,10 +1452,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">植村秀x这就是街舞</div>
+          <div class="work-item-name">植村秀 x 这就是街舞</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">植村秀</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">副导演</div>
         </div>
       </div>
     </div>
@@ -1502,10 +1470,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">知乎丨吾辈问答 x 天猫双11·DIRCUT</div>
+          <div class="work-item-name">知乎 x 天猫双11 x 何广智《吾辈问答》</div>
           <div class="work-item-tag">TVC</div>
-          <div class="work-item-brand">知乎</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">知乎｜天猫</div>
+          <div class="work-item-role">创意策划｜制片人</div>
         </div>
       </div>
     </div>
@@ -1518,10 +1486,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">第一期0808</div>
+          <div class="work-item-name">Bilibili向前冲 x AMZ  x 第一集</div>
           <div class="work-item-tag">TVC</div>
-          <div class="work-item-brand"></div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">BILIBILI公益</div>
+          <div class="work-item-role">导演｜编剧｜创意</div>
         </div>
       </div>
     </div>
@@ -1534,10 +1502,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">第七期</div>
+          <div class="work-item-name">Bilibili向前冲 x 赖美云  x 第七集</div>
           <div class="work-item-tag">TVC</div>
-          <div class="work-item-brand"></div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">BILIBILI公益</div>
+          <div class="work-item-role">导演｜编剧｜创意</div>
         </div>
       </div>
     </div>
@@ -1550,10 +1518,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">第三期final</div>
+          <div class="work-item-name">Bilibili向前冲 x 逍遥散人  x 第三集</div>
           <div class="work-item-tag">TVC</div>
-          <div class="work-item-brand"></div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">BILIBILI</div>
+          <div class="work-item-role">导演｜编剧｜创意</div>
         </div>
       </div>
     </div>
@@ -1566,10 +1534,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">第二期0812</div>
+          <div class="work-item-name">Bilibili向前冲 x 拯救世界的狗子  x 第二集</div>
           <div class="work-item-tag">TVC</div>
-          <div class="work-item-brand"></div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">BILIBILI</div>
+          <div class="work-item-role">导演｜编剧｜创意</div>
         </div>
       </div>
     </div>
@@ -1582,10 +1550,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">第五期0901</div>
+          <div class="work-item-name">Bilibili向前冲 x 才浅  x 第五集</div>
           <div class="work-item-tag">TVC</div>
-          <div class="work-item-brand"></div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">BILIBILI公益</div>
+          <div class="work-item-role">导演｜编剧</div>
         </div>
       </div>
     </div>
@@ -1598,10 +1566,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">第八期最终</div>
+          <div class="work-item-name">Bilibili向前冲 x 盒子酸奶  x 第八集</div>
           <div class="work-item-tag">TVC</div>
-          <div class="work-item-brand"></div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">BILIBILI公益</div>
+          <div class="work-item-role">导演｜编剧｜创意</div>
         </div>
       </div>
     </div>
@@ -1614,10 +1582,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">第六期</div>
+          <div class="work-item-name">Bilibili向前冲 x 拉宏桑 x 第六集</div>
           <div class="work-item-tag">TVC</div>
-          <div class="work-item-brand"></div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">BILIBILI公益</div>
+          <div class="work-item-role">导演｜编剧｜创意</div>
         </div>
       </div>
     </div>
@@ -1630,10 +1598,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">第四期0825</div>
+          <div class="work-item-name">Bilibili向前冲 x 鲁大能  x 第四集</div>
           <div class="work-item-tag">TVC</div>
-          <div class="work-item-brand"></div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">BILIBILI公益</div>
+          <div class="work-item-role">导演｜编剧｜创意</div>
         </div>
       </div>
     </div>
@@ -1646,10 +1614,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">美克美家《享受意外》_Final_完整版_0518</div>
+          <div class="work-item-name">美克美家《享受意外》</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">美克美家</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">副导演</div>
         </div>
       </div>
     </div>
@@ -1664,10 +1632,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">起跑线 相伴成长特辑</div>
+          <div class="work-item-name">《陪你一起长大》相伴成长特辑</div>
           <div class="work-item-tag">TVC</div>
-          <div class="work-item-brand">起跑线</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">芒果TV</div>
+          <div class="work-item-role">导演｜剪辑师</div>
         </div>
       </div>
     </div>
@@ -1683,7 +1651,7 @@ footer::before {
           <div class="work-item-name">迪卡侬青少年秋季篇</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">迪卡侬</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">创意｜制片人</div>
         </div>
       </div>
     </div>
@@ -1697,10 +1665,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">随变</div>
+          <div class="work-item-name">随变冰淇淋 x 杨和苏</div>
           <div class="work-item-tag">TVC</div>
-          <div class="work-item-brand">随变</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">蒙牛</div>
+          <div class="work-item-role">副导演｜创意｜制片人</div>
         </div>
       </div>
     </div>
@@ -1713,10 +1681,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">七时吉祥x是</div>
+          <div class="work-item-name">七时吉祥 x 卢昱晓 x 豪士面包</div>
           <div class="work-item-tag">TVC</div>
-          <div class="work-item-brand">七时吉祥</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">豪士面包</div>
+          <div class="work-item-role">副导演｜制片人</div>
         </div>
       </div>
     </div>
@@ -1729,10 +1697,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">中免日上x徐梦洁 </div>
+          <div class="work-item-name">中免日上 x 徐梦洁 x 元音大冒险</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">中免日上</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">副导演｜创意策划｜制片人</div>
         </div>
       </div>
     </div>
@@ -1745,10 +1713,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">今麦郎凉白开 杨紫 喵咪喝水紫南-广告片餐饮食品视频-新片场</div>
+          <div class="work-item-name">今麦郎 x 杨紫《猫咪篇》</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">今麦郎</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">副导演</div>
         </div>
       </div>
     </div>
@@ -1761,10 +1729,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">把世界落在日常 x 玫瑰是玫瑰TVC-竖屏广告美妆护肤视频-新片场</div>
+          <div class="work-item-name">把世界落在日常 x 玫瑰是玫瑰 x 玫瑰手袋</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">玫瑰是玫瑰</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">制片人</div>
         </div>
       </div>
     </div>
@@ -1777,10 +1745,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">杨紫今麦郎凉白开-广告片TVC广告视频-新片场</div>
+          <div class="work-item-name">杨紫 x 今麦郎凉白开《片场篇》</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">今麦郎</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">副导演</div>
         </div>
       </div>
     </div>
@@ -1793,10 +1761,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">杨紫今麦郎凉白开举个水-广告片餐饮食品视频-新片场</div>
+          <div class="work-item-name">杨紫今麦郎凉白 x 扬紫《后台篇》</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">今麦郎</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">副导演</div>
         </div>
       </div>
     </div>
@@ -1809,10 +1777,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">甄稀 x 张颜齐final_小档</div>
+          <div class="work-item-name">伊利甄稀冰淇淋 x 张颜齐 x 一起露营吧</div>
           <div class="work-item-tag">TVC</div>
-          <div class="work-item-brand">甄稀</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">伊利</div>
+          <div class="work-item-role">副导演｜制片人</div>
         </div>
       </div>
     </div>
@@ -1825,10 +1793,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">甄稀支棒x尹正Final</div>
+          <div class="work-item-name">伊利甄稀支棒 x 尹正 x 一起露营吧</div>
           <div class="work-item-tag">TVC</div>
-          <div class="work-item-brand">甄稀</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">伊利</div>
+          <div class="work-item-role">创意｜制片人</div>
         </div>
       </div>
     </div>
@@ -1844,7 +1812,7 @@ footer::before {
           <div class="work-item-name">艾热</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">艾热</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">副导演｜创意｜制片人</div>
         </div>
       </div>
     </div>
@@ -1857,10 +1825,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">蓝河绵羊奶粉x张雨绮-广告片餐饮食品视频-新片场</div>
+          <div class="work-item-name">蓝河绵羊奶粉 x 张雨绮官宣TVC</div>
           <div class="work-item-tag">TVC</div>
-          <div class="work-item-brand">蓝河绵羊</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">蓝河集团</div>
+          <div class="work-item-role">创意｜制片人</div>
         </div>
       </div>
     </div>
@@ -1873,10 +1841,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">蘑菇街宝藏美妆师-广告片美妆护肤视频-新片场</div>
+          <div class="work-item-name">蘑菇街 x 每文Rere x 宝藏美妆师</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">蘑菇街</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">副导演｜制片人</div>
         </div>
       </div>
     </div>
@@ -1892,7 +1860,7 @@ footer::before {
           <div class="work-item-name">邂逅格拉斯的天然味道飞喜电子烟品牌TVC-广告片快消产品视频-新片场</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">飞喜</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">副导演｜创意</div>
         </div>
       </div>
     </div>
@@ -1908,7 +1876,7 @@ footer::before {
           <div class="work-item-name">随变bridge</div>
           <div class="work-item-tag">TVC</div>
           <div class="work-item-brand">随变</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">副导演｜制片人</div>
         </div>
       </div>
     </div>
@@ -1921,10 +1889,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">嘴嘴IP test_第一条视频</div>
+          <div class="work-item-name">嘴嘴IP x 第一条视频</div>
           <div class="work-item-tag">AIGC</div>
           <div class="work-item-brand">嘴嘴IP</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">导演｜AIGCer</div>
         </div>
       </div>
     </div>
@@ -1937,10 +1905,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">1208双12预热v5</div>
+          <div class="work-item-name">韩束直播预热</div>
           <div class="work-item-tag">短视频</div>
-          <div class="work-item-brand"></div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">KANS韩束</div>
+          <div class="work-item-role">编导｜剪辑师</div>
         </div>
       </div>
     </div>
@@ -1953,10 +1921,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">一叶子产品V3</div>
+          <div class="work-item-name">一叶子次抛精华产品视频</div>
           <div class="work-item-tag">短视频</div>
-          <div class="work-item-brand">一叶子</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">ONE LEAF一叶子</div>
+          <div class="work-item-role">编导｜摄像｜剪辑师</div>
         </div>
       </div>
     </div>
@@ -1969,10 +1937,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">一叶子产品_V2</div>
+          <div class="work-item-name">一叶子次抛精华产品视频</div>
           <div class="work-item-tag">短视频</div>
-          <div class="work-item-brand">一叶子</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">ONE LEAF一叶子</div>
+          <div class="work-item-role">编导｜摄像｜剪辑师</div>
         </div>
       </div>
     </div>
@@ -1985,10 +1953,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">信息流_V3</div>
+          <div class="work-item-name">一叶子信息流视频（roi31版）</div>
           <div class="work-item-tag">短视频</div>
-          <div class="work-item-brand"></div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">ONE LEAF一叶子</div>
+          <div class="work-item-role">编导｜剪辑师</div>
         </div>
       </div>
     </div>
@@ -2001,10 +1969,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">信息流_V4</div>
+          <div class="work-item-name">一叶子信息流视频（roi11版）</div>
           <div class="work-item-tag">短视频</div>
-          <div class="work-item-brand"></div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">ONE LEAF一叶子</div>
+          <div class="work-item-role">编导｜摄像｜剪辑师</div>
         </div>
       </div>
     </div>
@@ -2017,10 +1985,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">千川预热_V1</div>
+          <div class="work-item-name">韩束直播预热</div>
           <div class="work-item-tag">短视频</div>
-          <div class="work-item-brand"></div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">KANS韩束</div>
+          <div class="work-item-role">编导｜摄像｜剪辑师</div>
         </div>
       </div>
     </div>
@@ -2036,7 +2004,7 @@ footer::before {
           <div class="work-item-name">有翡_V1</div>
           <div class="work-item-tag">短视频</div>
           <div class="work-item-brand">有翡</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">编导｜剪辑师</div>
         </div>
       </div>
     </div>
@@ -2049,10 +2017,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">汤包大师篇</div>
+          <div class="work-item-name">老盛兴 x 汤包大师篇</div>
           <div class="work-item-tag">短视频</div>
-          <div class="work-item-brand">汤包大师</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">老盛兴</div>
+          <div class="work-item-role">导演｜创意</div>
         </div>
       </div>
     </div>
@@ -2067,8 +2035,8 @@ footer::before {
         <div class="work-item-info">
           <div class="work-item-name">经典汤包_产品展示片1</div>
           <div class="work-item-tag">短视频</div>
-          <div class="work-item-brand">经典汤包</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">老盛兴</div>
+          <div class="work-item-role">导演｜创意</div>
         </div>
       </div>
     </div>
@@ -2084,7 +2052,7 @@ footer::before {
           <div class="work-item-name">经典汤包_产品展示片2</div>
           <div class="work-item-tag">短视频</div>
           <div class="work-item-brand">经典汤包</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-role">导演｜创意</div>
         </div>
       </div>
     </div>
@@ -2097,10 +2065,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">超级品牌日_V1</div>
+          <div class="work-item-name">韩束 x 抖音超级品牌日视频</div>
           <div class="work-item-tag">短视频</div>
-          <div class="work-item-brand">超级品牌日</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">KANS韩束</div>
+          <div class="work-item-role">编导｜剪辑师</div>
         </div>
       </div>
     </div>
@@ -2113,10 +2081,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">超级品牌日_V2</div>
+          <div class="work-item-name">韩束 x 抖音超级品牌日预热视频</div>
           <div class="work-item-tag">短视频</div>
-          <div class="work-item-brand">超级品牌日</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">KANS韩束</div>
+          <div class="work-item-role">编导｜摄像｜剪辑师</div>
         </div>
       </div>
     </div>
@@ -2129,10 +2097,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">韩束产品_V1</div>
+          <div class="work-item-name">韩束产品视频</div>
           <div class="work-item-tag">短视频</div>
-          <div class="work-item-brand">韩束</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">KANS韩束</div>
+          <div class="work-item-role">编导｜摄像｜剪辑师</div>
         </div>
       </div>
     </div>
@@ -2145,10 +2113,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">韩束产品_V3</div>
+          <div class="work-item-name">韩束次抛精华产品视频</div>
           <div class="work-item-tag">短视频</div>
-          <div class="work-item-brand">韩束</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">KANS韩束</div>
+          <div class="work-item-role">编导｜摄像｜剪辑师</div>
         </div>
       </div>
     </div>
@@ -2161,10 +2129,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">韩束产品_V5</div>
+          <div class="work-item-name">韩束产品视频</div>
           <div class="work-item-tag">短视频</div>
-          <div class="work-item-brand">韩束</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">kans韩束</div>
+          <div class="work-item-role">编导｜摄像｜剪辑师</div>
         </div>
       </div>
     </div>
@@ -2177,10 +2145,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">韩束复古变装_V4</div>
+          <div class="work-item-name">韩束复古变装预热视频</div>
           <div class="work-item-tag">短视频</div>
-          <div class="work-item-brand">韩束</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">KANS韩束</div>
+          <div class="work-item-role">编导｜摄像｜剪辑师</div>
         </div>
       </div>
     </div>
@@ -2193,10 +2161,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">鹿鼎记_V1</div>
+          <div class="work-item-name">电视剧《鹿鼎记花絮》</div>
           <div class="work-item-tag">短视频</div>
-          <div class="work-item-brand">鹿鼎记</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">《鹿鼎记》</div>
+          <div class="work-item-role">编导｜剪辑师</div>
         </div>
       </div>
     </div>
@@ -2209,10 +2177,10 @@ footer::before {
           </svg>
         </button>
         <div class="work-item-info">
-          <div class="work-item-name">鹿鼎记_V3</div>
+          <div class="work-item-name">电视剧《鹿鼎记花絮》</div>
           <div class="work-item-tag">短视频</div>
-          <div class="work-item-brand">鹿鼎记</div>
-          <div class="work-item-role"></div>
+          <div class="work-item-brand">《鹿鼎记》</div>
+          <div class="work-item-role">编导｜剪辑师</div>
         </div>
       </div>
     </div>
@@ -2356,6 +2324,12 @@ footer::before {
   </div>
 </div>
 
+
+
+<!-- Embedded edits — persists across browsers, must load before main JS -->
+<script>
+window.__EMBEDDED_EDITS__ = {"videos/杨紫今麦郎凉白开-广告片TVC广告视频-新片场.mp4":{".work-item-name":"杨紫 x 今麦郎凉白开《片场篇》",".work-item-brand":"今麦郎",".work-item-role":"副导演"},"videos/甄稀支棒x尹正Final.mp4":{".work-item-name":"伊利甄稀支棒 x 尹正 x 一起露营吧",".work-item-brand":"伊利",".work-item-role":"创意｜制片人"},"videos/知乎丨吾辈问答 x 天猫双11·DIRCUT.mp4":{".work-item-name":"知乎 x 天猫双11 x 何广智《吾辈问答》",".work-item-brand":"知乎｜天猫",".work-item-role":"创意策划｜制片人"},"videos/甄稀 x 张颜齐final_小档.mp4":{".work-item-name":"伊利甄稀冰淇淋 x 张颜齐 x 一起露营吧",".work-item-brand":"伊利",".work-item-role":"副导演｜制片人"},"videos/随变.mp4":{".work-item-name":"随变冰淇淋 x 杨和苏",".work-item-brand":"蒙牛",".work-item-role":"副导演｜创意｜制片人"},"videos/随变bridge.mp4":{".work-item-name":"随变bridge",".work-item-brand":"随变",".work-item-role":"副导演｜制片人"},"videos/杨紫今麦郎凉白开举个水-广告片餐饮食品视频-新片场.mp4":{".work-item-name":"杨紫今麦郎凉白 x 扬紫《后台篇》",".work-item-brand":"今麦郎",".work-item-role":"副导演"},"videos/第一期0808.mp4":{".work-item-name":"Bilibili向前冲 x AMZ  x 第一集",".work-item-brand":"BILIBILI公益",".work-item-role":"导演｜编剧｜创意"},"videos/第四期0825.mp4":{".work-item-name":"Bilibili向前冲 x 鲁大能  x 第四集",".work-item-brand":"BILIBILI公益",".work-item-role":"导演｜编剧｜创意"},"videos/第七期.mp4":{".work-item-name":"Bilibili向前冲 x 赖美云  x 第七集",".work-item-brand":"BILIBILI公益",".work-item-role":"导演｜编剧｜创意"},"videos/《陪你一起长大》-初为父母特辑.mp4":{".work-item-name":"《陪你一起长大》-初为父母特辑",".work-item-brand":"芒果TV",".work-item-role":"导演｜剪辑师"},"videos/亚洲渔港海参_不回复系列-灵魂时刻_完整版（带客户角标）.mp4":{".work-item-name":"亚洲渔港海参《地库篇》",".work-item-brand":"亚洲渔港",".work-item-role":"创意｜制片人"},"videos/亚洲渔港海参_不回复系列_老板喊你_完整版（带客户角标）.mp4":{".work-item-name":"亚洲渔港海参 《老板篇》",".work-item-brand":"亚洲渔港",".work-item-role":"创意｜制片人"},"videos/亚洲渔港海参_免衣力系列_情侣_完整版(带客户角标）.mp4":{".work-item-name":"亚洲渔港海参-《情侣篇》",".work-item-brand":"亚洲渔港",".work-item-role":"创意｜制片人"},"videos/今麦郎凉白开 杨紫 喵咪喝水紫南-广告片餐饮食品视频-新片场.mp4":{".work-item-name":"今麦郎 x 杨紫《猫咪篇》",".work-item-brand":"今麦郎",".work-item-role":"副导演"},"videos/蓝河绵羊奶粉x张雨绮-广告片餐饮食品视频-新片场.mp4":{".work-item-name":"蓝河绵羊奶粉 x 张雨绮官宣TVC",".work-item-brand":"蓝河集团",".work-item-role":"创意｜制片人"},"videos/中免日上x徐梦洁 .mp4":{".work-item-name":"中免日上 x 徐梦洁 x 元音大冒险",".work-item-brand":"中免日上",".work-item-role":"副导演｜创意策划｜制片人"},"videos/康师傅冰红茶 燃炸街舞秀.mp4":{".work-item-name":"康师傅冰红茶 x 这就是街舞",".work-item-brand":"康师傅",".work-item-role":"副导演｜制片人"},"videos/元气森林.mp4":{".work-item-name":"元气森林",".work-item-brand":"元气森林",".work-item-role":"副导演｜创意｜制片人"},"videos/Tuborg.mp4":{".work-item-name":"中国说唱巅峰对决 x 早安 x Tuborg",".work-item-brand":"Tuborg乐堡啤酒",".work-item-role":"副导演｜创意策划｜制片人"},"videos/威尔仕健身_团课升级篇.mp4":{".work-item-name":"威尔仕健身 团课升级宣传片",".work-item-brand":"威尔仕健身",".work-item-role":"导演｜剪辑师"},"videos/第二期0812.mp4":{".work-item-name":"Bilibili向前冲 x 拯救世界的狗子  x 第二集",".work-item-brand":"BILIBILI",".work-item-role":"导演｜编剧｜创意"},"videos/第五期0901.mp4":{".work-item-name":"Bilibili向前冲 x 才浅  x 第五集",".work-item-brand":"BILIBILI公益",".work-item-role":"导演｜编剧"},"videos/第八期最终.mp4":{".work-item-name":"Bilibili向前冲 x 盒子酸奶  x 第八集",".work-item-brand":"BILIBILI公益",".work-item-role":"导演｜编剧｜创意"},"videos/亚洲渔港海参_免衣力系列_祖孙-完整版（带客户角标）.mp4":{".work-item-name":"亚洲渔港海参《祖孙篇》",".work-item-brand":"亚洲渔港",".work-item-role":"创意｜制片人"},"videos/亚洲渔港海参_免衣力系列_老伴_完整版(带客户角标）.mp4":{".work-item-name":"亚洲渔港海参《老伴儿篇》",".work-item-brand":"亚洲渔港",".work-item-role":"创意｜制片人"},"videos/亚洲渔港烤鱼_01_-完整版（带客户角标）.mp4":{".work-item-name":"亚洲渔港烤鱼《辞职篇》",".work-item-brand":"亚洲渔港",".work-item-role":"创意｜制片人"},"videos/亚洲渔港海参_高胶原不叫冤_镜子_完整版（带客户角标）.mp4":{".work-item-name":"亚洲渔港海参《冤案篇》",".work-item-brand":"亚洲渔港",".work-item-role":"创意｜制片人"},"videos/蘑菇街宝藏美妆师-广告片美妆护肤视频-新片场.mp4":{".work-item-name":"蘑菇街 x 每文Rere x 宝藏美妆师",".work-item-brand":"蘑菇街",".work-item-role":"副导演｜制片人"},"videos/七时吉祥x是.mp4":{".work-item-name":"七时吉祥 x 卢昱晓 x 豪士面包",".work-item-brand":"豪士面包",".work-item-role":"副导演｜制片人"},"videos/植村秀x这就是街舞.mp4":{".work-item-name":"植村秀 x 这就是街舞",".work-item-brand":"植村秀",".work-item-role":"副导演"},"videos/美克美家《享受意外》_Final_完整版_0518.mp4":{".work-item-name":"美克美家《享受意外》",".work-item-brand":"美克美家",".work-item-role":"副导演"},"videos/艾热.mp4":{".work-item-name":"艾热",".work-item-brand":"艾热",".work-item-role":"副导演｜创意｜制片人"},"videos/迪卡侬青少年秋季篇.mp4":{".work-item-name":"迪卡侬青少年秋季篇",".work-item-brand":"迪卡侬",".work-item-role":"创意｜制片人"},"videos/唐家饼蝴蝶酥  横版.MP4":{".work-item-name":"唐家饼 蝴蝶酥新品上市宣传片",".work-item-brand":"唐家饼",".work-item-role":"创意｜制片人"},"videos/第三期final.mp4":{".work-item-name":"Bilibili向前冲 x 逍遥散人  x 第三集",".work-item-brand":"BILIBILI",".work-item-role":"导演｜编剧｜创意"},"videos/第六期.mp4":{".work-item-name":"Bilibili向前冲 x 拉宏桑 x 第六集",".work-item-brand":"BILIBILI公益",".work-item-role":"导演｜编剧｜创意"},"videos/起跑线 相伴成长特辑.mp4":{".work-item-name":"《陪你一起长大》相伴成长特辑",".work-item-brand":"芒果TV",".work-item-role":"导演｜剪辑师"},"videos/把世界落在日常 x 玫瑰是玫瑰TVC-竖屏广告美妆护肤视频-新片场.mp4":{".work-item-name":"把世界落在日常 x 玫瑰是玫瑰 x 玫瑰手袋",".work-item-brand":"玫瑰是玫瑰",".work-item-role":"制片人"},"videos/邂逅格拉斯的天然味道飞喜电子烟品牌TVC-广告片快消产品视频-新片场.mp4":{".work-item-name":"邂逅格拉斯的天然味道飞喜电子烟品牌TVC-广告片快消产品视频-新片场",".work-item-brand":"飞喜",".work-item-role":"副导演｜创意"},"videos/嘴嘴IP test_第一条视频.mp4":{".work-item-name":"嘴嘴IP x 第一条视频",".work-item-brand":"嘴嘴IP",".work-item-role":"导演｜AIGCer"},"videos/一叶子产品V3.mp4":{".work-item-name":"一叶子次抛精华产品视频",".work-item-brand":"ONE LEAF一叶子",".work-item-role":"编导｜摄像｜剪辑师"},"videos/1208双12预热v5.mp4":{".work-item-name":"韩束直播预热",".work-item-brand":"KANS韩束",".work-item-role":"编导｜剪辑师"},"videos/一叶子产品_V2.MP4":{".work-item-name":"一叶子次抛精华产品视频",".work-item-brand":"ONE LEAF一叶子",".work-item-role":"编导｜摄像｜剪辑师"},"videos/信息流_V3.mp4":{".work-item-name":"一叶子信息流视频（roi31版）",".work-item-brand":"ONE LEAF一叶子",".work-item-role":"编导｜剪辑师"},"videos/信息流_V4.mp4":{".work-item-name":"一叶子信息流视频（roi11版）",".work-item-brand":"ONE LEAF一叶子",".work-item-role":"编导｜摄像｜剪辑师"},"videos/韩束产品_V3.mp4":{".work-item-name":"韩束次抛精华产品视频",".work-item-brand":"KANS韩束",".work-item-role":"编导｜摄像｜剪辑师"},"videos/千川预热_V1.mp4":{".work-item-name":"韩束直播预热",".work-item-brand":"KANS韩束",".work-item-role":"编导｜摄像｜剪辑师"},"videos/有翡_V1.mp4":{".work-item-name":"有翡_V1",".work-item-brand":"有翡",".work-item-role":"编导｜剪辑师"},"videos/汤包大师篇.mp4":{".work-item-name":"老盛兴 x 汤包大师篇",".work-item-brand":"老盛兴",".work-item-role":"导演｜创意"},"videos/经典汤包_产品展示片1.mp4":{".work-item-name":"经典汤包_产品展示片1",".work-item-brand":"老盛兴",".work-item-role":"导演｜创意"},"videos/经典汤包_产品展示片2.mp4":{".work-item-name":"经典汤包_产品展示片2",".work-item-brand":"经典汤包",".work-item-role":"导演｜创意"},"videos/超级品牌日_V1.mp4":{".work-item-name":"韩束 x 抖音超级品牌日视频",".work-item-brand":"KANS韩束",".work-item-role":"编导｜剪辑师"},"videos/超级品牌日_V2.mp4":{".work-item-name":"韩束 x 抖音超级品牌日预热视频",".work-item-brand":"KANS韩束",".work-item-role":"编导｜摄像｜剪辑师"},"videos/韩束产品_V1.mp4":{".work-item-name":"韩束产品视频",".work-item-brand":"KANS韩束",".work-item-role":"编导｜摄像｜剪辑师"},"videos/韩束产品_V5.mp4":{".work-item-name":"韩束产品视频",".work-item-brand":"kans韩束",".work-item-role":"编导｜摄像｜剪辑师"},"videos/韩束复古变装_V4.mp4":{".work-item-name":"韩束复古变装预热视频",".work-item-brand":"KANS韩束",".work-item-role":"编导｜摄像｜剪辑师"},"videos/鹿鼎记_V1.mp4":{".work-item-name":"电视剧《鹿鼎记花絮》",".work-item-brand":"《鹿鼎记》",".work-item-role":"编导｜剪辑师"},"videos/鹿鼎记_V3.mp4":{".work-item-name":"电视剧《鹿鼎记花絮》",".work-item-brand":"《鹿鼎记》",".work-item-role":"编导｜剪辑师"}};
+</script>
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
@@ -2506,83 +2480,6 @@ document.addEventListener("visibilitychange", () => {
   document.hidden ? stopWater() : (startWater(), initWater());
 });
 window.addEventListener('resize', initWater);
-
-/* ══════════════════════════════════════════════════════════════
-   CURSOR  — simple pixel-art canvas
-══════════════════════════════════════════════════════════════ */
-const cursorEl = document.getElementById('cursor');
-const cursorCanvas = document.getElementById('cursor-canvas');
-const cursorCtx = cursorCanvas.getContext('2d');
-let cmx=0,cmy=0;
-
-// Pixel art — water drop (Be Water brand), 12×12 cells @ 3px
-const PIXEL = 3;
-const PW = 12, PH = 12;
-cursorCanvas.width = PW * PIXEL;
-cursorCanvas.height = PH * PIXEL;
-
-const pattern = [
-  '.....##.....',
-  '....####....',
-  '...######...',
-  '...######...',
-  '..########..',
-  '..########..',
-  '...######...',
-  '....####....',
-  '.....##.....',
-  '.....##.....',
-  '.....##.....',
-  '.....###....'
-];
-
-const hoverPattern = [
-  '.....##.....',
-  '....####....',
-  '...######...',
-  '..########..',
-  '..########..',
-  '.##########.',
-  '.##########.',
-  '..########..',
-  '...######...',
-  '....####....',
-  '.....##.....',
-  '.....###....'
-];
-
-function drawCursor(patternArr) {
-  cursorCtx.clearRect(0, 0, PW * PIXEL, PH * PIXEL);
-  for (let y = 0; y < patternArr.length; y++) {
-    for (let x = 0; x < patternArr[y].length; x++) {
-      const ch = patternArr[y][x];
-      if (ch === ' ') continue;
-      if (ch === '#') cursorCtx.fillStyle = '#0d0d0c';
-      else if (ch === '@') cursorCtx.fillStyle = '#d4a574';
-      else if (ch === '.') cursorCtx.fillStyle = 'rgba(0,0,0,0.18)';
-      cursorCtx.fillRect(x * PIXEL, y * PIXEL, PIXEL, PIXEL);
-    }
-  }
-}
-drawCursor(pattern);
-
-document.addEventListener('mousemove', e => {
-  const dx = e.clientX - cmx, dy = e.clientY - cmy;
-  cmx = e.clientX; cmy = e.clientY;
-
-  gsap.to(cursorEl,{x:cmx-18,y:cmy-18,duration:0.035,ease:'none'});
-
-  const spd = Math.hypot(dx,dy);
-  const ang = Math.atan2(dy,dx)*180/Math.PI + 90;
-  gsap.to(cursorEl,{rotate:ang*(0.35), scaleX:1+Math.min(spd*.008,.2),
-    duration:0.1,ease:'power2.out'});
-});
-
-document.querySelectorAll('a,button,.work-item,.lang-option').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ cursorEl.classList.add('hovering'); drawCursor(hoverPattern); });
-  el.addEventListener('mouseleave',()=>{ cursorEl.classList.remove('hovering'); drawCursor(pattern); });
-});
-
 
 /* ══════════════════════════════════════════════════════════════
    MIMOSA EFFECT on work items
@@ -2779,13 +2676,10 @@ const phases=['Loading','Crafting','Almost...'];
 let ph=0;
 let progress=0;
 const loadTL=gsap.timeline({onComplete:()=>{
-  // Ocean wave transition — waves wash upward like rising tide
-  gsap.to('.loader-wave--1',{y:'-120vh',duration:1.5,ease:'power3.in'});
-  gsap.to('.loader-wave--2',{y:'-120vh',duration:1.3,ease:'power3.in',delay:0.10});
-  gsap.to('.loader-wave--3',{y:'-120vh',duration:1.1,ease:'power2.in',delay:0.18});
-  gsap.to('.loader-wave--4',{y:'-120vh',duration:0.95,ease:'power2.in',delay:0.25});
-  gsap.to('.loader-inner',{opacity:0,duration:0.4,delay:0.08});
-  gsap.to('#loader',{opacity:0,duration:0.2,delay:1.05,onComplete:()=>{
+  // Entire loader slides upward off screen, revealing the page
+  gsap.to('.loader-inner',{opacity:0,duration:0.3,delay:0.1});
+  gsap.to('.loader-wave',{y:'-130vh',duration:1.2,ease:'power3.in',stagger:0.08});
+  gsap.to('#loader',{y:'-100vh',duration:0.9,ease:'power3.in',delay:0.15,onComplete:()=>{
     loader.style.display='none';
     initPage();
   }});
@@ -2855,71 +2749,33 @@ if (backToTop) {
 
 
 /* ══════════════════════════════════════════════════════════════
-   WORK FILTER — animated toggle
+   WORK FILTER — instant toggle (columns layout can't animate)
 ══════════════════════════════════════════════════════════════ */
 const filterBtns = document.querySelectorAll('.work-filter-btn');
 const workItemsAll = document.querySelectorAll('.work-item');
-
-// Animate-in helpers for items that become visible
-function revealItems() {
-  gsap.utils.toArray('.work-item:not(.filter-hidden)').forEach((item, i) => {
-    if (item.style.display === 'none') return;
-    gsap.fromTo(item, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out', delay: (i % 6) * 0.04 });
-  });
-}
 
 filterBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     // Toggle: if already active, deselect and show all
     if (btn.classList.contains('active')) {
       btn.classList.remove('active');
-      workItemsAll.forEach(item => {
-        item.style.display = '';
-        item.classList.remove('filter-hidden');
-      });
-      revealItems();
+      workItemsAll.forEach(item => { item.style.display = ''; });
       return;
     }
     filterBtns.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const filter = btn.dataset.filter;
-
-    // Hide non-matching items with a quick fade
-    var hiding = [];
-    var showing = [];
     workItemsAll.forEach(item => {
-      if (item.dataset.category === filter) {
-        if (item.style.display === 'none') {
-          item.style.display = '';
-          showing.push(item);
-        }
-        item.classList.remove('filter-hidden');
-      } else {
-        if (item.style.display !== 'none') {
-          hiding.push(item);
-        }
-      }
+      item.style.display = (item.dataset.category === filter) ? '' : 'none';
     });
-
-    // Fade out hidden items, then set display:none
-    hiding.forEach(function(item, i) {
-      gsap.to(item, { opacity: 0, y: 10, duration: 0.25, ease: 'power2.in', delay: i * 0.02, onComplete: function() {
-        item.style.display = 'none';
-        item.classList.add('filter-hidden');
-      }});
-    });
-
-    // Fade in new items after a brief delay
-    if (showing.length) {
-      setTimeout(function() {
-        showing.forEach(function(item, i) {
-          item.style.opacity = '0';
-          gsap.to(item, { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out', delay: i * 0.04 });
-        });
-      }, 50);
-    }
   });
 });
+
+// Default: select TV COMMERCIAL on page load
+(function() {
+  var tvcBtn = document.querySelector('.work-filter-btn[data-filter="TVC"]');
+  if (tvcBtn) tvcBtn.click();
+})();
 
 /* ══════════════════════════════════════════════════════════════
    VIDEO LIGHTBOX — click to open, native controls
@@ -2936,8 +2792,6 @@ filterBtns.forEach(btn => {
     if (ext === 'm4v') return 'video/mp4';
     return 'video/mp4';
   }
-
-  var cursorEl = document.getElementById('cursor');
 
   var currentMediaType = 'video'; // 'video' or 'image'
 
@@ -2961,8 +2815,6 @@ filterBtns.forEach(btn => {
     lightbox.classList.add('open');
     lightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-    document.body.style.cursor = 'auto';
-    if (cursorEl) cursorEl.style.display = 'none';
     if (isVideo) lbVideo.focus();
   }
 
@@ -2972,8 +2824,6 @@ filterBtns.forEach(btn => {
     lightbox.classList.remove('open');
     lightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
-    document.body.style.cursor = '';
-    if (cursorEl) cursorEl.style.display = '';
   }
 
   lbClose.addEventListener('click', function(e) { e.stopPropagation(); closeLightbox(); });
@@ -3199,12 +3049,36 @@ filterBtns.forEach(btn => {
       edits[key] = itemEdits;
     });
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(edits)); } catch(e) {}
+    // Show export dialog for cross-browser sync
+    showExportDialog(edits);
+  }
+
+  function showExportDialog(edits) {
+    // Remove existing dialog if any
+    var existing = document.getElementById('export-dialog');
+    if (existing) existing.remove();
+    var jsonStr = JSON.stringify(edits);
+    var overlay = document.createElement('div');
+    overlay.id = 'export-dialog';
+    overlay.style.cssText = 'position:fixed;inset:0;z-index:100000;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;cursor:auto;';
+    overlay.innerHTML = '<div style="background:#fafaf8;border-radius:12px;padding:32px;max-width:600px;width:90vw;max-height:80vh;overflow:auto;cursor:auto;font-family:Syne,sans-serif;">' +
+      '<div style="font-weight:600;font-size:1rem;margin-bottom:8px;">Edits Exported</div>' +
+      '<div style="font-size:0.7rem;color:#6b6b65;margin-bottom:16px;">Copy the text below and send it to update the HTML file</div>' +
+      '<textarea readonly rows="10" style="width:100%;font-size:0.6rem;font-family:monospace;padding:12px;border:1px solid #e8e8e2;border-radius:6px;resize:vertical;cursor:auto;" onclick="this.select()">' + jsonStr + '</textarea>' +
+      '<button style="margin-top:12px;padding:8px 20px;font-family:Syne,sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;border:1px solid #0d0d0c;border-radius:100px;background:#0d0d0c;color:#fafaf8;cursor:pointer;" onclick="navigator.clipboard.writeText(document.querySelector(\'#export-dialog textarea\').value);this.textContent=\'Copied!\';setTimeout(function(){document.getElementById(\'export-dialog\').remove();},800);">Copy & Close</button>' +
+      '</div>';
+    document.body.appendChild(overlay);
+    overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
   }
 
   function loadSavedEdits() {
+    var saved = null;
+    try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch(e) {}
+    if (!saved && typeof window.__EMBEDDED_EDITS__ !== 'undefined') {
+      saved = window.__EMBEDDED_EDITS__;
+    }
+    if (!saved) return;
     try {
-      var saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-      if (!saved) return;
       document.querySelectorAll('.work-item').forEach(function(item, i) {
         var src = (item.querySelector('.work-item-video') || {}).getAttribute('src') || '';
         var key = src || 'item-' + i;
@@ -3365,6 +3239,16 @@ filterBtns.forEach(btn => {
   window.addEventListener('DOMContentLoaded', loadSavedEdits);
   // Also try immediately in case DOM is already loaded
   if (document.readyState !== 'loading') loadSavedEdits();
+
+  // Auto-export: if localStorage has edits but HTML doesn't, show export dialog
+  setTimeout(function() {
+    try {
+      var storedEdits = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (storedEdits && typeof window.__EMBEDDED_EDITS__ === 'undefined') {
+        showExportDialog(storedEdits);
+      }
+    } catch(e) {}
+  }, 500);
 })();
 
 /* ══════════════════════════════════════════════════════════════
@@ -3517,8 +3401,6 @@ var LIVE_PROJECTS = [{"title":"伊丽莎白·雅顿｜抖音超级品牌盛典",
   var detailBody = document.getElementById('detail-body');
   var closeBtn = document.querySelector('.project-detail-close');
   var bg = document.querySelector('.project-detail-bg');
-  var cursorEl = document.getElementById('cursor');
-
   // Color palette for placeholders
   var colors = ['#8B1A2B','#1a3a4a','#2d5a3d','#4a2d6b','#6b3a1a','#1a4a5a','#3a1a4a'];
 
@@ -3581,8 +3463,6 @@ var LIVE_PROJECTS = [{"title":"伊丽莎白·雅顿｜抖音超级品牌盛典",
     detail.classList.add('open');
     detail.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-    document.body.style.cursor = 'auto';
-    if (cursorEl) cursorEl.style.display = 'none';
     detail.querySelector('.project-detail-scroll').scrollTop = 0;
   }
 
@@ -3590,8 +3470,6 @@ var LIVE_PROJECTS = [{"title":"伊丽莎白·雅顿｜抖音超级品牌盛典",
     detail.classList.remove('open');
     detail.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
-    document.body.style.cursor = '';
-    if (cursorEl) cursorEl.style.display = '';
   }
 
   closeBtn.addEventListener('click', closeDetail);
@@ -3619,5 +3497,6 @@ var LIVE_PROJECTS = [{"title":"伊丽莎白·雅顿｜抖音超级品牌盛典",
 })();
 
 </script>
+
 </body>
 </html>
