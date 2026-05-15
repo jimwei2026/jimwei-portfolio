@@ -4,7 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Be Water — Jimmei</title>
+<meta name="description" content="Jim Wei Studio — multidisciplinary design & creative direction. Brand identity, web design, motion, and art direction.">
+<meta property="og:title" content="Be Water — Jimmei Studio">
+<meta property="og:description" content="Multidisciplinary design & creative direction.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#fafaf8">
+<link rel="icon" type="image/png" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://images.unsplash.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -82,20 +89,19 @@ img, video { display: block; width: 100%; }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .marquee-track { animation: none !important; }
 }
 
 /* ═══ LOADER ════════════════════════════════════════════════════════ */
 #loader {
   position: fixed; inset: 0;
-  background: var(--fg);
+  background: var(--bg);
   z-index: 99999;
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
 }
 #loader::before {
   content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.03) 0%, transparent 70%);
+  background: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.025) 0%, transparent 70%);
 }
 .loader-inner {
   display: flex; flex-direction: column; align-items: center; gap: 28px;
@@ -104,67 +110,58 @@ img, video { display: block; width: 100%; }
   font-family: var(--font); font-weight: 800;
   font-size: clamp(1.5rem, 4vw, 3.5rem);
   letter-spacing: -0.04em; text-transform: uppercase;
-  color: var(--bg);
+  color: var(--fg);
   overflow: hidden;
 }
 .loader-text span { display: block; animation: loaderFadeIn 0.6s var(--ease-out); }
 @keyframes loaderFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 .loader-bar-wrap {
-  width: 220px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden;
+  width: 220px; height: 2px; background: rgba(0,0,0,0.08); border-radius: 2px; overflow: hidden;
 }
 #loader-bar {
   height: 100%; width: 0%;
-  background: linear-gradient(90deg, var(--bg) 0%, rgba(255,255,255,0.7) 100%);
+  background: linear-gradient(90deg, var(--fg) 0%, var(--warm) 80%, var(--cool) 100%);
   border-radius: 2px;
 }
 .loader-pct {
   font-family: var(--font); font-size: 0.65rem; letter-spacing: 0.25em;
-  color: rgba(255,255,255,0.35); text-transform: uppercase;
+  color: var(--grey4); text-transform: uppercase;
+}
+/* ═══ LOADER WAVES ════════════════════════════════════════════ */
+.loader-waves {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 100%; pointer-events: none; z-index: 3;
+}
+.loader-wave {
+  position: absolute; left: 0; width: 100%;
+  height: 55%; bottom: -55%;
+  will-change: transform;
+}
+.loader-wave svg {
+  display: block; width: 100%; height: 100%;
 }
 
 /* ═══ WATER CANVAS ══════════════════════════════════════════════════ */
 #water-canvas {
   position: fixed; inset: 0; pointer-events: none;
   z-index: 8000; mix-blend-mode: multiply; opacity: 0.55;
+  will-change: transform;
 }
 
-/* ═══ CURSOR — Photorealistic water droplet ═════════════════════════ */
+/* ═══ CURSOR — cute emoji ═════════════════════════ */
 #cursor {
   position: fixed; top: 0; left: 0;
   pointer-events: none; z-index: 9999;
-  width: 22px; height: 28px;
+  width: 32px; height: 32px;
   will-change: transform;
-  /* Teardrop: pointy top, round bottom */
-  border-radius: 50% 50% 50% 50% / 35% 35% 65% 65%;
-  background:
-    radial-gradient(ellipse 30% 20% at 35% 22%,
-      rgba(255,255,255,1) 0%,
-      rgba(255,255,255,0) 100%),
-    radial-gradient(ellipse 15% 10% at 62% 35%,
-      rgba(255,255,255,0.5) 0%,
-      rgba(255,255,255,0) 100%),
-    radial-gradient(ellipse 90% 80% at 50% 60%,
-      rgba(60,140,255,1) 0%,
-      rgba(10,60,200,1) 50%,
-      rgba(0,15,80,1) 100%);
-  box-shadow:
-    0 0 0 0.5px rgba(100,170,255,0.4),
-    0 6px 20px rgba(20,80,220,0.6),
-    0 2px 6px rgba(20,80,220,0.8),
-    inset 0 -4px 10px rgba(0,10,60,0.5),
-    inset 0 2px 4px rgba(120,180,255,0.3);
-  filter: drop-shadow(0 3px 10px rgba(20,100,255,0.45));
-  transform-origin: 50% 20%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; line-height: 1;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
+  transform-origin: 50% 50%;
 }
 #cursor.hovering {
-  width: 30px; height: 38px;
-  box-shadow:
-    0 0 0 1px rgba(100,170,255,0.5),
-    0 8px 28px rgba(20,80,220,0.7),
-    0 2px 8px rgba(20,80,220,0.9),
-    inset 0 -5px 12px rgba(0,10,60,0.6),
-    inset 0 2px 5px rgba(120,180,255,0.4);
-  filter: drop-shadow(0 5px 16px rgba(20,100,255,0.65));
+  font-size: 38px;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
 }
 
 /* Wake trail dots */
@@ -373,7 +370,7 @@ nav > * { pointer-events: auto; }
 /* ═══ HERO — fullscreen video ═══════════════════════════════════════ */
 #hero {
   position: relative; width: 100%; height: 100vh;
-  overflow: hidden; background: #000;
+  overflow: hidden; background: var(--bg);
 }
 #hero video {
   position: absolute; inset: 0; width: 100%; height: 100%;
@@ -382,24 +379,11 @@ nav > * { pointer-events: auto; }
 #hero::after {
   content: ''; position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(to bottom,
-    rgba(0,0,0,0.18) 0%,
-    rgba(0,0,0,0.08) 40%,
-    rgba(0,0,0,0.22) 60%,
-    rgba(0,0,0,0.5) 100%);
+    rgba(0,0,0,0.10) 0%,
+    rgba(0,0,0,0.04) 40%,
+    rgba(0,0,0,0.14) 60%,
+    rgba(0,0,0,0.35) 100%);
 }
-.hero-overlay-text {
-  position: absolute; top: clamp(80px, 14vh, 140px); left: 56px;
-  z-index: 2; pointer-events: none;
-}
-.hero-overlay-text h1 {
-  font-family: var(--font); font-weight: 700;
-  font-size: clamp(1.6rem, 4vw, 3.2rem);
-  letter-spacing: -0.04em; text-transform: uppercase;
-  color: rgba(255,255,255,0.78); line-height: 0.92;
-  text-shadow: 0 1px 8px rgba(0,0,0,0.35);
-}
-.hero-overlay-text h1 em { font-style: italic; font-weight: 300; opacity: 0.6; }
-.hero-overlay-text h1 br { display: block; }
 .hero-scroll-hint {
   position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
   z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px;
@@ -455,41 +439,51 @@ nav > * { pointer-events: auto; }
 /* ═══ OLD TICKER (page-level, now unused — kept for safety) ═══ */
 .ticker-section { display: none; }
 
-/* ═══ MARQUEE ═══════════════════════════════════════════════════════ */
-.marquee-wrap {
-  padding: 20px 0; border-bottom: 1px solid var(--border);
-  overflow: hidden; white-space: nowrap; background: var(--surface);
+
+
+/* ═══ WORK TITLE ═════════════════════════════════════════════════ */
+.work-title {
+  font-family: var(--font); font-weight: 800;
+  font-size: clamp(3rem, 7vw, 7rem); letter-spacing: -0.05em; line-height: 0.9;
+  text-transform: uppercase; color: var(--fg);
+  text-align: center; margin-bottom: 32px;
 }
-.marquee-track { display: inline-flex; gap: 80px; animation: marquee 25s linear infinite; }
-.marquee-track span {
-  font-family: var(--font); font-size: 0.75rem; font-weight: 500;
-  letter-spacing: 0.16em; text-transform: uppercase; color: var(--grey4); flex-shrink: 0;
-  transition: color 0.4s;
+
+/* ═══ WORK FILTERS ═══════════════════════════════════════════ */
+.work-filters {
+  display: flex; gap: 12px; justify-content: center;
+  padding: 0 56px 48px;
+  flex-wrap: wrap;
 }
-.marquee-track .sep { color: var(--grey5); }
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.marquee-wrap:hover .marquee-track { animation-play-state: paused; }
+.work-filter-btn {
+  font-family: var(--font); font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 10px 22px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: transparent;
+  color: var(--grey3);
+  cursor: none;
+  transition: all 0.3s var(--ease-out);
+}
+.work-filter-btn:hover {
+  border-color: var(--fg);
+  color: var(--fg);
+}
+.work-filter-btn.active {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+@media (max-width: 900px) {
+  .work-filters { padding: 0 24px 36px; gap: 8px; }
+  .work-filter-btn { padding: 8px 16px; font-size: 0.58rem; }
+}
 
 /* ═══ WORK SECTION — masonry waterfall ══════════════════════════════ */
 #work {
   padding: 100px 56px 120px;
   background: var(--bg);
-}
-.work-header {
-  display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 72px;
-}
-.work-label {
-  font-family: var(--font); font-size: 0.62rem; font-weight: 600;
-  letter-spacing: 0.28em; text-transform: uppercase; color: var(--grey3); margin-bottom: 8px;
-}
-.work-title {
-  font-family: var(--font); font-weight: 800;
-  font-size: clamp(3rem, 7vw, 7rem); letter-spacing: -0.05em; line-height: 0.9;
-  text-transform: uppercase; color: var(--fg);
-}
-.work-count {
-  font-family: var(--font); font-size: 0.6rem; letter-spacing: 0.18em; color: var(--grey4);
-  align-self: flex-end; padding-bottom: 8px;
 }
 
 /* Masonry grid — CSS columns */
@@ -507,6 +501,7 @@ nav > * { pointer-events: auto; }
   border-radius: var(--radius-md);
 }
 
+
 /* Mimosa effect: the card itself recoils from cursor via JS */
 .work-item-inner {
   position: relative; overflow: hidden;
@@ -519,54 +514,218 @@ nav > * { pointer-events: auto; }
   box-shadow: var(--shadow-lg);
 }
 
-.work-item-img {
+.work-item-img,
+.work-item-video {
   width: 100%; display: block;
   object-fit: cover;
   border-radius: var(--radius-md);
   transition: filter 0.6s ease, transform 0.6s var(--ease-out);
   filter: grayscale(5%) brightness(0.96);
   will-change: transform;
+  background: var(--surface);
 }
-.work-item:hover .work-item-img {
+.work-item:hover .work-item-img,
+.work-item:hover .work-item-video {
   filter: grayscale(0%) brightness(1.02);
   transform: scale(1.03);
 }
 
-/* Info card that slides up */
+/* Info card overlay */
 .work-item-info {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  padding: 32px 24px 24px;
-  background: linear-gradient(to top,
-    rgba(10,10,10,0.9) 0%,
-    rgba(10,10,10,0.45) 50%,
-    transparent 100%);
-  border-radius: 0 0 var(--radius-md) var(--radius-md);
-  transform: translateY(100%);
-  transition: transform 0.5s var(--ease-out);
+  position: absolute; inset: 0;
+  padding: 24px;
+  display: flex; flex-direction: column;
+  border-radius: var(--radius-md);
+  pointer-events: none;
 }
-.work-item:hover .work-item-info { transform: translateY(0); }
 
+/* Title — centered in upper half */
 .work-item-name {
-  font-family: var(--font); font-weight: 700; font-size: 1.15rem;
-  letter-spacing: -0.02em; color: #fff; margin-bottom: 4px;
+  font-family: var(--font); font-weight: 700; font-size: clamp(0.9rem, 2vw, 1.2rem);
+  letter-spacing: -0.02em; color: #fff;
+  text-align: center;
+  margin-top: 18%;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.7);
 }
-.work-item-meta {
-  font-family: var(--font); font-size: 0.58rem; letter-spacing: 0.14em;
-  text-transform: uppercase; color: rgba(255,255,255,0.5); line-height: 2;
+
+/* Bottom row: left = brand+role, right = type tag */
+.work-item-info::before {
+  content: '';
+  flex: 1;
+}
+.work-item-brand {
+  font-family: var(--font); font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+  margin-bottom: 2px;
+}
+.work-item-role {
+  font-family: var(--font); font-size: 0.54rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--warm);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 .work-item-tag {
-  display: inline-block; margin-top: 12px;
-  font-family: var(--font); font-size: 0.56rem; letter-spacing: 0.16em;
-  text-transform: uppercase; padding: 5px 12px;
-  border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.65);
+  position: absolute; bottom: 24px; right: 24px;
+  font-family: var(--font); font-size: 0.56rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 4px 11px;
+  border: 1px solid rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.75);
   border-radius: var(--radius-sm);
   backdrop-filter: blur(4px);
-  transition: border-color 0.3s, color 0.3s, background 0.3s;
 }
 .work-item:hover .work-item-tag {
-  border-color: rgba(255,255,255,0.5);
+  border-color: rgba(255,255,255,0.6);
   color: #fff;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.1);
+}
+.work-item-meta {
+  display: none;
+}
+.work-item-role:empty:not([contenteditable]),
+.work-item-brand:empty:not([contenteditable]) {
+  display: none;
+}
+.editing .work-item-role:empty,
+.editing .work-item-brand:empty {
+  display: inline-block;
+  min-width: 60px;
+}
+
+/* Edit toggle button */
+.edit-toggle-btn {
+  font-family: var(--font); font-size: 0.58rem; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 8px 16px;
+  border: 1px dashed rgba(0,0,0,0.2); color: var(--grey3);
+  border-radius: var(--radius-sm); background: transparent;
+  transition: all 0.25s var(--ease-out); margin-left: 20px;
+}
+.edit-toggle-btn:hover { border-color: var(--warm); color: var(--warm); }
+.edit-toggle-btn.active {
+  background: var(--warm); color: #fff; border-color: var(--warm);
+}
+
+/* Contenteditable fields in cards */
+[contenteditable="true"] {
+  outline: none; border-radius: 3px; padding: 1px 4px; margin: -1px -4px;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.editing [contenteditable="true"] {
+  cursor: text;
+}
+.editing [contenteditable="true"]:hover {
+  background: rgba(212,165,116,0.15);
+  box-shadow: 0 0 0 1px rgba(212,165,116,0.3);
+}
+.editing [contenteditable="true"]:focus {
+  background: rgba(212,165,116,0.2);
+  box-shadow: 0 0 0 2px var(--warm);
+}
+[contenteditable="true"]:empty:before {
+  content: attr(data-placeholder);
+  color: rgba(255,255,255,0.25);
+}
+
+/* Drag-and-drop in edit mode */
+.work-item[draggable="true"] {
+  cursor: grab;
+  transition: opacity 0.2s, transform 0.2s var(--ease-out);
+}
+.work-item[draggable="true"]:active {
+  cursor: grabbing;
+}
+.work-item.dragging {
+  opacity: 0.35;
+  transform: scale(0.96);
+}
+.work-item.drag-over {
+  position: relative;
+}
+.work-item.drag-over::after {
+  content: '';
+  position: absolute; inset: -3px;
+  border: 2px dashed var(--warm);
+  border-radius: var(--radius-md);
+  z-index: 5;
+  pointer-events: none;
+}
+.drag-handle {
+  position: absolute; top: 10px; right: 10px; z-index: 5;
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.45);
+  border-radius: 4px;
+  color: rgba(255,255,255,0.55);
+  font-size: 14px; line-height: 1;
+  cursor: grab;
+  transition: color 0.2s, background 0.2s;
+  letter-spacing: 0;
+}
+.drag-handle:hover {
+  color: #fff;
+  background: rgba(0,0,0,0.65);
+}
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+/* Restore pointer events in edit mode */
+.editing .work-item-info { pointer-events: auto; }
+.editing .work-item-name,
+.editing .work-item-brand,
+.editing .work-item-role { pointer-events: auto; }
+
+/* ═══ WORK PLAY BUTTON ══════════════════════════════════════════ */
+.work-play-btn {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  display: flex; align-items: center; justify-content: center;
+  cursor: none;
+  opacity: 1;
+  pointer-events: auto;
+}
+.work-play-btn svg { width: 22px; height: 22px; margin-left: 2px; }
+.work-item:hover .work-play-btn {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+.work-play-btn:hover {
+  background: rgba(0,0,0,0.75);
+  border-color: rgba(255,255,255,0.6);
+  transform: translate(-50%, -50%) scale(1.12);
+}
+/* ═══ WORK VIEW ALL ═════════════════════════════════════════════════ */
+.work-view-all {
+  text-align: center; padding-top: 40px;
+}
+.btn-view-all {
+  display: inline-block;
+  font-family: var(--font); font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--fg);
+  padding: 16px 40px;
+  border: 1.5px solid var(--fg);
+  border-radius: var(--radius-sm);
+  transition: all 0.35s var(--ease-out);
+  cursor: none;
+}
+.btn-view-all:hover {
+  background: var(--fg);
+  color: var(--bg);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+@media (prefers-color-scheme: dark) {
+  .btn-view-all { color: var(--fg); border-color: var(--fg); }
+  .btn-view-all:hover { background: var(--fg); color: var(--bg); }
 }
 
 /* ═══ ABOUT ═════════════════════════════════════════════════════════ */
@@ -736,11 +895,32 @@ footer::before {
       rgba(14,14,13,0.5) 50%,
       transparent 100%);
   }
-  .work-item-img { filter: grayscale(8%) brightness(0.9); }
-  .work-item:hover .work-item-img { filter: grayscale(0%) brightness(1); }
+  .work-item-img,
+  .work-item-video { filter: grayscale(8%) brightness(0.9); }
+  .work-item:hover .work-item-img,
+  .work-item:hover .work-item-video { filter: grayscale(0%) brightness(1); }
   .skill-tag { background: var(--surface); }
   .lang-btn { background: var(--surface); }
   .lang-dropdown { background: var(--surface); }
+
+  #hero { background: #000; }
+  #hero::after {
+    background: linear-gradient(to bottom,
+      rgba(0,0,0,0.18) 0%,
+      rgba(0,0,0,0.08) 40%,
+      rgba(0,0,0,0.22) 60%,
+      rgba(0,0,0,0.5) 100%);
+  }
+  #loader { background: var(--fg); }
+  #loader::before { background: radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.03) 0%, transparent 70%); }
+  .loader-text { color: var(--bg); }
+  .loader-bar-wrap { background: rgba(255,255,255,0.1); }
+  #loader-bar { background: linear-gradient(90deg, var(--bg) 0%, rgba(255,255,255,0.7) 100%); }
+  .loader-pct { color: rgba(255,255,255,0.35); }
+  .loader-wave--1 svg path { fill: #0a0a08; }
+  .loader-wave--2 svg path { fill: #0e2340; }
+  .loader-wave--3 svg path { fill: #1a5090; }
+  .loader-wave--4 svg path { fill: #0e0e0d; }
 }
 
 /* ═══ RESPONSIVE ════════════════════════════════════════════════════ */
@@ -752,8 +932,6 @@ footer::before {
     border-radius: var(--radius-md);
   }
   .nav-links { display: none; }
-  .hero-overlay-text { left: 24px; top: clamp(70px, 12vh, 100px); }
-  .hero-overlay-text h1 { font-size: clamp(1.2rem, 5vw, 2rem); }
   #about { grid-template-columns: 1fr; gap: 48px; padding: 80px 24px; }
   .about-left { position: static; }
   .about-big-text br { display: none; }
@@ -770,6 +948,56 @@ footer::before {
     width: min(280px, 88vw);
     padding: 48px 28px;
   }
+}
+
+
+/* ═══ VIDEO LIGHTBOX ════════════════════════════════════════════ */
+.video-lightbox {
+  position: fixed; inset: 0; z-index: 99990;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; cursor: auto;
+  transition: opacity 0.4s var(--ease-out);
+}
+.video-lightbox.open {
+  opacity: 1; pointer-events: auto; cursor: auto;
+}
+.video-lightbox-bg {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.video-lightbox-inner {
+  position: relative; z-index: 1;
+  width: min(95vw, 1400px);
+  max-height: 90vh;
+  display: flex; align-items: center; justify-content: center;
+}
+.video-lightbox-inner video {
+  width: 100%; max-height: 90vh;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  background: #000;
+}
+.video-lightbox-close {
+  position: absolute; top: -48px; right: 0; z-index: 2;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  transition: all 0.25s var(--ease-out);
+}
+.video-lightbox-close:hover {
+  background: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.4);
+  transform: scale(1.08);
+}
+@media (max-width: 900px) {
+  .video-lightbox-inner { width: 100vw; }
+  .video-lightbox-inner video { border-radius: 0; }
+  .video-lightbox-close { top: 8px; right: 8px; }
 }
 
 /* ═══ TOUCH DEVICES ══════════════════════════════════════════════ */
@@ -791,7 +1019,7 @@ footer::before {
 <canvas id="water-canvas"></canvas>
 
 <!-- Cursor droplet -->
-<div id="cursor"></div>
+<div id="cursor">🐱</div>
 
 <!-- Back to top -->
 <button id="back-to-top" aria-label="Back to top">
@@ -806,6 +1034,28 @@ footer::before {
     <div class="loader-text"><span id="loader-word">Loading</span></div>
     <div class="loader-bar-wrap"><div id="loader-bar"></div></div>
     <div class="loader-pct"><span id="loader-pct-num">0</span>%</div>
+  </div>
+  <div class="loader-waves">
+    <div class="loader-wave loader-wave--1">
+      <svg viewBox="0 0 1440 280" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,280 C180,200 360,130 540,170 C720,210 900,140 1080,155 C1260,170 1380,200 1440,170 L1440,280 L0,280 Z" fill="#f2f0eb"/>
+      </svg>
+    </div>
+    <div class="loader-wave loader-wave--2">
+      <svg viewBox="0 0 1440 280" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,280 C120,180 300,100 540,135 C780,170 900,110 1080,105 C1260,100 1380,150 1440,120 L1440,280 L0,280 Z" fill="#e4e0d8"/>
+      </svg>
+    </div>
+    <div class="loader-wave loader-wave--3">
+      <svg viewBox="0 0 1440 280" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,280 C240,160 480,80 720,115 C960,150 1080,80 1260,70 C1360,65 1420,100 1440,80 L1440,280 L0,280 Z" fill="#d0cbc2"/>
+      </svg>
+    </div>
+    <div class="loader-wave loader-wave--4">
+      <svg viewBox="0 0 1440 280" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,280 C180,220 360,140 540,165 C720,190 900,110 1080,125 C1260,140 1380,160 1440,120 L1440,280 L0,280 Z" fill="#fafaf8"/>
+      </svg>
+    </div>
   </div>
 </div>
 
@@ -832,11 +1082,10 @@ footer::before {
     <li><a href="#about" data-i18n="nav_about">About</a></li>
     <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
     <li><a href="#playground" data-i18n="nav_play">Playground</a></li>
-    <li><a href="#services"   data-i18n="nav_services">Services</a></li>
   </ul>
   <div class="side-nav-divider"></div>
   <div class="side-nav-foot">
-    © 2025 — Jimmei Studio<br>Los Angeles, CA
+    © 2026 — Jim Wei Studio<br>Shanghai, CHINA
   </div>
 </div>
 
@@ -850,7 +1099,6 @@ footer::before {
     <li><a href="#about"      data-i18n="nav_about">About</a></li>
     <li><a href="#contact"    data-i18n="nav_contact">Contact</a></li>
     <li><a href="#playground" data-i18n="nav_play">Playground</a></li>
-    <li><a href="#services"   data-i18n="nav_services">Services</a></li>
   </ul>
   <div class="lang-switcher" id="lang-switcher">
     <button class="lang-btn" id="lang-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">
@@ -894,114 +1142,982 @@ footer::before {
       <div class="hero-ticker-dot"></div>
     </div>
   </div>
-
-  <div class="hero-overlay-text" aria-hidden="true">
-    <h1>Be<br>Water<br><em>My Friend</em></h1>
-  </div>
-  <div class="hero-scroll-hint" aria-hidden="true">
-    <span data-i18n="scroll">Scroll</span>
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-      <path d="M10 4v12M4 10l6 6 6-6"/>
-    </svg>
-  </div>
 </section>
 
 
-<!-- ═══ MARQUEE ══════════════════════════════════════════════════════ -->
-<div class="marquee-wrap" aria-hidden="true">
-  <div class="marquee-track">
-    <span>Brand Identity</span><span class="sep"> · </span>
-    <span>Web Design</span><span class="sep"> · </span>
-    <span>Motion Design</span><span class="sep"> · </span>
-    <span>Art Direction</span><span class="sep"> · </span>
-    <span>Creative Strategy</span><span class="sep"> · </span>
-    <span>Brand Identity</span><span class="sep"> · </span>
-    <span>Web Design</span><span class="sep"> · </span>
-    <span>Motion Design</span><span class="sep"> · </span>
-    <span>Art Direction</span><span class="sep"> · </span>
-    <span>Creative Strategy</span><span class="sep"> · </span>
-  </div>
-</div>
-
 <!-- ═══ WORK — masonry waterfall with mimosa effect ═════════════════ -->
 <section id="work">
-  <div class="work-header">
-    <div>
-      <div class="work-label" data-i18n="work_label">Selected Work</div>
-      <h2 class="work-title" data-i18n="work_title">Work</h2>
-    </div>
-    <div class="work-count">06 Projects</div>
+
+  <!-- Category Filter -->
+
+  <h2 class="work-title">Work</h2>
+
+  <div class="work-filters">
+    <button class="work-filter-btn active" data-filter="all">All</button>
+    <button class="work-filter-btn" data-filter="TVC">TV COMMERCIAL</button>
+    <button class="work-filter-btn" data-filter="AIGC">AIGC VIDEO</button>
+    <button class="work-filter-btn" data-filter="短视频">SHORT VIDEO</button>
+    <button class="edit-toggle-btn" id="edit-toggle" title="Toggle inline editing">Edit Mode ✎</button>
   </div>
 
-  <div class="work-masonry" id="work-masonry">
-
-    <div class="work-item" data-name="Aurelius" data-year="2024" data-client="Aurelius Co." data-role="Art Director" data-type="Brand Identity">
+<div class="work-masonry" id="work-masonry">
+<div class="work-item" data-category="TVC" data-role="" data-brand="Tuborg">
       <div class="work-item-inner">
-        <img class="work-item-img" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80" alt="Aurelius" style="aspect-ratio:4/5">
+        <video class="work-item-video" src="videos/Tuborg.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
         <div class="work-item-info">
-          <div class="work-item-name">Aurelius</div>
-          <div class="work-item-meta">2024 &nbsp;·&nbsp; Aurelius Co.<br>Art Director</div>
-          <div class="work-item-tag">Brand Identity</div>
+          <div class="work-item-name">Tuborg</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">Tuborg</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="陪你一起长大">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/《陪你一起长大》-初为父母特辑.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">《陪你一起长大》-初为父母特辑</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">陪你一起长大</div>
+          <div class="work-item-role"></div>
         </div>
       </div>
     </div>
 
-    <div class="work-item" data-name="Forma" data-year="2024" data-client="Forma Studio" data-role="Creative Director" data-type="Digital Experience">
+<div class="work-item" data-category="TVC" data-role="" data-brand="亚洲渔港">
       <div class="work-item-inner">
-        <img class="work-item-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Forma" style="aspect-ratio:3/4">
+        <video class="work-item-video" src="videos/亚洲渔港海参_不回复系列-灵魂时刻_完整版（带客户角标）.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
         <div class="work-item-info">
-          <div class="work-item-name">Forma</div>
-          <div class="work-item-meta">2024 &nbsp;·&nbsp; Forma Studio<br>Creative Director</div>
-          <div class="work-item-tag">Digital Experience</div>
+          <div class="work-item-name">亚洲渔港海参_不回复系列-灵魂时刻_完整版（带客户角标）</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">亚洲渔港</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="亚洲渔港">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/亚洲渔港海参_不回复系列_老板喊你_完整版（带客户角标）.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">亚洲渔港海参_不回复系列_老板喊你_完整版（带客户角标）</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">亚洲渔港</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="亚洲渔港">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/亚洲渔港海参_免衣力系列_情侣_完整版(带客户角标）.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">亚洲渔港海参_免衣力系列_情侣_完整版(带客户角标）</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">亚洲渔港</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="亚洲渔港">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/亚洲渔港海参_免衣力系列_祖孙-完整版（带客户角标）.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">亚洲渔港海参_免衣力系列_祖孙-完整版（带客户角标）</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">亚洲渔港</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="亚洲渔港">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/亚洲渔港海参_免衣力系列_老伴_完整版(带客户角标）.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">亚洲渔港海参_免衣力系列_老伴_完整版(带客户角标）</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">亚洲渔港</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="亚洲渔港">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/亚洲渔港海参_高胶原不叫冤_镜子_完整版（带客户角标）.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">亚洲渔港海参_高胶原不叫冤_镜子_完整版（带客户角标）</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">亚洲渔港</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="亚洲渔港">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/亚洲渔港烤鱼_01_-完整版（带客户角标）.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">亚洲渔港烤鱼_01_-完整版（带客户角标）</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">亚洲渔港</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="元气森林">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/元气森林.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">元气森林</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">元气森林</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="唐家饼">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/唐家饼蝴蝶酥  横版.MP4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">唐家饼蝴蝶酥  横版</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">唐家饼</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="威尔仕健身">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/威尔仕健身_团课升级篇.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">威尔仕健身_团课升级篇</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">威尔仕健身</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="康师傅">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/康师傅冰红茶 燃炸街舞秀.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">康师傅冰红茶 燃炸街舞秀</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">康师傅</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="植村秀">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/植村秀x这就是街舞.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">植村秀x这就是街舞</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">植村秀</div>
+          <div class="work-item-role"></div>
         </div>
       </div>
     </div>
 
-    <div class="work-item" data-name="Meridian" data-year="2023" data-client="Meridian Press" data-role="Lead Designer" data-type="Editorial">
+
+<div class="work-item" data-category="TVC" data-role="" data-brand="知乎">
       <div class="work-item-inner">
-        <img class="work-item-img" src="https://images.unsplash.com/photo-1545235617-9465d2a55698?w=800&q=80" alt="Meridian" style="aspect-ratio:1/1">
+        <video class="work-item-video" src="videos/知乎丨吾辈问答 x 天猫双11·DIRCUT.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
         <div class="work-item-info">
-          <div class="work-item-name">Meridian</div>
-          <div class="work-item-meta">2023 &nbsp;·&nbsp; Meridian Press<br>Lead Designer</div>
-          <div class="work-item-tag">Editorial</div>
+          <div class="work-item-name">知乎丨吾辈问答 x 天猫双11·DIRCUT</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">知乎</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/第一期0808.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">第一期0808</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand"></div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/第七期.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">第七期</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand"></div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/第三期final.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">第三期final</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand"></div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/第二期0812.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">第二期0812</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand"></div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/第五期0901.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">第五期0901</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand"></div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/第八期最终.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">第八期最终</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand"></div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/第六期.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">第六期</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand"></div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/第四期0825.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">第四期0825</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand"></div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="美克美家">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/美克美家《享受意外》_Final_完整版_0518.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">美克美家《享受意外》_Final_完整版_0518</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">美克美家</div>
+          <div class="work-item-role"></div>
         </div>
       </div>
     </div>
 
-    <div class="work-item" data-name="Void" data-year="2023" data-client="Void Films" data-role="Motion Director" data-type="Motion Design">
+
+<div class="work-item" data-category="TVC" data-role="" data-brand="起跑线">
       <div class="work-item-inner">
-        <img class="work-item-img" src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80" alt="Void" style="aspect-ratio:5/6">
+        <video class="work-item-video" src="videos/起跑线 相伴成长特辑.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
         <div class="work-item-info">
-          <div class="work-item-name">Void</div>
-          <div class="work-item-meta">2023 &nbsp;·&nbsp; Void Films<br>Motion Director</div>
-          <div class="work-item-tag">Motion Design</div>
+          <div class="work-item-name">起跑线 相伴成长特辑</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">起跑线</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="迪卡侬">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/迪卡侬青少年秋季篇.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">迪卡侬青少年秋季篇</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">迪卡侬</div>
+          <div class="work-item-role"></div>
         </div>
       </div>
     </div>
 
-    <div class="work-item" data-name="Lumen" data-year="2023" data-client="Lumen Labs" data-role="Brand Strategist" data-type="Branding">
+<div class="work-item" data-category="TVC" data-role="" data-brand="随变">
       <div class="work-item-inner">
-        <img class="work-item-img" src="https://images.unsplash.com/photo-1600132806608-231446b2e7af?w=800&q=80" alt="Lumen" style="aspect-ratio:4/3">
+        <video class="work-item-video" src="videos/随变.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
         <div class="work-item-info">
-          <div class="work-item-name">Lumen</div>
-          <div class="work-item-meta">2023 &nbsp;·&nbsp; Lumen Labs<br>Brand Strategist</div>
-          <div class="work-item-tag">Branding</div>
+          <div class="work-item-name">随变</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">随变</div>
+          <div class="work-item-role"></div>
         </div>
       </div>
     </div>
-
-    <div class="work-item" data-name="Solstice" data-year="2022" data-client="Solstice Wear" data-role="Creative Lead" data-type="Campaign">
+<div class="work-item" data-category="TVC" data-role="" data-brand="七时吉祥">
       <div class="work-item-inner">
-        <img class="work-item-img" src="https://images.unsplash.com/photo-1541532713592-79a0317b272b?w=800&q=80" alt="Solstice" style="aspect-ratio:3/4">
+        <video class="work-item-video" src="videos/七时吉祥x是.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
         <div class="work-item-info">
-          <div class="work-item-name">Solstice</div>
-          <div class="work-item-meta">2022 &nbsp;·&nbsp; Solstice Wear<br>Creative Lead</div>
-          <div class="work-item-tag">Campaign</div>
+          <div class="work-item-name">七时吉祥x是</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">七时吉祥</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="中免日上">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/中免日上x徐梦洁 .mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">中免日上x徐梦洁 </div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">中免日上</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="今麦郎">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/今麦郎凉白开 杨紫 喵咪喝水紫南-广告片餐饮食品视频-新片场.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">今麦郎凉白开 杨紫 喵咪喝水紫南-广告片餐饮食品视频-新片场</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">今麦郎</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="玫瑰是玫瑰">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/把世界落在日常 x 玫瑰是玫瑰TVC-竖屏广告美妆护肤视频-新片场.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">把世界落在日常 x 玫瑰是玫瑰TVC-竖屏广告美妆护肤视频-新片场</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">玫瑰是玫瑰</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="今麦郎">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/杨紫今麦郎凉白开-广告片TVC广告视频-新片场.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">杨紫今麦郎凉白开-广告片TVC广告视频-新片场</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">今麦郎</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="今麦郎">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/杨紫今麦郎凉白开举个水-广告片餐饮食品视频-新片场.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">杨紫今麦郎凉白开举个水-广告片餐饮食品视频-新片场</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">今麦郎</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="甄稀">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/甄稀 x 张颜齐final_小档.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">甄稀 x 张颜齐final_小档</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">甄稀</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="甄稀">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/甄稀支棒x尹正Final.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">甄稀支棒x尹正Final</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">甄稀</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="艾热">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/艾热.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">艾热</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">艾热</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="蓝河绵羊">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/蓝河绵羊奶粉x张雨绮-广告片餐饮食品视频-新片场.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">蓝河绵羊奶粉x张雨绮-广告片餐饮食品视频-新片场</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">蓝河绵羊</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="蘑菇街">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/蘑菇街宝藏美妆师-广告片美妆护肤视频-新片场.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">蘑菇街宝藏美妆师-广告片美妆护肤视频-新片场</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">蘑菇街</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="飞喜">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/邂逅格拉斯的天然味道飞喜电子烟品牌TVC-广告片快消产品视频-新片场.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">邂逅格拉斯的天然味道飞喜电子烟品牌TVC-广告片快消产品视频-新片场</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">飞喜</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="TVC" data-role="" data-brand="随变">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/随变bridge.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">随变bridge</div>
+          <div class="work-item-tag">TVC</div>
+          <div class="work-item-brand">随变</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="AIGC" data-role="" data-brand="嘴嘴IP">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/嘴嘴IP test_第一条视频.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">嘴嘴IP test_第一条视频</div>
+          <div class="work-item-tag">AIGC</div>
+          <div class="work-item-brand">嘴嘴IP</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="短视频" data-role="" data-brand="">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/1208双12预热v5.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">1208双12预热v5</div>
+          <div class="work-item-tag">短视频</div>
+          <div class="work-item-brand"></div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="短视频" data-role="" data-brand="一叶子">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/一叶子产品V3.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">一叶子产品V3</div>
+          <div class="work-item-tag">短视频</div>
+          <div class="work-item-brand">一叶子</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="短视频" data-role="" data-brand="一叶子">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/一叶子产品_V2.MP4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">一叶子产品_V2</div>
+          <div class="work-item-tag">短视频</div>
+          <div class="work-item-brand">一叶子</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="短视频" data-role="" data-brand="">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/信息流_V3.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">信息流_V3</div>
+          <div class="work-item-tag">短视频</div>
+          <div class="work-item-brand"></div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="短视频" data-role="" data-brand="">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/信息流_V4.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">信息流_V4</div>
+          <div class="work-item-tag">短视频</div>
+          <div class="work-item-brand"></div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="短视频" data-role="" data-brand="">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/千川预热_V1.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">千川预热_V1</div>
+          <div class="work-item-tag">短视频</div>
+          <div class="work-item-brand"></div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="短视频" data-role="" data-brand="有翡">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/有翡_V1.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">有翡_V1</div>
+          <div class="work-item-tag">短视频</div>
+          <div class="work-item-brand">有翡</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="短视频" data-role="" data-brand="汤包大师">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/汤包大师篇.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">汤包大师篇</div>
+          <div class="work-item-tag">短视频</div>
+          <div class="work-item-brand">汤包大师</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="短视频" data-role="" data-brand="经典汤包">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/经典汤包_产品展示片1.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">经典汤包_产品展示片1</div>
+          <div class="work-item-tag">短视频</div>
+          <div class="work-item-brand">经典汤包</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="短视频" data-role="" data-brand="经典汤包">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/经典汤包_产品展示片2.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">经典汤包_产品展示片2</div>
+          <div class="work-item-tag">短视频</div>
+          <div class="work-item-brand">经典汤包</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="短视频" data-role="" data-brand="超级品牌日">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/超级品牌日_V1.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">超级品牌日_V1</div>
+          <div class="work-item-tag">短视频</div>
+          <div class="work-item-brand">超级品牌日</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="短视频" data-role="" data-brand="超级品牌日">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/超级品牌日_V2.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">超级品牌日_V2</div>
+          <div class="work-item-tag">短视频</div>
+          <div class="work-item-brand">超级品牌日</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="短视频" data-role="" data-brand="韩束">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/韩束产品_V1.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">韩束产品_V1</div>
+          <div class="work-item-tag">短视频</div>
+          <div class="work-item-brand">韩束</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="短视频" data-role="" data-brand="韩束">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/韩束产品_V3.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">韩束产品_V3</div>
+          <div class="work-item-tag">短视频</div>
+          <div class="work-item-brand">韩束</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="短视频" data-role="" data-brand="韩束">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/韩束产品_V5.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">韩束产品_V5</div>
+          <div class="work-item-tag">短视频</div>
+          <div class="work-item-brand">韩束</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="短视频" data-role="" data-brand="韩束">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/韩束复古变装_V4.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">韩束复古变装_V4</div>
+          <div class="work-item-tag">短视频</div>
+          <div class="work-item-brand">韩束</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="短视频" data-role="" data-brand="鹿鼎记">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/鹿鼎记_V1.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">鹿鼎记_V1</div>
+          <div class="work-item-tag">短视频</div>
+          <div class="work-item-brand">鹿鼎记</div>
+          <div class="work-item-role"></div>
+        </div>
+      </div>
+    </div>
+<div class="work-item" data-category="短视频" data-role="" data-brand="鹿鼎记">
+      <div class="work-item-inner">
+        <video class="work-item-video" src="videos/鹿鼎记_V3.mp4" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+        <button class="work-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+        <div class="work-item-info">
+          <div class="work-item-name">鹿鼎记_V3</div>
+          <div class="work-item-tag">短视频</div>
+          <div class="work-item-brand">鹿鼎记</div>
+          <div class="work-item-role"></div>
         </div>
       </div>
     </div>
 
   </div>
+
+  <div class="work-view-all">
+    <a href="#" class="btn-view-all">View All Works →</a>
+  </div>
+
 </section>
 
 <!-- ═══ ABOUT ═════════════════════════════════════════════════════════ -->
@@ -1035,14 +2151,28 @@ footer::before {
   </div>
   <div class="footer-meta">
     <ul class="footer-links">
-      <li><a href="#">Twitter</a></li>
-      <li><a href="#">LinkedIn</a></li>
-      <li><a href="#">Dribbble</a></li>
-      <li><a href="#">GitHub</a></li>
+      <li><a href="#" rel="noopener noreferrer" target="_blank">Twitter</a></li>
+      <li><a href="#" rel="noopener noreferrer" target="_blank">LinkedIn</a></li>
+      <li><a href="#" rel="noopener noreferrer" target="_blank">Dribbble</a></li>
+      <li><a href="#" rel="noopener noreferrer" target="_blank">GitHub</a></li>
     </ul>
-    <div class="footer-copy" data-i18n="footer_copy">© 2025 — All rights reserved</div>
+    <div class="footer-copy" data-i18n="footer_copy">© 2026 Jim Wei Studio, Shanghai, CHINA</div>
   </div>
 </footer>
+
+
+<!-- ═══ VIDEO LIGHTBOX ═══════════════════════════════════════════════ -->
+<div id="video-lightbox" class="video-lightbox" aria-hidden="true">
+  <div class="video-lightbox-bg"></div>
+  <div class="video-lightbox-inner">
+    <button class="video-lightbox-close" aria-label="Close video">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="1" y1="1" x2="23" y2="23"/><line x1="23" y1="1" x2="1" y2="23"/>
+      </svg>
+    </button>
+    <video id="lightbox-video" controls playsinline preload="auto"></video>
+  </div>
+</div>
 
 <script>
 gsap.registerPlugin(ScrollTrigger);
@@ -1053,7 +2183,7 @@ gsap.registerPlugin(ScrollTrigger);
 const dict = {
   en: {
     nav_home:'Home', nav_work:'Work', nav_about:'About', nav_contact:'Contact',
-    nav_play:'Playground', nav_services:'Services', nav_label:'Navigation', close:'Close',
+    nav_play:'Playground', nav_label:'Navigation', close:'Close',
     scroll:'Scroll',
     ticker_sub:'We make digital (and magical)...',
     ticker:['Branding','Experiences','Interfaces','Stories'],
@@ -1062,11 +2192,11 @@ const dict = {
     about_p1:"I'm a multidisciplinary creative with a decade of crafting purposeful digital products. I believe every pixel carries intent — and that restraint is the highest form of design.",
     about_p2:"My work lives at the boundary of visual culture and technology. I collaborate with forward-thinking brands to make experiences that feel inevitable in hindsight.",
     about_p3:"Currently based in Los Angeles, working globally. Previously at Pentagram, R/GA, and independent studios across three continents.",
-    contact_label:'Contact', footer_cta:"Let's\nTalk →", footer_copy:'© 2025 — All rights reserved'
+    contact_label:'Contact', footer_cta:"Let's\nTalk →", footer_copy:'© 2026 Jim Wei Studio, Shanghai, CHINA'
   },
   zh: {
     nav_home:'首页', nav_work:'作品', nav_about:'关于', nav_contact:'联系',
-    nav_play:'实验室', nav_services:'服务', nav_label:'导航', close:'关闭',
+    nav_play:'实验室', nav_label:'导航', close:'关闭',
     scroll:'向下',
     ticker_sub:'我们创造数字（与魔法）...',
     ticker:['品牌设计','数字体验','交互界面','创意叙事'],
@@ -1075,11 +2205,11 @@ const dict = {
     about_p1:'我是一位跨学科创意人，十年来专注于打造有意义的数字产品。我相信每一个像素都承载着意图——而克制，是设计最高的形式。',
     about_p2:'我的作品生长于视觉文化与技术的边界地带。我与有远见的品牌合作，打造那些让人觉得"理应如此"的体验。',
     about_p3:'现居洛杉矶，服务全球客户。曾供职于 Pentagram、R/GA，以及横跨三大洲的独立设计工作室。',
-    contact_label:'联系', footer_cta:'开始\n合作 →', footer_copy:'© 2025 — 版权所有'
+    contact_label:'联系', footer_cta:'开始\n合作 →', footer_copy:'© 2026 Jim Wei Studio — 版权所有'
   },
   ja: {
     nav_home:'ホーム', nav_work:'作品', nav_about:'概要', nav_contact:'連絡',
-    nav_play:'実験', nav_services:'サービス', nav_label:'ナビゲーション', close:'閉じる',
+    nav_play:'実験', nav_label:'ナビゲーション', close:'閉じる',
     scroll:'スクロール',
     ticker_sub:'デジタルと魔法を創る...',
     ticker:['ブランディング','体験設計','インターフェース','ストーリー'],
@@ -1088,11 +2218,11 @@ const dict = {
     about_p1:'10年間、目的意識を持ったデジタルプロダクトを手掛けてきた多分野クリエイターです。すべてのピクセルには意図があり、抑制こそデザインの最高の形と信じています。',
     about_p2:'私の仕事はビジュアル文化とテクノロジーの境界に息づいています。先見性のあるブランドと協力し、「必然」と感じさせる体験を生み出します。',
     about_p3:'ロサンゼルスを拠点にグローバルに活動中。Pentagram、R/GAおよび三大陸の独立スタジオでの経験を持ちます。',
-    contact_label:'連絡先', footer_cta:'お問い\n合わせ →', footer_copy:'© 2025 — 全著作権所有'
+    contact_label:'連絡先', footer_cta:'お問い\n合わせ →', footer_copy:'© 2026 Jim Wei Studio — 全著作権所有'
   },
   fr: {
     nav_home:'Accueil', nav_work:'Travaux', nav_about:'À propos', nav_contact:'Contact',
-    nav_play:'Labo', nav_services:'Services', nav_label:'Navigation', close:'Fermer',
+    nav_play:'Labo', nav_label:'Navigation', close:'Fermer',
     scroll:'Défiler',
     ticker_sub:'Nous créons le digital (et la magie)...',
     ticker:['Branding','Expériences','Interfaces','Récits'],
@@ -1101,7 +2231,7 @@ const dict = {
     about_p1:"Créatif multidisciplinaire depuis dix ans, je façonne des produits numériques porteurs de sens. Je crois que chaque pixel a une intention — et que la retenue est la forme la plus haute du design.",
     about_p2:"Mon travail vit à la frontière de la culture visuelle et de la technologie. Je collabore avec des marques visionnaires pour créer des expériences qui semblent inévitables.",
     about_p3:"Basé à Los Angeles, travaillant à l'international. Anciennement chez Pentagram, R/GA et des studios indépendants sur trois continents.",
-    contact_label:'Contact', footer_cta:'Parlons\nProjet →', footer_copy:'© 2025 — Tous droits réservés'
+    contact_label:'Contact', footer_cta:'Parlons\nProjet →', footer_copy:'© 2026 Jim Wei Studio — Tous droits réservés'
   }
 };
 let currentLang = 'en';
@@ -1175,9 +2305,15 @@ function renderWater() {
   const oc = offscr.getContext('2d'); oc.putImageData(imgData,0,0);
   wCtx.clearRect(0,0,wW,wH);
   wCtx.drawImage(offscr,0,0,wW,wH);
-  requestAnimationFrame(renderWater);
+  waterRAF = requestAnimationFrame(renderWater);
 }
-initWater(); renderWater();
+let waterRAF = null;
+initWater(); waterRAF = requestAnimationFrame(renderWater);
+function startWater() { if (!waterRAF) { waterRAF = requestAnimationFrame(renderWater); } }
+function stopWater()  { if (waterRAF) { cancelAnimationFrame(waterRAF); waterRAF = null; } }
+document.addEventListener("visibilitychange", () => {
+  document.hidden ? stopWater() : (startWater(), initWater());
+});
 window.addEventListener('resize', initWater);
 
 /* ══════════════════════════════════════════════════════════════
@@ -1250,6 +2386,7 @@ document.addEventListener('click',e=>{
   }
 });
 
+
 /* ══════════════════════════════════════════════════════════════
    MIMOSA EFFECT on work items
    Cards shy away from cursor like mimosa pudica leaves
@@ -1258,7 +2395,7 @@ const workItems = document.querySelectorAll('.work-item');
 
 workItems.forEach(item => {
   const inner = item.querySelector('.work-item-inner');
-  const img   = item.querySelector('.work-item-img');
+  const media = item.querySelector('.work-item-img, .work-item-video');
 
   item.addEventListener('mousemove', e => {
     const rect  = item.getBoundingClientRect();
@@ -1295,7 +2432,7 @@ workItems.forEach(item => {
     });
 
     // Image also subtly shifts in opposite direction (parallax within card)
-    gsap.to(img, {
+    gsap.to(media, {
       x: dx * 0.04,
       y: dy * 0.04,
       duration: 0.5,
@@ -1310,7 +2447,7 @@ workItems.forEach(item => {
       duration: 0.9,
       ease: 'elastic.out(1, 0.5)'
     });
-    gsap.to(img, {
+    gsap.to(media, {
       x: 0, y: 0,
       duration: 0.7,
       ease: 'elastic.out(1, 0.4)'
@@ -1340,12 +2477,11 @@ function animRipples(){
     ripCtx.strokeStyle=`rgba(0,0,0,${r.alpha.toFixed(3)})`; ripCtx.lineWidth=1;
     ripCtx.stroke(); r.r+=r.speed; r.alpha*=0.976;
   });
-  requestAnimationFrame(animRipples);
+  if (ripples.length > 0) requestAnimationFrame(animRipples);
 }
 function resizeRip(){
   ripCanvas.width=sidePanel.offsetWidth; ripCanvas.height=sidePanel.offsetHeight;
 }
-animRipples();
 
 function animWave(){
   waveT++;
@@ -1448,8 +2584,16 @@ const phases=['Loading','Crafting','Almost...'];
 let ph=0;
 let progress=0;
 const loadTL=gsap.timeline({onComplete:()=>{
-  gsap.to(loader,{yPercent:-100,duration:1,ease:'power4.inOut',onComplete:()=>loader.style.display='none'});
-  initPage();
+  // Ocean wave transition — waves wash upward like rising tide
+  gsap.to('.loader-wave--1',{y:'-120vh',duration:1.5,ease:'power3.in'});
+  gsap.to('.loader-wave--2',{y:'-120vh',duration:1.3,ease:'power3.in',delay:0.10});
+  gsap.to('.loader-wave--3',{y:'-120vh',duration:1.1,ease:'power2.in',delay:0.18});
+  gsap.to('.loader-wave--4',{y:'-120vh',duration:0.95,ease:'power2.in',delay:0.25});
+  gsap.to('.loader-inner',{opacity:0,duration:0.4,delay:0.08});
+  gsap.to('#loader',{opacity:0,duration:0.2,delay:1.05,onComplete:()=>{
+    loader.style.display='none';
+    initPage();
+  }});
 }});
 loadTL.to(loaderBar,{width:'100%',duration:1.6,ease:'power2.inOut',onUpdate:function(){
   progress=Math.round(this.progress()*100);
@@ -1476,18 +2620,6 @@ function initPage(){
     gsap.fromTo(item,{opacity:0,y:40},{opacity:1,y:0,duration:0.75,ease:'power3.out',
       delay:(i%3)*0.1,
       scrollTrigger:{trigger:item,start:'top 88%',toggleActions:'play none none none'}});
-  });
-
-  // Hero overlay text parallax
-  gsap.to('.hero-overlay-text',{
-    y: -40,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '#hero',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: true
-    }
   });
 
   setTimeout(startTicker, 500);
@@ -1522,6 +2654,421 @@ if (backToTop) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
+
+
+
+
+/* ══════════════════════════════════════════════════════════════
+   WORK FILTER
+══════════════════════════════════════════════════════════════ */
+const filterBtns = document.querySelectorAll('.work-filter-btn');
+const workItemsAll = document.querySelectorAll('.work-item');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    workItemsAll.forEach(item => {
+      if (filter === 'all' || item.dataset.category === filter) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+});
+
+/* ══════════════════════════════════════════════════════════════
+   VIDEO LIGHTBOX — click to open, native controls
+══════════════════════════════════════════════════════════════ */
+(function() {
+  var lightbox = document.getElementById('video-lightbox');
+  var lbVideo = document.getElementById('lightbox-video');
+  var lbClose = document.querySelector('.video-lightbox-close');
+  var lbBg = document.querySelector('.video-lightbox-bg');
+
+  function getType(src) {
+    var ext = src.split('.').pop().toLowerCase();
+    if (ext === 'mov') return 'video/quicktime';
+    if (ext === 'm4v') return 'video/mp4';
+    return 'video/mp4';
+  }
+
+  var cursorEl = document.getElementById('cursor');
+
+  function openLightbox(videoEl) {
+    var src = videoEl.getAttribute('src');
+    if (!src) return;
+    lbVideo.innerHTML = '';
+    var source = document.createElement('source');
+    source.src = src;
+    source.type = getType(src);
+    lbVideo.appendChild(source);
+    lbVideo.load();
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    document.body.style.cursor = 'auto';
+    if (cursorEl) cursorEl.style.display = 'none';
+    lbVideo.focus();
+  }
+
+  function closeLightbox() {
+    lbVideo.pause();
+    lbVideo.innerHTML = '';
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    document.body.style.cursor = '';
+    if (cursorEl) cursorEl.style.display = '';
+  }
+
+  lbClose.addEventListener('click', function(e) { e.stopPropagation(); closeLightbox(); });
+  lbBg.addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+  });
+
+  // Attach to every work item — click to open lightbox
+  var items = document.querySelectorAll('.work-item');
+  for (var i = 0; i < items.length; i++) {
+    (function(item) {
+      var video = item.querySelector('.work-item-video');
+      if (!video) return;
+
+      function handleClick(e) {
+        if (e.target.closest('[contenteditable]')) return;
+        e.stopPropagation();
+        openLightbox(video);
+      }
+
+      item.addEventListener('click', handleClick);
+      video.addEventListener('click', handleClick);
+
+      var playBtn = item.querySelector('.work-play-btn');
+      if (playBtn) {
+        playBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          e.preventDefault();
+          openLightbox(video);
+        });
+      }
+    })(items[i]);
+  }
+})();
+
+/* ══════════════════════════════════════════════════════════════
+   INLINE EDITING — edit name, brand, role directly on page
+══════════════════════════════════════════════════════════════ */
+(function() {
+  var editToggle = document.getElementById('edit-toggle');
+  var workSection = document.getElementById('work');
+  var STORAGE_KEY = 'jimwei_work_edits';
+  var editing = false;
+
+  // Editable field config
+  var editableSelectors = {
+    '.work-item-name':  { attr: 'data-name',  placeholder: '作品名称' },
+    '.work-item-brand': { attr: 'data-brand', placeholder: '品牌名' },
+    '.work-item-role':  { attr: 'data-role',  placeholder: '你的岗位' }
+  };
+
+  function setEditable(enabled) {
+    editing = enabled;
+    if (enabled) {
+      workSection.classList.add('editing');
+      editToggle.classList.add('active');
+      editToggle.textContent = 'Edit Mode ✓';
+      document.querySelectorAll('.work-item').forEach(function(item) {
+        // Make editable
+        Object.keys(editableSelectors).forEach(function(sel) {
+          var el = item.querySelector(sel);
+          if (!el) return;
+          el.setAttribute('contenteditable', 'true');
+          var cfg = editableSelectors[sel];
+          if (!el.textContent.trim()) {
+            el.setAttribute('data-placeholder', cfg.placeholder);
+          }
+        });
+        // Add drag handle
+        if (!item.querySelector('.drag-handle')) {
+          var handle = document.createElement('span');
+          handle.className = 'drag-handle';
+          handle.textContent = '⋮⋮';
+          handle.setAttribute('aria-label', 'Drag to reorder');
+          item.querySelector('.work-item-inner').appendChild(handle);
+        }
+        item.setAttribute('draggable', 'true');
+      });
+    } else {
+      workSection.classList.remove('editing');
+      editToggle.classList.remove('active');
+      editToggle.textContent = 'Edit Mode ✎';
+      document.querySelectorAll('.work-item [contenteditable]').forEach(function(el) {
+        el.removeAttribute('contenteditable');
+        el.removeAttribute('data-placeholder');
+      });
+      document.querySelectorAll('.work-item .drag-handle').forEach(function(h) { h.remove(); });
+      document.querySelectorAll('.work-item').forEach(function(item) {
+        item.removeAttribute('draggable');
+        item.classList.remove('dragging', 'drag-over');
+      });
+      saveAllEdits();
+    }
+  }
+
+  function saveAllEdits() {
+    var edits = {};
+    document.querySelectorAll('.work-item').forEach(function(item, i) {
+      var src = (item.querySelector('.work-item-video') || {}).getAttribute('src') || '';
+      var key = src || 'item-' + i;
+      var itemEdits = {};
+      Object.keys(editableSelectors).forEach(function(sel) {
+        var el = item.querySelector(sel);
+        if (!el) return;
+        var text = el.textContent.trim();
+        itemEdits[sel] = text;
+        // Sync to data attributes
+        var cfg = editableSelectors[sel];
+        if (cfg.attr) item.setAttribute(cfg.attr, text);
+      });
+      edits[key] = itemEdits;
+    });
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(edits)); } catch(e) {}
+  }
+
+  function loadSavedEdits() {
+    try {
+      var saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (!saved) return;
+      document.querySelectorAll('.work-item').forEach(function(item, i) {
+        var src = (item.querySelector('.work-item-video') || {}).getAttribute('src') || '';
+        var key = src || 'item-' + i;
+        var itemEdits = saved[key];
+        if (!itemEdits) return;
+        Object.keys(itemEdits).forEach(function(sel) {
+          var el = item.querySelector(sel);
+          if (el && itemEdits[sel]) el.textContent = itemEdits[sel];
+        });
+      });
+    } catch(e) {}
+  }
+
+  // === DRAG AND DROP ===
+  var masonry = document.getElementById('work-masonry');
+  var dragSrc = null;
+  var dragFromHandle = false;
+  var ORDER_KEY = 'jimwei_work_order';
+
+  function saveOrder() {
+    var order = [];
+    document.querySelectorAll('#work-masonry > .work-item').forEach(function(item) {
+      var src = (item.querySelector('.work-item-video') || {}).getAttribute('src') || '';
+      order.push(src);
+    });
+    try { localStorage.setItem(ORDER_KEY, JSON.stringify(order)); } catch(e) {}
+  }
+
+  function loadOrder() {
+    try {
+      var order = JSON.parse(localStorage.getItem(ORDER_KEY));
+      if (!order || !order.length) return;
+      var items = document.querySelectorAll('#work-masonry > .work-item');
+      var itemMap = {};
+      items.forEach(function(item) {
+        var src = (item.querySelector('.work-item-video') || {}).getAttribute('src') || '';
+        itemMap[src] = item;
+      });
+      // Reorder: find each item by its src and append in order
+      var fragment = document.createDocumentFragment();
+      order.forEach(function(src) {
+        if (itemMap[src]) fragment.appendChild(itemMap[src]);
+      });
+      // Append any remaining items not in saved order
+      Object.keys(itemMap).forEach(function(src) {
+        if (order.indexOf(src) === -1) fragment.appendChild(itemMap[src]);
+      });
+      masonry.appendChild(fragment);
+    } catch(e) {}
+  }
+
+  // Track if mousedown started on drag handle
+  document.addEventListener('mousedown', function(e) {
+    dragFromHandle = !!(e.target.closest('.drag-handle'));
+  }, true);
+
+  masonry.addEventListener('dragstart', function(e) {
+    if (!editing || !dragFromHandle) { e.preventDefault(); return; }
+    var item = e.target.closest('.work-item');
+    if (!item) return;
+    dragSrc = item;
+    item.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', '');
+  }, true);
+
+  masonry.addEventListener('dragend', function(e) {
+    if (!dragSrc) return;
+    dragSrc.classList.remove('dragging');
+    document.querySelectorAll('#work-masonry > .work-item.drag-over').forEach(function(el) {
+      el.classList.remove('drag-over');
+    });
+    dragSrc = null;
+    saveOrder();
+  });
+
+  masonry.addEventListener('dragover', function(e) {
+    if (!dragSrc) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    var item = e.target.closest('#work-masonry > .work-item');
+    if (!item || item === dragSrc) return;
+    // Clear previous highlights
+    document.querySelectorAll('#work-masonry > .work-item.drag-over').forEach(function(el) {
+      if (el !== item) el.classList.remove('drag-over');
+    });
+    // Determine if we should insert before or after based on mouse position
+    var rect = item.getBoundingClientRect();
+    var midY = rect.top + rect.height / 2;
+    if (e.clientY < midY) {
+      item.classList.add('drag-over');
+      item.classList.remove('drag-over-bottom');
+    } else {
+      item.classList.add('drag-over');
+    }
+  });
+
+  masonry.addEventListener('drop', function(e) {
+    if (!dragSrc) return;
+    e.preventDefault();
+    var target = e.target.closest('#work-masonry > .work-item');
+    if (!target || target === dragSrc) return;
+    var rect = target.getBoundingClientRect();
+    var midY = rect.top + rect.height / 2;
+    if (e.clientY < midY) {
+      masonry.insertBefore(dragSrc, target);
+    } else {
+      masonry.insertBefore(dragSrc, target.nextSibling);
+    }
+    document.querySelectorAll('#work-masonry > .work-item.drag-over').forEach(function(el) {
+      el.classList.remove('drag-over');
+    });
+    saveOrder();
+  });
+
+  // Load saved order on startup
+  if (document.readyState !== 'loading') loadOrder();
+  else window.addEventListener('DOMContentLoaded', loadOrder);
+
+  // Prevent clicks on editable fields from opening lightbox (when editing)
+  document.addEventListener('click', function(e) {
+    if (!editing) return;
+    var target = e.target;
+    if (target.hasAttribute && target.hasAttribute('contenteditable')) {
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+    }
+    if (target.closest('.drag-handle')) {
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+    }
+  }, true);
+
+  // Save on blur
+  document.addEventListener('blur', function(e) {
+    if (!editing) return;
+    if (e.target.hasAttribute && e.target.hasAttribute('contenteditable')) {
+      saveAllEdits();
+    }
+  }, true);
+
+  // Save on Enter, prevent newlines
+  document.addEventListener('keydown', function(e) {
+    if (!editing) return;
+    if (e.target.hasAttribute && e.target.hasAttribute('contenteditable')) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        e.target.blur();
+      }
+    }
+  }, true);
+
+  editToggle.addEventListener('click', function() {
+    setEditable(!editing);
+  });
+
+  // Load saved edits on startup
+  window.addEventListener('DOMContentLoaded', loadSavedEdits);
+  // Also try immediately in case DOM is already loaded
+  if (document.readyState !== 'loading') loadSavedEdits();
+})();
+
+/* ══════════════════════════════════════════════════════════════
+   POSTER FRAME CAPTURE — lazy capture first frame for thumbnails
+══════════════════════════════════════════════════════════════ */
+(function() {
+  var processed = new WeakSet();
+  var canvas = document.createElement('canvas');
+  var ctx = canvas.getContext('2d');
+
+  function captureFrame(videoEl) {
+    if (processed.has(videoEl)) return;
+    if (videoEl.readyState < 2) return; // need at least metadata
+    processed.add(videoEl);
+
+    try {
+      videoEl.currentTime = 0.5;
+    } catch(e) { return; }
+
+    function onSeeked() {
+      videoEl.removeEventListener('seeked', onSeeked);
+      try {
+        var w = videoEl.videoWidth || 320;
+        var h = videoEl.videoHeight || 180;
+        if (w === 0 || h === 0) return;
+        canvas.width = w;
+        canvas.height = h;
+        ctx.drawImage(videoEl, 0, 0, w, h);
+        var dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+        videoEl.setAttribute('poster', dataUrl);
+      } catch(e) {}
+    }
+
+    videoEl.addEventListener('seeked', onSeeked, { once: true });
+  }
+
+  function observeVideos() {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          captureFrame(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '200px' });
+
+    var videos = document.querySelectorAll('.work-item-video');
+    for (var i = 0; i < videos.length; i++) {
+      var v = videos[i];
+      if (v.readyState >= 2) {
+        captureFrame(v);
+      } else {
+        v.addEventListener('loadedmetadata', function() { captureFrame(this); }, { once: true });
+        observer.observe(v);
+      }
+    }
+  }
+
+  if (document.readyState === 'complete') {
+    observeVideos();
+  } else {
+    window.addEventListener('load', observeVideos);
+  }
+})();
+
 </script>
+
+<!-- ═══ VIDEO LIGHTBOX ═══════════════════════════════════════════════ -->
 </body>
 </html>
