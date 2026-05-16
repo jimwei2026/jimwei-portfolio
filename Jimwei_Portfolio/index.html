@@ -3510,7 +3510,25 @@ var LIVE_PROJECTS = [{"title":"伊丽莎白·雅顿｜抖音超级品牌盛典",
   }
 })();
 
-</script>
 
-</body>
-</html>
+/* ══════════════════════════════════════════════════════════════
+   CURSOR — smooth water drop
+══════════════════════════════════════════════════════════════ */
+(function() {
+  var c = document.getElementById("cursor");
+  if (!c) return;
+  var mx = 0, my = 0, cx = -100, cy = -100;
+  function update() {
+    cx += (mx - cx) * 0.25;
+    cy += (my - cy) * 0.25;
+    c.style.transform = "translate3d(" + (cx - 6) + "px, " + (cy - 8) + "px, 0)";
+    requestAnimationFrame(update);
+  }
+  document.addEventListener("mousemove", function(e) { mx = e.clientX; my = e.clientY; });
+  document.querySelectorAll("a,button,.work-item,.lang-option").forEach(function(el) {
+    el.addEventListener("mouseenter", function() { c.classList.add("hover"); });
+    el.addEventListener("mouseleave", function() { c.classList.remove("hover"); });
+  });
+  update();
+})();
+</script>
