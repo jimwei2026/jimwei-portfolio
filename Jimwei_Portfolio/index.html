@@ -2666,41 +2666,38 @@ if (backToTop) {
 
 
 /* ══════════════════════════════════════════════════════════════
-   WORK FILTER — smooth opacity transition
+   WORK FILTER — clean masonry swap
 ══════════════════════════════════════════════════════════════ */
 const filterBtns = document.querySelectorAll('.work-filter-btn');
 const workItemsAll = document.querySelectorAll('.work-item');
+const workMasonry = document.getElementById('work-masonry');
 
 filterBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     if (btn.classList.contains('active')) {
       btn.classList.remove('active');
-      gsap.to(workItemsAll, { opacity: 1, scale: 1, duration: 0.35, ease: 'power2.out', stagger: 0.015,
-        onStart: function() { this.targets().forEach(t => t.style.pointerEvents = ''); },
-        onComplete: function() { this.targets().forEach(t => t.style.display = ''); }
-      });
+      workItemsAll.forEach(item => { item.style.display = ''; item.style.opacity = ''; item.style.pointerEvents = ''; });
+      gsap.fromTo(workMasonry, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' });
       return;
     }
     filterBtns.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const filter = btn.dataset.filter;
-    var visible = [];
-    var hidden = [];
-    workItemsAll.forEach(item => {
-      if (item.dataset.category === filter) {
-        visible.push(item);
-      } else {
-        hidden.push(item);
-      }
-    });
-    // Hide non-matching instantly, then fade in matching
-    gsap.to(hidden, { opacity: 0, scale: 0.96, duration: 0.25, ease: 'power2.in', stagger: 0.01,
-      onStart: function() { this.targets().forEach(t => t.style.pointerEvents = 'none'); },
-      onComplete: function() { this.targets().forEach(t => t.style.display = 'none'); }
-    });
-    gsap.to(visible, { opacity: 1, scale: 1, duration: 0.35, ease: 'power2.out', stagger: 0.015, delay: 0.1,
-      onStart: function() {
-        this.targets().forEach(function(t) { t.style.display = ''; t.style.pointerEvents = ''; });
+
+    // Fade out grid → swap items → fade in
+    gsap.to(workMasonry, {
+      opacity: 0, duration: 0.18, ease: 'power2.in',
+      onComplete: function() {
+        workItemsAll.forEach(item => {
+          if (item.dataset.category === filter) {
+            item.style.display = '';
+            item.style.pointerEvents = '';
+          } else {
+            item.style.display = 'none';
+          }
+          item.style.opacity = '';
+        });
+        gsap.to(workMasonry, { opacity: 1, duration: 0.28, ease: 'power2.out' });
       }
     });
   });
