@@ -141,6 +141,43 @@ img, video { display: block; width: 100%; }
   display: block; width: 100%; height: 100%;
 }
 
+/* ═══ CUSTOM CURSOR — water drop ═══════════════════════════ */
+#cursor {
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 99999;
+  width: 18px; height: 24px;
+  will-change: transform;
+  border-radius: 50% 50% 50% 50% / 35% 35% 65% 65%;
+  background:
+    radial-gradient(ellipse 30% 20% at 35% 22%,
+      rgba(255,255,255,1) 0%,
+      rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse 90% 80% at 50% 60%,
+      rgba(42,127,255,1) 0%,
+      rgba(10,60,200,1) 55%,
+      rgba(0,15,80,1) 100%);
+  box-shadow:
+    0 0 0 0.5px rgba(100,170,255,0.3),
+    0 4px 18px rgba(20,80,220,0.5),
+    inset 0 -3px 8px rgba(0,10,60,0.4),
+    inset 0 2px 4px rgba(120,180,255,0.25);
+  filter: drop-shadow(0 2px 8px rgba(20,100,255,0.4));
+  transform-origin: 50% 22%;
+  transition: width 0.2s var(--ease-out), height 0.2s var(--ease-out);
+}
+#cursor.hover {
+  width: 24px; height: 32px;
+  box-shadow:
+    0 0 0 0.5px rgba(100,170,255,0.5),
+    0 6px 24px rgba(20,80,220,0.65),
+    inset 0 -4px 10px rgba(0,10,60,0.5),
+    inset 0 2px 5px rgba(120,180,255,0.35);
+  filter: drop-shadow(0 3px 12px rgba(20,100,255,0.6));
+}
+@media (hover: none) and (pointer: coarse) {
+  #cursor { display: none; }
+}
+
 /* ═══ WATER CANVAS ══════════════════════════════════════════════════ */
 #water-canvas {
   position: fixed; inset: 0; pointer-events: none;
@@ -1085,11 +1122,13 @@ footer::before {
 /* ═══ TOUCH DEVICES ══════════════════════════════════════════════ */
 @media (hover: none) and (pointer: coarse) {
   body { cursor: auto; }
+  #cursor { display: none; }
   .edge-hint { display: none; }
 }
 </style>
 </head>
 <body>
+<div id="cursor"></div>
 
 <!-- Skip to main content -->
 <a href="#main-content" class="skip-link">Skip to content</a>
